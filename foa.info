@@ -1,0 +1,31 @@
+; @file foa.info
+; Based on the `standard' Drupal profile.
+
+name = Faculty of Arts
+description = Install Drupal with Faculty of Arts presets enabled.
+dependencies[] = block
+dependencies[] = color
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = toolbar
+dependencies[] = overlay
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
+
+core = 7.x
+version = "7.x-1.0"
+
+; Below are the FoA extras on top of the `standard' profile.
