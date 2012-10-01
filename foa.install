@@ -142,18 +142,27 @@ function foa_install() {
   $types = array(
     array(
       'type' => 'page',
-      'name' => st('Basic page'),
+      'name' => st('Page'),
       'base' => 'node_content',
-      'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+      'description' => st("Use <em>pages</em> for your static content, such as an 'About us' page."),
       'custom' => 1,
       'modified' => 1,
       'locked' => 0,
     ),
     array(
-      'type' => 'article',
-      'name' => st('Article'),
+      'type' => 'news',
+      'name' => st('News'),
       'base' => 'node_content',
-      'description' => st('Use <em>articles</em> for time-sensitive content like news, press releases or blog posts.'),
+      'description' => st('Use <em>news</em> for time-sensitive content like updates, press releases or blog posts.'),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+    array(
+      'type' => 'event',
+      'name' => st('Event'),
+      'base' => 'node_content',
+      'description' => st('An <em>Event</em> is limited in time by a start and end date and time.'),
       'custom' => 1,
       'modified' => 1,
       'locked' => 0,
@@ -177,7 +186,7 @@ function foa_install() {
     ),
     array(
       'type' => 'node',
-      'bundle' => 'article',
+      'bundle' => 'news',
       'mapping' => array(
         'field_shared_image' => array(
           'predicates' => array('og:image', 'rdfs:seeAlso'),
@@ -194,17 +203,27 @@ function foa_install() {
     rdf_mapping_save($rdf_mapping);
   }
 
-  // Default "Basic page" to not be promoted and have comments disabled.
-  variable_set('node_options_page', array('status'));
+  // Default "Page" to not be promoted, have comments disabled and create new revision.
+  variable_set('node_options_page', array('status', 'revision'));
   variable_set('comment_page', COMMENT_NODE_HIDDEN);
 
-  // Don't display date and author information for "Basic page" nodes by default.
+  // Default "News" to be promoted, have comments disabled and create new revision.
+  variable_set('node_options_news', array('status', 'revision', 'promote'));
+  variable_set('comment_news', COMMENT_NODE_HIDDEN);
+
+  // Default "Event" to not be promoted, have comments disabled and create new revision.
+  variable_set('node_options_event', array('status', 'revision'));
+  variable_set('comment_event', COMMENT_NODE_HIDDEN);
+
+  // Don't display date and author information for any nodes by default.
   variable_set('node_submitted_page', FALSE);
+  variable_set('node_submitted_news', FALSE);
+  variable_set('node_submitted_event', FALSE);
 
   // Allow visitor account creation with administrative approval.
   variable_set('user_register', USER_REGISTER_ADMINISTRATORS_ONLY);
 
-  // Create an image field named "Image", enabled for the 'article' content type.
+  // Create a shared image field named "Image", enabled for all content types.
   // Many of the following values will be defaulted, they're included here as an illustrative examples.
   // See http://api.drupal.org/api/function/field_create_field/7
 
@@ -232,18 +251,23 @@ function foa_install() {
     'field_name' => 'field_shared_image',
     'entity_type' => 'node',
     'label' => 'Image',
-    'bundle' => 'article',
-    'description' => st('Upload an image to go with this article.'),
+    'bundle' => 'news',
+    'description' => st('Upload an image.'),
     'required' => FALSE,
 
     'settings' => array(
-      'file_directory' => 'field/image',
+      'file_directory' => 'images',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
       'alt_field' => TRUE,
       'title_field' => '',
+    ),
+
+    'behaviors' => array(
+      'multiple values' => FIELD_BEHAVIOR_CUSTOM,
+      'default value' => FIELD_BEHAVIOR_NONE,
     ),
 
     'widget' => array(
@@ -270,7 +294,14 @@ function foa_install() {
       ),
     ),
   );
-  field_create_instance($instance);
+
+  // Add the shared image field to all node types.
+  $nodes = array('page', 'article', 'event');
+  foreach ($nodes as $node) {
+    $instance['bundle'] = $node;
+    $instance['description'] = st('Upload an image to go with this @node.', array('@node' => $node));
+    field_create_instance($instance);
+  }
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
