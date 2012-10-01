@@ -279,13 +279,13 @@ function foa_install() {
 
   // @todo: Set permissions on the editor role.
   $editor_role = new stdClass();
-  $editor_role->name = 'administrator';
+  $editor_role->name = 'editor';
   $editor_role->weight = 2;
   user_role_save($editor_role);
 
   // @todo: Set permissions on the admin role.
   $admin_role = new stdClass();
-  $admin_role->name = 'administrator';
+  $admin_role->name = 'admin';
   $admin_role->weight = 3;
   user_role_save($admin_role);
 
@@ -298,7 +298,7 @@ function foa_install() {
   // Set this as the administrator role.
   variable_set('user_admin_role', $site_admin_role->rid);
 
-  // Assign user 1 the "administrator" role.
+  // Assign user 1 the "site admin" role.
   db_insert('users_roles')
     ->fields(array('uid' => 1, 'rid' => $site_admin_role->rid))
     ->execute();
