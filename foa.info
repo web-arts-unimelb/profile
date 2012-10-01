@@ -1,5 +1,7 @@
 ; @file foa.info
 ; Based on the `standard' Drupal profile.
+;
+; The toolbar and overlay modules have been removed.
 
 name = Faculty of Arts
 description = Install Drupal with Faculty of Arts presets enabled.
@@ -19,8 +21,6 @@ dependencies[] = taxonomy
 dependencies[] = dblog
 dependencies[] = search
 dependencies[] = shortcut
-dependencies[] = toolbar
-dependencies[] = overlay
 dependencies[] = field_ui
 dependencies[] = file
 dependencies[] = rdf
@@ -29,6 +29,7 @@ core = 7.x
 version = "7.x-1.0"
 
 ; Below are the FoA extras on top of the `standard' profile.
+dependencies[] = admin_menu_toolbar
 dependencies[] = css_splitter
 dependencies[] = sassy
 dependencies[] = wysiwyg
