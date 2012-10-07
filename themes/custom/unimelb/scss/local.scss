@@ -324,6 +324,12 @@ body.html.blue.not-front {
   background-position: 50% 0px;
 }
 
+/* Float content images to the right so text can wrap. */
+.field-name-field-shared-images {
+  float: right;
+  margin: 0px 0px 1em 2em;
+}
+
 /* Float account-images right. */
 .account-images {
   float: right;

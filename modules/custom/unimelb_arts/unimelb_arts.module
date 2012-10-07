@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Faculty of Arts feature.
+ */
+
+include_once 'unimelb_arts.features.inc';
