@@ -33,6 +33,7 @@ dependencies[] = admin_menu_toolbar
 dependencies[] = css_splitter
 dependencies[] = sassy
 dependencies[] = wysiwyg
+dependencies[] = wysiwyg_fields
 
 ; These are used by the unimelb_arts Feature.
 dependencies[] = ctools
