@@ -96,8 +96,6 @@ function unimelb_preprocess_page(&$variables) {
   $variables['brand_logo'] = theme_get_setting('unimelb_settings_custom_logo', '') ? 'logo' : 'no-logo';
 
   $variables['site_search_box'] = theme_get_setting('unimelb_settings_site_search_box');
-  $variables['unimelb_ht_right'] = theme_get_setting('unimelb_settings_ht-right', '');
-  $variables['unimelb_ht_left'] = theme_get_setting('unimelb_settings_ht-left', '');
 
   // Add in common theme specific meta info.
   $variables += _unimelb_meta_info();
@@ -216,17 +214,30 @@ function unimelb_preprocess_views_view_grid(&$vars) {
 function _unimelb_meta_info() {
   $variables = array();
 
-  $variables['unimelb_meta_email'] = theme_get_setting("unimelb_settings_ad-email");
-  $variables['unimelb_meta_phone'] = theme_get_setting("unimelb_settings_ad-phone");
-  $variables['unimelb_meta_fax'] = theme_get_setting("unimelb_settings_ad-fax");
+  $variables['unimelb_parent_org'] = theme_get_setting('unimelb_settings_parent-org');
+  $variables['unimelb_parent_org_url'] = theme_get_setting('unimelb_settings_parent-org-url');
 
-  $variables['unimelb_meta_facebook'] = theme_get_setting("unimelb_settings_fb-url");
-  $variables['unimelb_meta_twitter'] = theme_get_setting("unimelb_settings_tw-url");
+  $variables['unimelb_ht_right'] = theme_get_setting('unimelb_settings_ht-right');
+  $variables['unimelb_ht_left'] = theme_get_setting('unimelb_settings_ht-left');
 
-  $variables['unimelb_meta_auth_name'] = theme_get_setting("unimelb_settings_auth-name");
-  $variables['unimelb_meta_maint_name'] = theme_get_setting("unimelb_settings_maint-name");
+  $variables['unimelb_ad_line1'] = theme_get_setting('unimelb_settings_ad-line1');
+  $variables['unimelb_ad_line2'] = theme_get_setting('unimelb_settings_ad-line2');
+  $variables['unimelb_ad_sub'] = theme_get_setting('unimelb_settings_ad-sub');
+  $variables['unimelb_ad_postcode'] = theme_get_setting('unimelb_settings_ad-postcode');
+  $variables['unimelb_ad_state'] = theme_get_setting('unimelb_settings_ad-state');
+  $variables['unimelb_ad_country'] = theme_get_setting('unimelb_settings_ad-country');
 
-  $variables['unimelb_meta_date_created'] = theme_get_setting("unimelb_settings_date-created");
+  $variables['unimelb_meta_email'] = theme_get_setting('unimelb_settings_ad-email');
+  $variables['unimelb_meta_phone'] = theme_get_setting('unimelb_settings_ad-phone');
+  $variables['unimelb_meta_fax'] = theme_get_setting('unimelb_settings_ad-fax');
+
+  $variables['unimelb_meta_facebook'] = theme_get_setting('unimelb_settings_fb-url');
+  $variables['unimelb_meta_twitter'] = theme_get_setting('unimelb_settings_tw-url');
+
+  $variables['unimelb_meta_auth_name'] = theme_get_setting('unimelb_settings_auth-name');
+  $variables['unimelb_meta_maint_name'] = theme_get_setting('unimelb_settings_maint-name');
+
+  $variables['unimelb_meta_date_created'] = theme_get_setting('unimelb_settings_date-created');
 
   return $variables;
 }
