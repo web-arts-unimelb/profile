@@ -1,0 +1,73 @@
+<?php
+/**
+ * @file unimelb_arts.install
+ * Install and update routiens for the unimelb_arts feature.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function unimelb_arts_install() {
+  $t = get_t();
+
+  $admin = user_role_load_by_name('admin');
+  $siteadmin = user_role_load_by_name('site admin');
+
+  // Add the front_page nodequeue.
+  $queue = new stdClass();
+  $queue->name = 'front_page';
+  $queue->title = $t('Front Page');
+  $queue->owner = 'nodequeue';
+  $queue->subqueue_title = '';
+  $queue->add_subqueue = array(0 => $queue->title);
+  $queue->size = 6;
+  $queue->link = $t('Add to %subqueue');
+  $queue->link_remove = $t('Remove from %subqueue');
+  $queue->i18n = 1;
+  $queue->show_in_links = 1;
+  $queue->show_in_tab = 1;
+  $queue->show_in_ui = 1;
+  $queue->reference = 0;
+  $queue->reverse = 0;
+  $queue->i18n = 0;
+  $queue->roles = array($admin->rid, $siteadmin->rid);
+  $queue->types = array('page', 'event', 'news');
+  $queue->new = TRUE;
+
+  $qid = nodequeue_save($queue);
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Create the default front page NodeQueue.
+ */
+function unimelb_arts_update_7000(&$sandbox) {
+  $admin = user_role_load_by_name('admin');
+  $siteadmin = user_role_load_by_name('site admin');
+
+  // Add the front_page nodequeue.
+  $queue = new stdClass();
+  $queue->name = 'front_page';
+  $queue->title = t('Front Page');
+  $queue->owner = 'nodequeue';
+  $queue->subqueue_title = '';
+  $queue->add_subqueue = array(0 => $queue->title);
+  $queue->size = 6;
+  $queue->link = t('Add to %subqueue');
+  $queue->link_remove = t('Remove from %subqueue');
+  $queue->i18n = 1;
+  $queue->show_in_links = 1;
+  $queue->show_in_tab = 1;
+  $queue->show_in_ui = 1;
+  $queue->reference = 0;
+  $queue->reverse = 0;
+  $queue->i18n = 0;
+  $queue->roles = array($admin->rid, $siteadmin->rid);
+  $queue->types = array('page', 'event', 'news');
+  $queue->new = TRUE;
+
+  $qid = nodequeue_save($queue);
+
+  return t('Created nodequeue !title as @qid', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid .'/edit'), '@qid' => $qid));
+}
