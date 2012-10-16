@@ -1,0 +1,17 @@
+name = TinyMCE WYSIWYG
+description = Provides a configure TinyMCE WYSIWYG editor for text fields.
+core = 7.x
+package = Faculty of Arts Repository
+php = 5.2.4
+version = 7.x-1.1
+project = tinymce_wysiwyg
+dependencies[] = better_formats
+dependencies[] = custom_formatters
+dependencies[] = features
+dependencies[] = unimelb_arts
+dependencies[] = wysiwyg
+dependencies[] = wysiwyg_fields
+features[ctools][] = custom_formatters:custom_formatters:2
+features[features_api][] = api:1
+features[formatters][] = unimel_download_large
+features[formatters][] = unimel_download_small
