@@ -213,7 +213,7 @@ function unimelb_arts_field_default_fields() {
           'label' => 'above',
           'module' => 'file',
           'settings' => array(),
-          'type' => 'file_default',
+          'type' => 'hidden',
           'weight' => '3',
         ),
         'teaser' => array(
@@ -233,11 +233,39 @@ function unimelb_arts_field_default_fields() {
         'file_extensions' => 'txt pdf odt odp ods csv doc docx xls xlsx ppt pptx zip',
         'max_filesize' => '',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'file_default' => 'file_default',
+            ),
+            'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
+            'label' => 'Attachments',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'file',
         'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
@@ -288,7 +316,7 @@ function unimelb_arts_field_default_fields() {
             'image_link' => 'file',
             'image_style' => 'medium',
           ),
-          'type' => 'image',
+          'type' => 'hidden',
           'weight' => '1',
         ),
         'teaser' => array(
@@ -298,7 +326,7 @@ function unimelb_arts_field_default_fields() {
             'image_link' => 'content',
             'image_style' => 'thumbnail',
           ),
-          'type' => 'image',
+          'type' => 'hidden',
           'weight' => '1',
         ),
       ),
@@ -316,11 +344,39 @@ function unimelb_arts_field_default_fields() {
         'min_resolution' => '',
         'title_field' => 1,
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'image' => 'image',
+            ),
+            'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
+            'label' => 'Images',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'image',
         'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
@@ -468,6 +524,20 @@ function unimelb_arts_field_default_fields() {
         'active' => 1,
         'module' => 'file',
         'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
@@ -551,6 +621,20 @@ function unimelb_arts_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
@@ -615,16 +699,55 @@ function unimelb_arts_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'body',
       'label' => 'Body',
-      'required' => FALSE,
+      'required' => 0,
       'settings' => array(
-        'display_summary' => TRUE,
-        'text_processing' => 1,
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'filtered_html' => 'filtered_html',
+            'full_html' => 'full_html',
+            'html_editor' => 'html_editor',
+            'plain_text' => 'plain_text',
+          ),
+          'allowed_formats_toggle' => 0,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'filtered_html' => array(
+                'weight' => '0',
+              ),
+              'full_html' => array(
+                'weight' => '0',
+              ),
+              'html_editor' => array(
+                'weight' => '0',
+              ),
+              'plain_text' => array(
+                'weight' => '10',
+              ),
+            ),
+          ),
+        ),
+        'display_summary' => 0,
+        'text_processing' => '1',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Body',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'rows' => 20,
+          'rows' => '20',
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
@@ -673,7 +796,7 @@ function unimelb_arts_field_default_fields() {
           'label' => 'above',
           'module' => 'file',
           'settings' => array(),
-          'type' => 'file_default',
+          'type' => 'hidden',
           'weight' => '2',
         ),
         'teaser' => array(
@@ -693,11 +816,44 @@ function unimelb_arts_field_default_fields() {
         'file_extensions' => 'txt pdf odt odp ods csv doc docx xls xlsx ppt pptx zip',
         'max_filesize' => '',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
+              'custom_formatters_unimel_download_small' => 'custom_formatters_unimel_download_small',
+            ),
+            'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
+            'label' => 'Attachments',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'file',
         'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(
+              'attach' => 0,
+              'reference' => 'reference',
+              'remote' => 0,
+            ),
+            'source_attach' => array(
+              'absolute' => '0',
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '1',
+            ),
+          ),
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
@@ -748,7 +904,7 @@ function unimelb_arts_field_default_fields() {
             'image_link' => '',
             'image_style' => 'medium',
           ),
-          'type' => 'image',
+          'type' => 'hidden',
           'weight' => '0',
         ),
         'teaser' => array(
@@ -758,7 +914,7 @@ function unimelb_arts_field_default_fields() {
             'image_link' => 'content',
             'image_style' => 'thumbnail',
           ),
-          'type' => 'image',
+          'type' => 'hidden',
           'weight' => '0',
         ),
       ),
@@ -776,11 +932,39 @@ function unimelb_arts_field_default_fields() {
         'min_resolution' => '',
         'title_field' => 1,
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'image' => 'image',
+            ),
+            'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
+            'label' => 'Images',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'image',
         'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),

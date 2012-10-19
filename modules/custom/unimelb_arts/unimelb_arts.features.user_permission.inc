@@ -54,7 +54,8 @@ function unimelb_arts_user_default_permissions() {
   $permissions['bypass node access'] = array(
     'name' => 'bypass node access',
     'roles' => array(
-      0 => 'site admin',
+      0 => 'admin',
+      1 => 'site admin',
     ),
     'module' => 'node',
   );

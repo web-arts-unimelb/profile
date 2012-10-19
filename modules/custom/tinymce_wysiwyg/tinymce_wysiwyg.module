@@ -9,3 +9,4 @@
 function tinymce_wysiwyg_init() {
   drupal_add_css(drupal_get_path('module', 'tinymce_wysiwyg') . '/css/tinymce_wysiwyg.css');
 }
+
