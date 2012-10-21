@@ -34,7 +34,6 @@ dependencies[] = css_splitter
 dependencies[] = sassy
 dependencies[] = wysiwyg
 dependencies[] = wysiwyg_fields
-dependencies[] = ldap
 
 ; These are used by the unimelb_arts Feature.
 dependencies[] = ctools
