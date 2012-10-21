@@ -109,7 +109,8 @@ function foa_install() {
       'pages' => '',
       'cache' => -1,
     ),
-	array(
+    // @todo: This needs to be a jQuery menu block.
+    array(
       'module' => 'system',
       'delta' => 'navigation',
       'theme' => $default_theme,
@@ -157,11 +158,17 @@ function foa_install() {
   $editor_role->weight = 2;
   user_role_save($editor_role);
 
+  // Save the editor rid for use in the arts feature install.
+  variable_set('foa_editor_rid', $editor_role->rid);
+
   // @todo: Set permissions on the admin role.
   $admin_role = new stdClass();
   $admin_role->name = 'admin';
   $admin_role->weight = 3;
   user_role_save($admin_role);
+
+  // Save the admin role for use in the arts feature install.
+  variable_set('foa_admin_rid', $admin_role->rid);
 
   // Create a default role for site administrators, with all available permissions assigned.
   $site_admin_role = new stdClass();

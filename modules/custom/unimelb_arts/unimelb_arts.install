@@ -10,9 +10,6 @@
 function unimelb_arts_install() {
   $t = get_t();
 
-  $admin = user_role_load_by_name('admin');
-  $siteadmin = user_role_load_by_name('site admin');
-
   // Add the front_page nodequeue.
   $queue = new stdClass();
   $queue->name = 'front_page';
@@ -30,11 +27,15 @@ function unimelb_arts_install() {
   $queue->reference = 0;
   $queue->reverse = 0;
   $queue->i18n = 0;
-  $queue->roles = array($admin->rid, $siteadmin->rid);
+  $queue->roles = array(variable_get('foa_admin_rid', 0), variable_get('user_admin_role', 0));
   $queue->types = array('page', 'event', 'news');
   $queue->new = TRUE;
 
   $qid = nodequeue_save($queue);
+
+  // Temp variables, no longer needed.
+  variable_del('foa_editor_rid');
+  variable_del('foa_admin_rid');
 }
 
 /**
@@ -43,8 +44,8 @@ function unimelb_arts_install() {
  * Create the default front page NodeQueue.
  */
 function unimelb_arts_update_7000(&$sandbox) {
-  $admin = user_role_load_by_name('admin');
-  $siteadmin = user_role_load_by_name('site admin');
+  // $admin = user_role_load_by_name('admin');
+  // $siteadmin = user_role_load_by_name('site admin');
 
   // Add the front_page nodequeue.
   $queue = new stdClass();
@@ -63,11 +64,24 @@ function unimelb_arts_update_7000(&$sandbox) {
   $queue->reference = 0;
   $queue->reverse = 0;
   $queue->i18n = 0;
-  $queue->roles = array($admin->rid, $siteadmin->rid);
+  $queue->roles = array(variable_get('foa_admin_rid', 0), variable_get('user_admin_role', 0));
   $queue->types = array('page', 'event', 'news');
   $queue->new = TRUE;
 
   $qid = nodequeue_save($queue);
 
+  // Temp variables, no longer needed.
+  variable_del('foa_editor_rid');
+  variable_del('foa_admin_rid');
+
   return t('Created nodequeue !title as @qid', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid .'/edit'), '@qid' => $qid));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function unimelb_arts_uninstall() {
+  // Temp variables, should not exist, but just-in-case.
+  variable_del('foa_editor_rid');
+  variable_del('foa_admin_rid');
 }
