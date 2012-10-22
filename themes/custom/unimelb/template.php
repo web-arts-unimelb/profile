@@ -92,10 +92,20 @@ function unimelb_preprocess_page(&$variables) {
     }
   }
 
+  // Responsive layout using a per-layout template include.
+  // This only actually does something in templates/page-front.tpl.php
+  $variables['layout'] = 'layout/' . theme_get_setting('unimelb_settings_columns') . '.tpl.inc';
+  if (!file_exists(path_to_theme() . '/templates/' . $variables['layout'])) {
+    // If there is no defined template or if the file is missing, default to 3+1.
+    $variables['layout'] = 'layout/3-1.tpl.inc';
+  }
+
   // Body class that is used by templates to show or not show the university logo.
   $variables['brand_logo'] = theme_get_setting('unimelb_settings_custom_logo', '') ? 'logo' : 'no-logo';
 
   $variables['site_search_box'] = theme_get_setting('unimelb_settings_site_search_box');
+  $variables['unimelb_ht_right'] = theme_get_setting('unimelb_settings_ht-right', '');
+  $variables['unimelb_ht_left'] = theme_get_setting('unimelb_settings_ht-left', '');
 
   // Add in common theme specific meta info.
   $variables += _unimelb_meta_info();
@@ -214,8 +224,8 @@ function unimelb_preprocess_views_view_grid(&$vars) {
 function _unimelb_meta_info() {
   $variables = array();
 
-  $variables['unimelb_parent_org'] = theme_get_setting('unimelb_settings_parent-org');
-  $variables['unimelb_parent_org_url'] = theme_get_setting('unimelb_settings_parent-org-url');
+  $variables['unimelb_meta_parent_org'] = theme_get_setting("unimelb_settings_parent-org");
+  $variables['unimelb_meta_parent_org_url'] = theme_get_setting("unimelb_settings_parent-org-url");
 
   $variables['unimelb_ht_right'] = theme_get_setting('unimelb_settings_ht-right');
   $variables['unimelb_ht_left'] = theme_get_setting('unimelb_settings_ht-left');
@@ -227,19 +237,55 @@ function _unimelb_meta_info() {
   $variables['unimelb_ad_state'] = theme_get_setting('unimelb_settings_ad-state');
   $variables['unimelb_ad_country'] = theme_get_setting('unimelb_settings_ad-country');
 
-  $variables['unimelb_meta_email'] = theme_get_setting('unimelb_settings_ad-email');
-  $variables['unimelb_meta_phone'] = theme_get_setting('unimelb_settings_ad-phone');
-  $variables['unimelb_meta_fax'] = theme_get_setting('unimelb_settings_ad-fax');
+  $variables['unimelb_meta_email'] = theme_get_setting("unimelb_settings_ad-email");
+  $variables['unimelb_meta_phone'] = theme_get_setting("unimelb_settings_ad-phone");
+  $variables['unimelb_meta_fax'] = theme_get_setting("unimelb_settings_ad-fax");
 
-  $variables['unimelb_meta_facebook'] = theme_get_setting('unimelb_settings_fb-url');
-  $variables['unimelb_meta_twitter'] = theme_get_setting('unimelb_settings_tw-url');
+  $variables['unimelb_meta_facebook'] = theme_get_setting("unimelb_settings_fb-url");
+  $variables['unimelb_meta_twitter'] = theme_get_setting("unimelb_settings_tw-url");
 
-  $variables['unimelb_meta_auth_name'] = theme_get_setting('unimelb_settings_auth-name');
-  $variables['unimelb_meta_maint_name'] = theme_get_setting('unimelb_settings_maint-name');
+  $variables['unimelb_meta_auth_name'] = theme_get_setting("unimelb_settings_auth-name");
+  $variables['unimelb_meta_maint_name'] = theme_get_setting("unimelb_settings_maint-name");
 
-  $variables['unimelb_meta_date_created'] = theme_get_setting('unimelb_settings_date-created');
+  $variables['unimelb_meta_date_created'] = theme_get_setting("unimelb_settings_date-created");
 
   return $variables;
+}
+
+/**
+ * Implements phptemplate_image_widget()
+ */
+function unimelb_image_widget($variables) {
+  $element = $variables['element'];
+  if ($element['#field_name'] != 'field_account_image') {
+    return theme_image_widget($variables);
+  }
+
+  if ($element['fid']['#value'] != 0) {
+    $element['filename']['#markup'] .= ' <span class="file-size">(' . format_size($element['#file']->filesize) . ')</span> ';
+  }
+  $element['filename']['#weight'] = 100;
+
+  $output = '';
+  $output .= '<div class="image-widget form-managed-file clearfix">';
+
+  if (isset($element['preview'])) {
+    $output .= '<div class="image-preview">';
+    $output .= drupal_render($element['preview']);
+    $output .= '</div>';
+  }
+
+  hide($element['filename']);
+  $output .= '<div class="image-widget-data">';
+  $output .= drupal_render_children($element);
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '<div class="image-filename">';
+  show($element['filename']);
+  $output .= drupal_render($element['filename']);
+  $output .= '</div>';
+
+  return $output;
 }
 
 /**
