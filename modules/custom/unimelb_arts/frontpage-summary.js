@@ -6,15 +6,24 @@
  */
 Drupal.behaviors.frontpageSummary = {
   attach: function (context, settings) {
+
+    var init = $('.field-type-text-with-summary div.text-format-wrapper > fieldset.filter-wrapper input').val();
+    $('.text-summary-wrapper select', $(this).closest('.text-format-wrapper')).val(init);
+
+    $('.field-type-text-with-summary div.text-format-wrapper > fieldset.filter-wrapper select').change(function() {
+       var value = $(this).val();
+       $('.text-summary-wrapper select', $(this).closest('.text-format-wrapper')).val(value);
+    });
+
     $('.text-summary', context).once('text-summary', function () {
       var $widget = $(this).closest('div.field-type-text-with-summary');
       var $summaries = $widget.find('div.text-summary-wrapper');
 
       $summaries.once('text-summary-wrapper').each(function(index) {
         var $summary = $(this);
-        var $summaryLabel = $summary.find('label');
+        var $summaryLabel = $summary.find('label:first');
         var $full = $widget.find('.text-full').eq(index).closest('.form-item');
-        var $fullLabel = $full.find('label');
+        var $fullLabel = $full.find('label:first');
 
         // Create a placeholder label when the field cardinality is
         // unlimited or greater than 1.
