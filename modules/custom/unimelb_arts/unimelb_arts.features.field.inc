@@ -271,6 +271,8 @@ function unimelb_arts_field_default_fields() {
               'hide' => 1,
             ),
             'formatters' => array(
+              'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
+              'custom_formatters_unimel_download_small' => 'custom_formatters_unimel_download_small',
               'file_default' => 'file_default',
             ),
             'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
@@ -284,9 +286,13 @@ function unimelb_arts_field_default_fields() {
         'module' => 'file',
         'settings' => array(
           'filefield_sources' => array(
-            'filefield_sources' => array(),
+            'filefield_sources' => array(
+              'attach' => 0,
+              'reference' => 'reference',
+              'remote' => 0,
+            ),
             'source_attach' => array(
-              'absolute' => 0,
+              'absolute' => '0',
               'attach_mode' => 'move',
               'path' => 'file_attach',
             ),
@@ -561,7 +567,7 @@ function unimelb_arts_field_default_fields() {
           'label' => 'above',
           'module' => 'file',
           'settings' => array(),
-          'type' => 'file_default',
+          'type' => 'hidden',
           'weight' => '2',
         ),
         'teaser' => array(
@@ -581,15 +587,35 @@ function unimelb_arts_field_default_fields() {
         'file_extensions' => 'txt pdf odt odp ods csv doc docx xls xlsx ppt pptx zip',
         'max_filesize' => '',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
+              'custom_formatters_unimel_download_small' => 'custom_formatters_unimel_download_small',
+              'file_default' => 'file_default',
+            ),
+            'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
+            'label' => 'Attachments',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'file',
         'settings' => array(
           'filefield_sources' => array(
-            'filefield_sources' => array(),
+            'filefield_sources' => array(
+              'attach' => 0,
+              'reference' => 'reference',
+              'remote' => 0,
+            ),
             'source_attach' => array(
-              'absolute' => 0,
+              'absolute' => '0',
               'attach_mode' => 'move',
               'path' => 'file_attach',
             ),
@@ -879,6 +905,7 @@ function unimelb_arts_field_default_fields() {
             'formatters' => array(
               'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
               'custom_formatters_unimel_download_small' => 'custom_formatters_unimel_download_small',
+              'file_default' => 'file_default',
             ),
             'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
             'label' => 'Attachments',
