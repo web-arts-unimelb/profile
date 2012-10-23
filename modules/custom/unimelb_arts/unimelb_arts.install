@@ -17,11 +17,11 @@ function unimelb_arts_install() {
   $queue->owner = 'nodequeue';
   $queue->subqueue_title = '';
   $queue->add_subqueue = array(0 => $queue->title);
-  $queue->size = 6;
-  $queue->link = $t('Add to %subqueue');
-  $queue->link_remove = $t('Remove from %subqueue');
+  $queue->size = 12;
+  $queue->link = '';
+  $queue->link_remove = '';
   $queue->i18n = 1;
-  $queue->show_in_links = 1;
+  $queue->show_in_links = 0;
   $queue->show_in_tab = 1;
   $queue->show_in_ui = 1;
   $queue->reference = 0;
@@ -41,7 +41,7 @@ function unimelb_arts_install() {
 /**
  * Implements hook_update_N().
  *
- * Create the default front page NodeQueue.
+ * Create the default front page Nodequeue.
  */
 function unimelb_arts_update_7000(&$sandbox) {
   // $admin = user_role_load_by_name('admin');
@@ -55,10 +55,10 @@ function unimelb_arts_update_7000(&$sandbox) {
   $queue->subqueue_title = '';
   $queue->add_subqueue = array(0 => $queue->title);
   $queue->size = 6;
-  $queue->link = t('Add to %subqueue');
-  $queue->link_remove = t('Remove from %subqueue');
+  $queue->link = '';
+  $queue->link_remove = '';
   $queue->i18n = 1;
-  $queue->show_in_links = 1;
+  $queue->show_in_links = 0;
   $queue->show_in_tab = 1;
   $queue->show_in_ui = 1;
   $queue->reference = 0;
@@ -75,6 +75,32 @@ function unimelb_arts_update_7000(&$sandbox) {
   variable_del('foa_admin_rid');
 
   return t('Created nodequeue !title as @qid', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid .'/edit'), '@qid' => $qid));
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Remove Front Page nodequeue from node links.
+ */
+function unimelb_arts_update_7001(&$sandbox) {
+  $qid = db_select('nodequeue_queue', 'q')
+           ->fields('q', array('qid'))
+           ->condition('name' , 'front_page')
+           ->execute()
+           ->fetchField();
+
+  $queue = nodequeue_load($qid);
+
+  // Update settings.
+  $queue->size = 12;
+  $queue->link = '';
+  $queue->link_remove = '';
+  $queue->show_in_links = 0;
+
+  // Save!
+  $qid = nodequeue_save($queue);
+
+  return t('Updated nodequeue !title (qid @qid)', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid .'/edit'), '@qid' => $qid));
 }
 
 /**
