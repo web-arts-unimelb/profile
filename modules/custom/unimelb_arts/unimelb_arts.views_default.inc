@@ -225,6 +225,7 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
   $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
     'front_page' => 'front_page',
+    'ming' => 0,
   );
   /* Field: Content: Images */
   $handler->display->display_options['fields']['field_shared_images']['id'] = 'field_shared_images';
@@ -281,8 +282,7 @@ function unimelb_arts_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '6';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -398,6 +398,120 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['filters']['position']['field'] = 'position';
   $handler->display->display_options['filters']['position']['relationship'] = 'nodequeue_rel';
   $handler->display->display_options['filters']['position']['value']['value'] = '6';
+
+  /* Display: Block 7 */
+  $handler = $view->new_display('block', 'Block 7', 'block_7');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Nodequeue: Position */
+  $handler->display->display_options['filters']['position']['id'] = 'position';
+  $handler->display->display_options['filters']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['position']['field'] = 'position';
+  $handler->display->display_options['filters']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['position']['value']['value'] = '7';
+
+  /* Display: Block 8 */
+  $handler = $view->new_display('block', 'Block 8', 'block_8');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Nodequeue: Position */
+  $handler->display->display_options['filters']['position']['id'] = 'position';
+  $handler->display->display_options['filters']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['position']['field'] = 'position';
+  $handler->display->display_options['filters']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['position']['value']['value'] = '8';
+
+  /* Display: Block 9 */
+  $handler = $view->new_display('block', 'Block 9', 'block_9');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Nodequeue: Position */
+  $handler->display->display_options['filters']['position']['id'] = 'position';
+  $handler->display->display_options['filters']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['position']['field'] = 'position';
+  $handler->display->display_options['filters']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['position']['value']['value'] = '9';
+
+  /* Display: Block 10 */
+  $handler = $view->new_display('block', 'Block 10', 'block_10');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Nodequeue: Position */
+  $handler->display->display_options['filters']['position']['id'] = 'position';
+  $handler->display->display_options['filters']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['position']['field'] = 'position';
+  $handler->display->display_options['filters']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['position']['value']['value'] = '10';
+
+  /* Display: Block 11 */
+  $handler = $view->new_display('block', 'Block 11', 'block_11');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Nodequeue: Position */
+  $handler->display->display_options['filters']['position']['id'] = 'position';
+  $handler->display->display_options['filters']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['position']['field'] = 'position';
+  $handler->display->display_options['filters']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['position']['value']['value'] = '11';
+
+  /* Display: Block 12 */
+  $handler = $view->new_display('block', 'Block 12', 'block_12');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Nodequeue: Position */
+  $handler->display->display_options['filters']['position']['id'] = 'position';
+  $handler->display->display_options['filters']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['position']['field'] = 'position';
+  $handler->display->display_options['filters']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['position']['value']['value'] = '12';
   $export['front_page'] = $view;
 
   $view = new view();
