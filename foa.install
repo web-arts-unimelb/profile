@@ -111,8 +111,8 @@ function foa_install() {
     ),
     // @todo: This needs to be a jQuery menu block.
     array(
-      'module' => 'system',
-      'delta' => 'navigation',
+      'module' => 'jquerymenu',
+      'delta' => '1',
       'theme' => $default_theme,
       'status' => 1,
       'weight' => 0,
@@ -203,4 +203,28 @@ function foa_install() {
     ->execute();
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
+
+  __helper_set_default_jquerymenu();	
+}
+
+
+function __helper_set_default_jquerymenu()
+{
+	$table_name = "jquerymenus";
+	$condi = db_table_exists($table_name);
+
+	if($condi == TRUE)
+	{	
+		db_insert($table_name)->fields(
+			array(
+				"mid" => 1, 
+				"menu_name" => "main-menu"
+			)
+		)
+  		->execute();
+	}
+	else
+	{
+		
+	}
 }

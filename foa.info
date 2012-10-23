@@ -48,6 +48,7 @@ dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views
 dependencies[] = features
+dependencies[] = jquerymenu
 
 ; And finally, the Feature itself.
 dependencies[] = unimelb_arts
