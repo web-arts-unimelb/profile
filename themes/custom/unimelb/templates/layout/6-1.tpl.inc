@@ -67,6 +67,7 @@
     <div class="col-2 page-preview">
       <?php if(!empty($page['home_column_12'])): print render($page['home_column_12']); endif; ?>
     </div>
+  </div>
 </div>
 
 <div class="col-2 rightside">
