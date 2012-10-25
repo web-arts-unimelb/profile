@@ -10,6 +10,16 @@
 function unimelb_arts_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access administration menu.
+  $permissions['access administration menu'] = array(
+    'name' => 'access administration menu',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
+    ),
+    'module' => 'admin_menu',
+  );
+
   // Exported permission: access content.
   $permissions['access content'] = array(
     'name' => 'access content',
