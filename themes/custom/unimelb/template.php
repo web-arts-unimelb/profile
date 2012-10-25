@@ -29,11 +29,11 @@ function unimelb_preprocess_html(&$variables) {
 
   // Generate the meta tag content here, simply print the content in the tpl.php.
   if ($keywords = theme_get_setting('unimelb_settings_meta-keywords')) {
-    $keywords[] = theme_get_setting('unimelb_settings_meta-keywords');
+    $keywords = explode(',', theme_get_setting('unimelb_settings_meta-keywords'));
   }
   $keywords[] = $variables['page_title'];
   $keywords[] = $variables['site_name'];
-  $variables['unimelb_meta_keywords']  = implode(', ', $keywords);
+  $variables['unimelb_meta_keywords'] = check_plain(implode(', ', $keywords));
 
   $variables['unimelb_meta_description'] = $variables['site_name'] . ': ' . $variables['page_title'];
   if ($variables['is_front'] && $description = theme_get_setting('unimelb_settings_ht-right')) {
