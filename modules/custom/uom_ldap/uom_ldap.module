@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the UoM LDAP feature.
+ * Code for the Faculty of Arts LDAP feature.
  */
 
 include_once 'uom_ldap.features.inc';
