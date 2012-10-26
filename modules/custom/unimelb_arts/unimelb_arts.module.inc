@@ -16,6 +16,8 @@ function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
   // Hide these WYSIWYG buttons on the summary field.
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_images { display: none; }', 'inline');
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_attachments { display: none; }', 'inline');
+
+  __field_label_modification($form);
 }
 
 /**
@@ -55,4 +57,18 @@ function unimelb_arts_field_attach_presave($entity_type, $entity) {
       }
     }
   }
+}
+
+
+// Modify field label
+function __field_label_modification(&$form)
+{
+	// Some help text
+	$help_text = $form['field_shared_images'][$form['language']['#value']]['#file_upload_title'];  
+	$help_text .= " (Press the '+' button above to see more images)";   
+	$form['field_shared_images'][$form['language']['#value']]['#file_upload_title'] = $help_text;
+
+	$help_text = $form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'];  
+	$help_text .= " (Press the '+' button above to see more files)";   
+	$form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'] = $help_text;
 }
