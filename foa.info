@@ -35,6 +35,7 @@ dependencies[] = wysiwyg_fields
 
 ; These are used by the unimelb_arts Feature.
 dependencies[] = ctools
+dependencies[] = entity
 dependencies[] = date
 dependencies[] = date_api
 dependencies[] = date_popup
@@ -45,6 +46,7 @@ dependencies[] = pathauto
 dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views
+dependencies[] = views_bulk_operations
 dependencies[] = features
 dependencies[] = jquerymenu
 
