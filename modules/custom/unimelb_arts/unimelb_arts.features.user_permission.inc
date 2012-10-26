@@ -50,6 +50,15 @@ function unimelb_arts_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: administer nodequeue.
+  $permissions['administer nodequeue'] = array(
+    'name' => 'administer nodequeue',
+    'roles' => array(
+      0 => 'site admin',
+    ),
+    'module' => 'nodequeue',
+  );
+
   // Exported permission: administer nodes.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
@@ -231,6 +240,25 @@ function unimelb_arts_user_default_permissions() {
       2 => 'site admin',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: manipulate all queues.
+  $permissions['manipulate all queues'] = array(
+    'name' => 'manipulate all queues',
+    'roles' => array(
+      0 => 'site admin',
+    ),
+    'module' => 'nodequeue',
+  );
+
+  // Exported permission: manipulate queues.
+  $permissions['manipulate queues'] = array(
+    'name' => 'manipulate queues',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
+    ),
+    'module' => 'nodequeue',
   );
 
   // Exported permission: revert revisions.
