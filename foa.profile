@@ -59,7 +59,7 @@ function foa_profile_tasks() {
 
   // Put each of the frontpage view blocks in their regions.
   for ($i = 1; $i <= 12; $i++) {
-    $batch['operations'][] = array('foa_profile_frontpage_block', array($i), '<front>');
+    $batch['operations'][] = array('foa_profile_frontpage_block', array($i, '<front>'));
   }
 
   // Create a jQuerymenu.
@@ -93,7 +93,7 @@ function foa_profile_frontpage_block($delta, $page,  &$context) {
   db_update('block')
     ->fields(array(
       'status' => 1,
-      'page' => $page,
+      'pages' => $page,
       'region' => 'home_column_' . $delta,
     ))
     ->condition('module', 'views')
@@ -151,7 +151,7 @@ function foa_profile_news_block($theme, $region, $page, &$context) {
   db_update('block')
     ->fields(array(
       'status' => 1,
-      'page' => $page,
+      'pages' => $page,
       'region' => $region,
     ))
     ->condition('module', 'views')
@@ -173,7 +173,7 @@ function foa_profile_events_block($theme, $region, $page, &$context) {
   db_update('block')
     ->fields(array(
       'status' => 1,
-      'page' => $page,
+      'pages' => $page,
       'region' => $region,
     ))
     ->condition('module', 'views')
