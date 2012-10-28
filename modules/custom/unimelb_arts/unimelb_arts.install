@@ -74,7 +74,7 @@ function unimelb_arts_update_7000(&$sandbox) {
   variable_del('foa_editor_rid');
   variable_del('foa_admin_rid');
 
-  return t('Created nodequeue !title as @qid', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid .'/edit'), '@qid' => $qid));
+  return t('Created nodequeue !title as @qid', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid . '/edit'), '@qid' => $qid));
 }
 
 /**
@@ -100,7 +100,7 @@ function unimelb_arts_update_7001(&$sandbox) {
   // Save!
   $qid = nodequeue_save($queue);
 
-  return t('Updated nodequeue !title (qid @qid)', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid .'/edit'), '@qid' => $qid));
+  return t('Updated nodequeue !title (qid @qid)', array('!title' => l($queue->title, 'admin/structure/nodequeue/' . $qid . '/edit'), '@qid' => $qid));
 }
 
 /**
