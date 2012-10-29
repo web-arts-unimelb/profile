@@ -133,6 +133,7 @@ function foa_profile_jquerymenu_block($theme, $region, $page, &$context) {
       'weight' => 0,
       'region' => $region,
       'pages'  => $page,
+      'title'  => t('Home'),
       'cache'  => -1,
     ))
     ->execute();
