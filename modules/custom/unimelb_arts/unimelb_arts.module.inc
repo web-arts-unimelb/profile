@@ -17,7 +17,17 @@ function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_images { display: none; }', 'inline');
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_attachments { display: none; }', 'inline');
 
-  __field_label_modification($form);
+	// Modify field label for image uploader in wysiwyg
+	if(isset($form['field_shared_images']))
+	{
+  	$form['field_shared_images'][$form['language']['#value']]['#file_upload_title'] .= t(" (Press the '+' button above to see more images)");
+  }
+  
+  // Modify field label for file uploader in wysiwyg
+  if(isset($form['field_shared_attachments']))
+  {
+  	$form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'] .= t(" (Press the '+' button above to see more files)");
+	}
 }
 
 /**
@@ -39,6 +49,7 @@ function unimelb_arts_field_widget_form_alter(&$element, &$form_state, $context)
   }
 }
 
+
 /**
  * Implements hook_field_attach_presave().
  */
@@ -57,18 +68,4 @@ function unimelb_arts_field_attach_presave($entity_type, $entity) {
       }
     }
   }
-}
-
-
-// Modify field label
-function __field_label_modification(&$form)
-{
-	// Some help text
-	$help_text = $form['field_shared_images'][$form['language']['#value']]['#file_upload_title'];  
-	$help_text .= " (Press the '+' button above to see more images)";   
-	$form['field_shared_images'][$form['language']['#value']]['#file_upload_title'] = $help_text;
-
-	$help_text = $form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'];  
-	$help_text .= " (Press the '+' button above to see more files)";   
-	$form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'] = $help_text;
 }
