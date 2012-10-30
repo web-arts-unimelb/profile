@@ -36,6 +36,9 @@ function unimelb_arts_install() {
   // Temp variables, no longer needed.
   variable_del('foa_editor_rid');
   variable_del('foa_admin_rid');
+
+  // @todo
+  // Give editor, admin and site admin correct access to the tags vocabulary.
 }
 
 /**

@@ -50,7 +50,7 @@ function unimelb_arts_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '2',
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -242,10 +242,9 @@ function unimelb_arts_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'file',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '3',
+          'weight' => '4',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -306,7 +305,7 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '6',
+        'weight' => '5',
       ),
     ),
   );
@@ -348,13 +347,9 @@ function unimelb_arts_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => 'file',
-            'image_style' => 'medium',
-          ),
+          'settings' => array(),
           'type' => 'hidden',
-          'weight' => '1',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -401,9 +396,13 @@ function unimelb_arts_field_default_fields() {
         'module' => 'image',
         'settings' => array(
           'filefield_sources' => array(
-            'filefield_sources' => array(),
+            'filefield_sources' => array(
+              'attach' => 0,
+              'reference' => 0,
+              'remote' => 0,
+            ),
             'source_attach' => array(
-              'absolute' => 0,
+              'absolute' => '0',
               'attach_mode' => 'move',
               'path' => 'file_attach',
             ),
@@ -419,6 +418,88 @@ function unimelb_arts_field_default_fields() {
         ),
         'type' => 'image_image',
         'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-event-field_shared_tags'.
+  $fields['node-event-field_shared_tags'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_tags',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'tags',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'event',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Tag this content to create relationships with other items sharing the same tags.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_tags',
+      'label' => 'Tags',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Tags',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '3',
       ),
     ),
   );
@@ -522,7 +603,7 @@ function unimelb_arts_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '-4',
+        'weight' => '1',
       ),
     ),
   );
@@ -565,10 +646,9 @@ function unimelb_arts_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'file',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '2',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -629,7 +709,7 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => 0,
+        'weight' => '4',
       ),
     ),
   );
@@ -676,7 +756,7 @@ function unimelb_arts_field_default_fields() {
             'image_link' => 'file',
             'image_style' => 'medium',
           ),
-          'type' => 'image',
+          'type' => 'hidden',
           'weight' => '0',
         ),
         'teaser' => array(
@@ -686,7 +766,7 @@ function unimelb_arts_field_default_fields() {
             'image_link' => 'content',
             'image_style' => 'thumbnail',
           ),
-          'type' => 'image',
+          'type' => 'hidden',
           'weight' => '0',
         ),
       ),
@@ -704,15 +784,33 @@ function unimelb_arts_field_default_fields() {
         'min_resolution' => '',
         'title_field' => 1,
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'image' => 'image',
+            ),
+            'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
+            'label' => 'Images',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'image',
         'settings' => array(
           'filefield_sources' => array(
-            'filefield_sources' => array(),
+            'filefield_sources' => array(
+              'attach' => 0,
+              'reference' => 0,
+              'remote' => 0,
+            ),
             'source_attach' => array(
-              'absolute' => 0,
+              'absolute' => '0',
               'attach_mode' => 'move',
               'path' => 'file_attach',
             ),
@@ -727,7 +825,89 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '-2',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-news-field_shared_tags'.
+  $fields['node-news-field_shared_tags'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_tags',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'tags',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'news',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Tag this content to create relationships with other items sharing the same tags.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_tags',
+      'label' => 'Tags',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Tags',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '2',
       ),
     ),
   );
@@ -772,7 +952,7 @@ function unimelb_arts_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '1',
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -831,7 +1011,7 @@ function unimelb_arts_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '3',
+        'weight' => '1',
       ),
     ),
   );
@@ -874,10 +1054,9 @@ function unimelb_arts_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'file',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '2',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -938,7 +1117,7 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '5',
+        'weight' => '4',
       ),
     ),
   );
@@ -980,13 +1159,9 @@ function unimelb_arts_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => 'medium',
-          ),
+          'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -1033,9 +1208,13 @@ function unimelb_arts_field_default_fields() {
         'module' => 'image',
         'settings' => array(
           'filefield_sources' => array(
-            'filefield_sources' => array(),
+            'filefield_sources' => array(
+              'attach' => 0,
+              'reference' => 0,
+              'remote' => 0,
+            ),
             'source_attach' => array(
-              'absolute' => 0,
+              'absolute' => '0',
               'attach_mode' => 'move',
               'path' => 'file_attach',
             ),
@@ -1050,7 +1229,89 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '4',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-page-field_shared_tags'.
+  $fields['node-page-field_shared_tags'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_tags',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'tags',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'page',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Tag this content to create relationships with other items sharing the same tags.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '1',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_tags',
+      'label' => 'Tags',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Tags',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '2',
       ),
     ),
   );
@@ -1061,6 +1322,8 @@ function unimelb_arts_field_default_fields() {
   t('Body');
   t('Date');
   t('Images');
+  t('Tag this content to create relationships with other items sharing the same tags.');
+  t('Tags');
   t('Upload and attach all files that should be displayed on this page.');
 
   return $fields;

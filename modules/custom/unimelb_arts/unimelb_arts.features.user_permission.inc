@@ -69,6 +69,15 @@ function unimelb_arts_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: administer taxonomy.
+  $permissions['administer taxonomy'] = array(
+    'name' => 'administer taxonomy',
+    'roles' => array(
+      0 => 'site admin',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: bypass node access.
   $permissions['bypass node access'] = array(
     'name' => 'bypass node access',
@@ -269,6 +278,56 @@ function unimelb_arts_user_default_permissions() {
       1 => 'site admin',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: show format selection for comment.
+  $permissions['show format selection for comment'] = array(
+    'name' => 'show format selection for comment',
+    'roles' => array(
+      0 => 'site admin',
+    ),
+    'module' => 'better_formats',
+  );
+
+  // Exported permission: show format selection for node.
+  $permissions['show format selection for node'] = array(
+    'name' => 'show format selection for node',
+    'roles' => array(
+      0 => 'site admin',
+    ),
+    'module' => 'better_formats',
+  );
+
+  // Exported permission: show format selection for taxonomy_term.
+  $permissions['show format selection for taxonomy_term'] = array(
+    'name' => 'show format selection for taxonomy_term',
+    'roles' => array(
+      0 => 'site admin',
+    ),
+    'module' => 'better_formats',
+  );
+
+  // Exported permission: show format selection for user.
+  $permissions['show format selection for user'] = array(
+    'name' => 'show format selection for user',
+    'roles' => array(
+      0 => 'site admin',
+    ),
+    'module' => 'better_formats',
+  );
+
+  // Exported permission: show format tips.
+  $permissions['show format tips'] = array(
+    'name' => 'show format tips',
+    'roles' => array(),
+    'module' => 'better_formats',
+  );
+
+  // Exported permission: show more format tips link.
+  $permissions['show more format tips link'] = array(
+    'name' => 'show more format tips link',
+    'roles' => array(),
+    'module' => 'better_formats',
   );
 
   // Exported permission: view own unpublished content.

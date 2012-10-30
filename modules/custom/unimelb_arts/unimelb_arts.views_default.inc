@@ -325,7 +325,7 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Author';
   $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'dashboard/[uid]';
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'admin/content/dashboard/[uid]';
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
@@ -465,7 +465,7 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['path'] = 'dashboard';
+  $handler->display->display_options['path'] = 'admin/content/dashboard';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Dashboard';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -487,7 +487,7 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['path'] = 'dashboard/my';
+  $handler->display->display_options['path'] = 'admin/content/dashboard/my';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'My Dashboard';
   $handler->display->display_options['menu']['weight'] = '0';
