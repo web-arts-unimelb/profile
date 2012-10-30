@@ -43,7 +43,16 @@ function uom_slider_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'slider',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'summary' => array(
+            'format' => 'full_html',
+            'value' => '',
+          ),
+          'value' => '',
+          'format' => 'full_html',
+        ),
+      ),
       'deleted' => '0',
       'description' => 'Enter descriptive text that is to be displayed as caption over the slider image.',
       'display' => array(
@@ -66,13 +75,42 @@ function uom_slider_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'body',
-      'label' => 'Image Caption',
+      'label' => 'Image caption',
       'required' => 1,
       'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'full_html' => 'full_html',
+            'plain_text' => 'plain_text',
+          ),
+          'allowed_formats_toggle' => 0,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'full_html' => array(
+                'weight' => '0',
+              ),
+              'plain_text' => array(
+                'weight' => '10',
+              ),
+            ),
+          ),
+        ),
         'display_summary' => 1,
-        'entity_translation_sync' => FALSE,
         'text_processing' => '1',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Image Caption',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -82,7 +120,7 @@ function uom_slider_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '3',
+        'weight' => '2',
       ),
     ),
   );
@@ -109,31 +147,28 @@ function uom_slider_field_default_fields() {
         ),
       ),
       'locked' => '0',
-      'module' => 'image',
+      'module' => 'linkimagefield',
       'settings' => array(
         'default_image' => 0,
-        'entity_translation_sync' => array(
-          0 => 'fid',
-        ),
         'uri_scheme' => 'public',
       ),
       'translatable' => '0',
-      'type' => 'image',
+      'type' => 'linkimagefield',
     ),
     'field_instance' => array(
       'bundle' => 'slider',
       'deleted' => '0',
-      'description' => 'Upload an image. It will be automatically resized to 720×240 pixels for display in the slider.',
+      'description' => 'Slider image will be resized to 690x240 automatically.',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
-          'module' => 'image',
+          'label' => 'above',
+          'module' => 'linkimagefield',
           'settings' => array(
             'image_link' => '',
-            'image_style' => 'slider',
+            'image_style' => '',
           ),
-          'type' => 'image',
-          'weight' => '2',
+          'type' => 'linkimagefield',
+          'weight' => 4,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -144,136 +179,53 @@ function uom_slider_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_slider_image',
-      'label' => 'Image',
+      'label' => 'Slider image',
       'required' => 1,
       'settings' => array(
         'alt_field' => 0,
+        'class_field' => 0,
+        'custom_target' => 0,
         'default_image' => 0,
-        'entity_translation_sync' => FALSE,
         'file_directory' => 'slider',
         'file_extensions' => 'png gif jpg jpeg',
+        'longdesc_field' => 0,
         'max_filesize' => '',
         'max_resolution' => '',
         'min_resolution' => '',
+        'rel_field' => 0,
+        'target' => '_self',
         'title_field' => 0,
+        'url' => '',
+        'url_settings' => array(
+          'class_field' => 0,
+          'custom_target' => 0,
+          'rel_field' => 0,
+          'target' => '_self',
+          'url' => '',
+        ),
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'slider_image',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'image',
+        'module' => 'linkimagefield',
         'settings' => array(
-          'filefield_sources' => array(
-            'filefield_sources' => array(),
-            'source_attach' => array(
-              'absolute' => 0,
-              'attach_mode' => 'move',
-              'path' => 'file_attach',
-            ),
-            'source_imce' => array(
-              'imce_mode' => 0,
-            ),
-            'source_reference' => array(
-              'autocomplete' => '0',
-            ),
-          ),
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
-        'type' => 'image_image',
-        'weight' => '2',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-slider-field_slider_link'.
-  $fields['node-slider-field_slider_link'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_slider_link',
-      'foreign keys' => array(
-        'node' => array(
-          'columns' => array(
-            'target_id' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
-      'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'entityreference',
-      'settings' => array(
-        'entity_translation_sync' => FALSE,
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'direction' => 'ASC',
-            'field' => 'body:value',
-            'property' => 'nid',
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'event' => 'event',
-            'program' => 'program',
-          ),
-        ),
-        'handler_submit' => 'Change handler',
-        'target_type' => 'node',
-      ),
-      'translatable' => '0',
-      'type' => 'entityreference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'slider',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'Choose the page (on this site) that the slider should link to.',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'entityreference',
-          'settings' => array(
-            'link' => FALSE,
-          ),
-          'type' => 'entityreference_label',
-          'weight' => '1',
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_slider_link',
-      'label' => 'Page Link',
-      'required' => 0,
-      'settings' => array(
-        'entity_translation_sync' => FALSE,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'entityreference',
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'path' => '',
-          'size' => '60',
-        ),
-        'type' => 'entityreference_autocomplete',
-        'weight' => '4',
+        'type' => 'linkimagefield_widget',
+        'weight' => '3',
       ),
     ),
   );
@@ -309,7 +261,16 @@ function uom_slider_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'slider',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'summary' => array(
+            'format' => 'full_html',
+            'value' => '',
+          ),
+          'value' => '',
+          'format' => 'full_html',
+        ),
+      ),
       'deleted' => '0',
       'description' => 'This text will be shown on the small pager to the right of the main slider. When a user hovers the mouse over this text, the main slider displays the image and caption you enter below.',
       'display' => array(
@@ -329,13 +290,42 @@ function uom_slider_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_slider_pager',
-      'label' => 'Pager Label',
+      'label' => 'Pager label',
       'required' => 1,
       'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'full_html' => 'full_html',
+            'plain_text' => 'plain_text',
+          ),
+          'allowed_formats_toggle' => 0,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'full_html' => array(
+                'weight' => '0',
+              ),
+              'plain_text' => array(
+                'weight' => '10',
+              ),
+            ),
+          ),
+        ),
         'display_summary' => 0,
-        'entity_translation_sync' => FALSE,
         'text_processing' => '1',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Pager Label',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -350,87 +340,14 @@ function uom_slider_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-slider-title_field'.
-  $fields['node-slider-title_field'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'title_field',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'text',
-      'settings' => array(
-        'entity_translation_sync' => FALSE,
-        'max_length' => 255,
-      ),
-      'translatable' => '1',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'slider',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'A field replacing node title.',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 4,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'title_field',
-      'label' => 'Title',
-      'required' => TRUE,
-      'settings' => array(
-        'entity_translation_sync' => FALSE,
-        'text_processing' => 0,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'text',
-        'settings' => array(
-          'size' => 60,
-        ),
-        'type' => 'text_textfield',
-        'weight' => '-5',
-      ),
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
-  t('A field replacing node title.');
-  t('Choose the page (on this site) that the slider should link to.');
   t('Enter descriptive text that is to be displayed as caption over the slider image.');
-  t('Image');
-  t('Image Caption');
-  t('Page Link');
-  t('Pager Label');
+  t('Image caption');
+  t('Pager label');
+  t('Slider image');
+  t('Slider image will be resized to 690x240 automatically.');
   t('This text will be shown on the small pager to the right of the main slider. When a user hovers the mouse over this text, the main slider displays the image and caption you enter below.');
-  t('Title');
-  t('Upload an image. It will be automatically resized to 720×240 pixels for display in the slider.');
 
   return $fields;
 }
