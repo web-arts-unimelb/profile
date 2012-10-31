@@ -49,6 +49,8 @@ dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = features
 dependencies[] = jquerymenu
+dependencies[] = views_slideshow
+dependencies[] = linkimagefield 
 
 ; And finally, the Feature itself.
 dependencies[] = unimelb_arts
