@@ -138,8 +138,8 @@ function foa_install() {
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'access comments'));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments'));
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 
   // Full HTML permission goes on our new roles.
   $full_html_permission = filter_permission_name($full_html_format);
@@ -153,7 +153,7 @@ function foa_install() {
   variable_set('foa_editor_rid', $editor_role->rid);
 
   // Enable permissions for editor role.
-  user_role_grant_permissions($editor_role->rid, array('access content', 'access comments', 'post comments', 'skip comment approval', $full_html_permission));
+  user_role_grant_permissions($editor_role->rid, array('access content', $full_html_permission));
 
   $admin_role = new stdClass();
   $admin_role->name = 'admin';
@@ -164,7 +164,7 @@ function foa_install() {
   variable_set('foa_admin_rid', $admin_role->rid);
 
   // Enable permissions for admin role.
-  user_role_grant_permissions($admin_role->rid, array('access content', 'access comments', 'post comments', 'skip comment approval', $full_html_permission));
+  user_role_grant_permissions($admin_role->rid, array('access content', $full_html_permission));
 
   // Create a default role for site administrators, with all available permissions assigned.
   $site_admin_role = new stdClass();

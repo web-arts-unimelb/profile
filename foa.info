@@ -6,7 +6,6 @@
 name = Faculty of Arts
 description = Install Drupal with Faculty of Arts presets enabled.
 dependencies[] = block
-dependencies[] = comment
 dependencies[] = contextual
 dependencies[] = help
 dependencies[] = image
