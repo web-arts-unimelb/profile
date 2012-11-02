@@ -51,17 +51,17 @@ function foa_install() {
       // URL filter.
       'filter_url' => array(
         'weight' => 0,
-        'status' => 1,
+        'status' => 0,
       ),
       // Line break filter.
       'filter_autop' => array(
         'weight' => 1,
-        'status' => 1,
+        'status' => 0,
       ),
       // HTML corrector filter.
       'filter_htmlcorrector' => array(
         'weight' => 10,
-        'status' => 1,
+        'status' => 0,
       ),
     ),
   );
@@ -138,10 +138,12 @@ function foa_install() {
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'access comments', $filtered_html_permission));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments', 'post comments', 'skip comment approval', $filtered_html_permission));
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'access comments'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments'));
 
-  // @todo: Set permissions on the editor role.
+  // Full HTML permission goes on our new roles.
+  $full_html_permission = filter_permission_name($full_html_format);
+
   $editor_role = new stdClass();
   $editor_role->name = 'editor';
   $editor_role->weight = 2;
@@ -150,7 +152,9 @@ function foa_install() {
   // Save the editor rid for use in the arts feature install.
   variable_set('foa_editor_rid', $editor_role->rid);
 
-  // @todo: Set permissions on the admin role.
+  // Enable permissions for editor role.
+  user_role_grant_permissions($editor_role->rid, array('access content', 'access comments', 'post comments', 'skip comment approval', $full_html_permission));
+
   $admin_role = new stdClass();
   $admin_role->name = 'admin';
   $admin_role->weight = 3;
@@ -158,6 +162,9 @@ function foa_install() {
 
   // Save the admin role for use in the arts feature install.
   variable_set('foa_admin_rid', $admin_role->rid);
+
+  // Enable permissions for admin role.
+  user_role_grant_permissions($admin_role->rid, array('access content', 'access comments', 'post comments', 'skip comment approval', $full_html_permission));
 
   // Create a default role for site administrators, with all available permissions assigned.
   $site_admin_role = new stdClass();

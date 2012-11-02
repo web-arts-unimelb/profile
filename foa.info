@@ -52,5 +52,6 @@ dependencies[] = jquerymenu
 dependencies[] = views_slideshow
 dependencies[] = linkimagefield 
 
-; And finally, the Feature itself.
+; And finally, the Arts Features.
 dependencies[] = unimelb_arts
+dependencies[] = wysiwyg_arts
