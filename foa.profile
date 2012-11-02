@@ -12,8 +12,7 @@
 function foa_form_install_configure_form_alter(&$form, $form_state) {
   // Pre-populate the site name with part of the server name.
   $site = strtoupper(strtr($_SERVER['SERVER_NAME'], array('www.' => '')));
-  $site = array_shift(explode('.', $site));
-  $form['site_information']['site_name']['#default_value'] = t('Faculty of Arts @site', array('@site' => $site));
+  $form['site_information']['site_name']['#default_value'] = array_shift(explode('.', $site));
   $form['site_information']['site_mail']['#default_value'] = 'arts-webmaster@lists.unimelb.edu.au';
 
   // Add a default email address and username,
