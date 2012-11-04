@@ -280,15 +280,6 @@ function unimelb_arts_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: show format selection for comment.
-  $permissions['show format selection for comment'] = array(
-    'name' => 'show format selection for comment',
-    'roles' => array(
-      0 => 'site admin',
-    ),
-    'module' => 'better_formats',
-  );
-
   // Exported permission: show format selection for node.
   $permissions['show format selection for node'] = array(
     'name' => 'show format selection for node',
