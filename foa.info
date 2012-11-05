@@ -28,6 +28,7 @@ version = "7.x-1.0"
 ; These are the FoA extras on top of the `standard' profile.
 dependencies[] = admin_menu_toolbar
 dependencies[] = css_splitter
+dependencies[] = diff
 dependencies[] = sassy
 dependencies[] = wysiwyg
 dependencies[] = wysiwyg_fields
