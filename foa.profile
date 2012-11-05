@@ -193,6 +193,11 @@ function foa_profile_events_block($theme, $region, $page, &$context) {
 function foa_profile_cleanup(&$context) {
   variable_del('foa_jquerymenu');
 
+  // Put back the original error level.
+  $error_level = variable_get('foa_error_level', 1);
+  variable_set('error_level', $error_level);
+  variable_del('foa_error_level');
+
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Cleaned up temporary variables');
 }
