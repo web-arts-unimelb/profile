@@ -76,6 +76,9 @@ function foa_profile_tasks() {
   // Put the events block on the front page.
   $batch['operations'][] = array('foa_profile_events_block', array('theme_default', 'sidebar_right', '<front>'));
 
+  // Set some miscellaneous system variables.
+  $batch['operations'][] = array('foa_profile_variables', array());
+
   // Cleanup mess.
   $batch['operations'][] = array('foa_profile_cleanup', array());
 
@@ -183,6 +186,19 @@ function foa_profile_events_block($theme, $region, $page, &$context) {
 
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Enabled frontpage events block');
+}
+
+/**
+ * Set required variables.
+ *
+ * Called by batch API.
+ */
+function foa_profile_variables(&$context) {
+  // No automagic nodequeue views.
+  variable_set('nodequeue_view_per_queue', 0);
+
+  $context['results'] = __FUNCTION__;
+  $context['message'] = t('Tweaked system variables');
 }
 
 /**
