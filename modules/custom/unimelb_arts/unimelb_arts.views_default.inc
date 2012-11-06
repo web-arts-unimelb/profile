@@ -715,7 +715,6 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
   $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
     'front_page' => 'front_page',
-    'ming' => 0,
   );
   /* Field: Content: Images */
   $handler->display->display_options['fields']['field_shared_images']['id'] = 'field_shared_images';
@@ -725,7 +724,7 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['fields']['field_shared_images']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_shared_images']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_shared_images']['settings'] = array(
-    'image_style' => 'front_page_2',
+    'image_style' => 'front_page_2up',
     'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_shared_images']['delta_limit'] = '1';
