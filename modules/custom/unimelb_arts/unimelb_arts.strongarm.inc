@@ -66,6 +66,27 @@ function unimelb_arts_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_event';
+  $strongarm->value = 0;
+  $export['comment_event'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_news';
+  $strongarm->value = 0;
+  $export['comment_news'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_page';
+  $strongarm->value = 0;
+  $export['comment_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'date_popup_timepicker';
   $strongarm->value = 'wvega';
   $export['date_popup_timepicker'] = $strongarm;
@@ -238,13 +259,6 @@ function unimelb_arts_strongarm() {
   $strongarm->name = 'node_submitted_page';
   $strongarm->value = FALSE;
   $export['node_submitted_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'nodequeue_view_per_queue';
-  $strongarm->value = 0;
-  $export['nodequeue_view_per_queue'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
