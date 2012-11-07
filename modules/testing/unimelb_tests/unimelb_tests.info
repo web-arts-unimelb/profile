@@ -1,0 +1,9 @@
+name = Faculty of Arts Tests
+description = Provides tests for the Faculty of Arts install profile and features.
+package = University of Melbourne
+version = 7.x-1.0
+core = 7.x
+
+dependencies[] = simpletest
+
+files[] = unimelb_tests.test

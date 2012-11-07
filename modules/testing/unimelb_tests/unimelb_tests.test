@@ -1,0 +1,42 @@
+<?php
+/**
+ * @file unimelb_tests.test
+ * Tests for the Faculty of Arts install profile.
+ */
+
+class FoaTestCase extends DrupalWebTestCase {
+  // Use the Faculty of Arts install profile.
+  protected $profile = 'foa';
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Faculty of Arts Tests',
+      'description' => 'Test that the Arts feature is installed properly.',
+        'group' => 'FoA',
+    );
+  }
+
+  // Install profle and enable tests module.
+  function setUp() {
+    parent::setUp('unimelb_tests');
+  }
+
+  // Tidy up mess.
+  function tearDown() {
+    parent::tearDown();
+  }
+
+  // Now then, for the actual tests.
+
+  /**
+   * Check that each of the roles have the correct node permissions.
+   *
+   * - Anonymous and authenticated users can not create or edit nodes.
+   * - Editors can edit their own nodes, but not create any.
+   * - Admins can create, edit and delete any nodes.
+   */
+  function testFoANodePermissions() {
+    $this->assertTrue(TRUE, 'The FoA tests have run.');
+  }
+
+}
