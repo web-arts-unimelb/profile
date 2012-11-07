@@ -724,7 +724,7 @@ function unimelb_arts_views_default_views() {
   $handler->display->display_options['fields']['field_shared_images']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_shared_images']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_shared_images']['settings'] = array(
-    'image_style' => 'frontpage_2up',
+    'image_style' => 'frontpage_3up',
     'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_shared_images']['delta_limit'] = '1';
