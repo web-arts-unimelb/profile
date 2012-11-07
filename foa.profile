@@ -35,7 +35,7 @@ function foa_form_install_configure_form_alter(&$form, $form_state) {
  */
 function foa_install_tasks(&$install_state) {
   $tasks['foa_profile_tasks'] = array(
-    'display_name' => st('Enable blocks'),
+    'display_name' => st('Customise site'),
     'display' => TRUE,
     'type' => 'batch',
     'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
@@ -52,7 +52,7 @@ function foa_install_tasks(&$install_state) {
 function foa_profile_tasks() {
 
   $batch = array(
-    'title' => st('Customising Faculty of Arts profile'),
+    'title' => st('Customising your new Faculty of Arts website'),
     'operations' => array(),
   );
 
