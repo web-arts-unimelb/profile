@@ -45,6 +45,7 @@ class FoaTestCase extends DrupalWebTestCase {
       ->execute()
       ->fetchField();
     $this->assertTrue($result, 'The default theme is enabled.');
+  }
 
   /**
    * Is the correct admin theme enabled?
