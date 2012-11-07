@@ -52,9 +52,12 @@ function foa_install_tasks(&$install_state) {
 function foa_profile_tasks() {
 
   $batch = array(
-    'title' => st('Customising University of Melbourne theme blocks'),
+    'title' => st('Customising Faculty of Arts profile'),
     'operations' => array(),
   );
+
+  // Enable theme.
+  $batch['operations'][] = array('foa_profile_enable_theme', array());
 
   // Put each of the frontpage view blocks in their regions.
   for ($i = 1; $i <= 12; $i++) {
@@ -83,6 +86,23 @@ function foa_profile_tasks() {
   $batch['operations'][] = array('foa_profile_cleanup', array());
 
   return $batch;
+}
+
+/**
+ * Enable the `unimelb' theme.
+ */
+function foa_profile_enable_theme(&$context) {
+  // Themes.
+  $default_theme = variable_get('theme_default', 'unimelb');
+
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', $default_theme)
+    ->execute();
+
+  $context['results'] = __FUNCTION__;
+  $context['message'] = t('Enabled Faculty of Arts theme');
 }
 
 /**
