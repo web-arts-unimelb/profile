@@ -14,3 +14,12 @@ its own git repository before you install the site:
 
  * git submodule init
  * git submodule update
+
+TESTING
+-------
+
+To run the tests for this install profile, you need a Drupal site with the
+simpletest module enabled. Then you can run the test script from the Drupal
+document root:
+
+  php ./scripts/run-tests.sh --url http://$SITENAME --class FoaTestCase
