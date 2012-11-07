@@ -23,12 +23,15 @@ dependencies[] = file
 dependencies[] = rdf
 
 core = 7.x
-version = "7.x-1.0"
+version = "7.x-1.1"
 
 ; These are the FoA extras on top of the `standard' profile.
+dependencies[] = admin_menu
 dependencies[] = admin_menu_toolbar
+dependencies[] = better_formats
 dependencies[] = css_splitter
 dependencies[] = diff
+dependencies[] = prepro
 dependencies[] = sassy
 dependencies[] = wysiwyg
 dependencies[] = wysiwyg_fields
@@ -40,6 +43,9 @@ dependencies[] = date
 dependencies[] = date_api
 dependencies[] = date_popup
 dependencies[] = date_views
+dependencies[] = features
+dependencies[] = jquerymenu
+dependencies[] = linkimagefield
 dependencies[] = nodequeue
 dependencies[] = path
 dependencies[] = pathauto
@@ -47,10 +53,7 @@ dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views
 dependencies[] = views_bulk_operations
-dependencies[] = features
-dependencies[] = jquerymenu
 dependencies[] = views_slideshow
-dependencies[] = linkimagefield 
 
 ; And finally, the Arts Features.
 dependencies[] = unimelb_arts
