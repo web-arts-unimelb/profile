@@ -58,9 +58,9 @@ function uom_slider_image_default_styles() {
 function uom_slider_node_info() {
   $items = array(
     'slider' => array(
-      'name' => t('Slider'),
+      'name' => t('Banner'),
       'base' => 'node_content',
-      'description' => t('A <em>Slider</em> is used to highlight specific content on the site. It contains an image, text and a link to page page elsewhere on the site.'),
+      'description' => t('A <em>Banner</em> is used to highlight specific content on the site. It contains an image, text and a link to page page elsewhere on the site.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => t('The title will be used as the text on the slideshow thumbnail.'),

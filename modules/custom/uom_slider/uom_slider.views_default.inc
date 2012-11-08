@@ -13,9 +13,9 @@ function uom_slider_views_default_views() {
   $view = new view();
   $view->name = 'slider';
   $view->description = '';
-  $view->tag = 'default, slider';
+  $view->tag = 'default, banner';
   $view->base_table = 'node';
-  $view->human_name = 'Slider';
+  $view->human_name = 'Banner';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
