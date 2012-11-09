@@ -26,6 +26,14 @@ function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
   if(isset($form['field_shared_attachments'])) {
     $form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'] .= t(" (Press the '+' button above to see more files)");
   }
+
+  // Add a pretty summary to this fieldset tab.
+  if (isset($form['field_shared_keywords'])) {
+    $form['field_shared_keywords']['#attached'] = array(
+      'js' => array(drupal_get_path('module', 'unimelb_arts') . '/js/keywords-summary.js'),
+    );
+  }
+
 }
 
 /**
