@@ -385,7 +385,7 @@ function unimelb_arts_field_default_fields() {
               'hide' => 1,
             ),
             'formatters' => array(
-              'image' => 'image',
+              'colorbox' => 'colorbox',
             ),
             'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
             'label' => 'Images',
@@ -400,6 +400,7 @@ function unimelb_arts_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'clipboard' => 0,
               'reference' => 0,
               'remote' => 0,
             ),
@@ -420,6 +421,91 @@ function unimelb_arts_field_default_fields() {
         ),
         'type' => 'image_image',
         'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-event-field_shared_keywords'.
+  $fields['node-event-field_shared_keywords'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_keywords',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'keywords',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'event',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Enter keywords to add to the keywords that are already configured in the theme.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '5',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_keywords',
+      'label' => 'Keywords',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Keywords',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'taxonomy',
+        'settings' => array(
+          'autocomplete_path' => 'taxonomy/autocomplete',
+          'size' => 60,
+        ),
+        'type' => 'taxonomy_autocomplete',
+        'weight' => '7',
       ),
     ),
   );
@@ -548,7 +634,7 @@ function unimelb_arts_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '1',
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -755,13 +841,9 @@ function unimelb_arts_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => 'file',
-            'image_style' => 'medium',
-          ),
+          'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -795,7 +877,7 @@ function unimelb_arts_field_default_fields() {
               'hide' => 1,
             ),
             'formatters' => array(
-              'image' => 'image',
+              'colorbox' => 'colorbox',
             ),
             'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
             'label' => 'Images',
@@ -810,6 +892,7 @@ function unimelb_arts_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'clipboard' => 0,
               'reference' => 0,
               'remote' => 0,
             ),
@@ -830,6 +913,91 @@ function unimelb_arts_field_default_fields() {
         ),
         'type' => 'image_image',
         'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-news-field_shared_keywords'.
+  $fields['node-news-field_shared_keywords'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_keywords',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'keywords',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'news',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Enter keywords to add to the keywords that are already configured in the theme.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '4',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_keywords',
+      'label' => 'Keywords',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Keywords',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'taxonomy',
+        'settings' => array(
+          'autocomplete_path' => 'taxonomy/autocomplete',
+          'size' => 60,
+        ),
+        'type' => 'taxonomy_autocomplete',
+        'weight' => '7',
       ),
     ),
   );
@@ -1201,7 +1369,7 @@ function unimelb_arts_field_default_fields() {
               'hide' => 1,
             ),
             'formatters' => array(
-              'image' => 'image',
+              'colorbox' => 'colorbox',
             ),
             'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
             'label' => 'Images',
@@ -1216,6 +1384,7 @@ function unimelb_arts_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'clipboard' => 0,
               'reference' => 0,
               'remote' => 0,
             ),
@@ -1236,6 +1405,91 @@ function unimelb_arts_field_default_fields() {
         ),
         'type' => 'image_image',
         'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-page-field_shared_keywords'.
+  $fields['node-page-field_shared_keywords'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_keywords',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'keywords',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'page',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Enter keywords to add to the keywords that are already configured in the theme.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '4',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_keywords',
+      'label' => 'Keywords',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Keywords',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'taxonomy',
+        'settings' => array(
+          'autocomplete_path' => 'taxonomy/autocomplete',
+          'size' => 60,
+        ),
+        'type' => 'taxonomy_autocomplete',
+        'weight' => '7',
       ),
     ),
   );
@@ -1327,7 +1581,9 @@ function unimelb_arts_field_default_fields() {
   t('Attachments');
   t('Body');
   t('Date');
+  t('Enter keywords to add to the keywords that are already configured in the theme.');
   t('Images');
+  t('Keywords');
   t('Tag this content to create relationships with other items sharing the same tags.');
   t('Tags');
   t('Upload and attach all files that should be displayed on this page.');
