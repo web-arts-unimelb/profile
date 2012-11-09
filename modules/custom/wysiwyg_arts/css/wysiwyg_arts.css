@@ -10,14 +10,14 @@ h5 { font-size:14px;}
 h6 { font-size:12px;}
 
 /* Float images. */
-img.wysiwg-right {
+img.wysiwyg-right {
   float: right;
   margin-top: 0.5em;
   margin-bottom: 1em;
   margin-left: 2em;
 }
 
-img.wysiwg-left {
+img.wysiwyg-left {
   float: left;
   margin-top: 0.5em;
   margin-bottom: 1em;
