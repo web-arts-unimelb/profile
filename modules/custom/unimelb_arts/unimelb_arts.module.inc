@@ -75,3 +75,28 @@ function unimelb_arts_field_attach_presave($entity_type, $entity) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_html().
+ *
+ * This function checks the current node for contents in its keywords field
+ * and puts those key words in a theme variable, so they can be referenced
+ * by other preprocess hooks and by the theme.
+ */
+function unimelb_arts_preprocess_html(&$variables) {
+  $node = menu_get_object();
+
+  // If we're looking at a node and there is data in the keywords field for
+  // this node, add that data to a variable that can be used by the theme.
+  if (!empty($node->vid) && !empty($node->field_shared_keywords[$node->language])) {
+    $tids = $keywords = array();
+    foreach ($node->field_shared_keywords[$node->language] as $term) {
+      $tids[] = $term['tid'];
+    }
+    $terms = taxonomy_term_load_multiple($tids);
+    foreach ($terms as $term) {
+      $keywords[] = $term->name;
+    }
+    $variables['node_keywords'] = implode(', ', $keywords);
+  }
+}
