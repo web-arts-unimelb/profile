@@ -27,7 +27,6 @@ version = "7.x-1.1"
 
 ; These are the FoA extras on top of the `standard' profile.
 dependencies[] = admin_menu
-dependencies[] = admin_menu_toolbar
 dependencies[] = better_formats
 dependencies[] = css_splitter
 dependencies[] = diff

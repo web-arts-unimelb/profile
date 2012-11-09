@@ -198,13 +198,6 @@ function foa_install() {
   // Update the menu router information.
   menu_rebuild();
 
-	// Disable admin_menu_toolbar by default, because we have issue with the style.
-	db_update('system')
-		->fields(array('status' => 0))
-		->condition('type', 'module')
-		->condition('name', 'admin_menu_toolbar')
-		->execute();
-
   // Enable the admin theme.
   db_update('system')
     ->fields(array('status' => 1))
