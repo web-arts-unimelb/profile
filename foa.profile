@@ -217,6 +217,12 @@ function foa_profile_variables(&$context) {
   // No automagic nodequeue views.
   variable_set('nodequeue_view_per_queue', 0);
 
+  // Collapse module groups on module page.
+  variable_set('admin_menu_tweak_modules', 1);
+
+  // Collapse module groups on permissions page.
+  variable_set('admin_menu_tweak_permissions', 1);
+
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Tweaked system variables');
 }
