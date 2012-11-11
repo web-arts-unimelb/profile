@@ -198,6 +198,9 @@ function foa_install() {
   // Update the menu router information.
   menu_rebuild();
 
+	// Enable foa profile slider block
+	_foa_profile_slider_block();
+
   // Enable the admin theme.
   db_update('system')
     ->fields(array('status' => 1))
@@ -206,4 +209,45 @@ function foa_install() {
     ->execute();
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
+  
+  
+}
+
+function _foa_profile_slider_block()
+{
+	// We are not able to make it work in foa.profile, so we create slider block here
+	// We need to create the slider block somehow.
+  _create_foa_profile_slider('unimelb', 'slider', '<front>');
+  
+  // Then enable the slider block
+  _enable_foa_profile_slider_block('unimelb', 'slider', '<front>');
+}
+
+function _create_foa_profile_slider($theme, $region, $page) {
+	db_insert('block')
+    ->fields(array(
+      'module' => 'views',
+      'delta'  => 'slider-block',
+      'theme'  => $theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => $region,
+      'pages'  => $page,
+      'title'  => t('Home'),
+      'cache'  => -1,
+    ))
+    ->execute();
+}
+
+function _enable_foa_profile_slider_block($theme, $region, $page) {
+  db_update('block')
+		->fields(array(
+			'status' => 1,
+			'pages' => $page,
+			'region' => $region,
+		))
+		->condition('module', 'views')
+		->condition('delta', 'slider-block')
+		->condition('theme', $theme)
+		->execute();
 }
