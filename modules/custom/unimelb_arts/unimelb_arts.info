@@ -7,6 +7,7 @@ version = 7.x-1.8
 project = unimelb_arts
 dependencies[] = admin_menu
 dependencies[] = better_formats
+dependencies[] = colorbox
 dependencies[] = ctools
 dependencies[] = custom_formatters
 dependencies[] = date
