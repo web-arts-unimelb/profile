@@ -6,4 +6,5 @@ core = 7.x
 
 dependencies[] = simpletest
 
+files[] = foa_web_test_case.php
 files[] = unimelb_tests.test

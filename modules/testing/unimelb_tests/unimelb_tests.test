@@ -4,29 +4,21 @@
  * Tests for the Faculty of Arts install profile.
  */
 
-class FoaTestCase extends DrupalWebTestCase {
-  // Use the Faculty of Arts install profile.
-  protected $profile = 'foa';
-
+/**
+ * Test install profile theme settings.
+ */
+class FoaThemeTestCase extends FoaWebTestCase {
   public static function getInfo() {
     return array(
-      'name' => 'Faculty of Arts Tests',
-      'description' => 'Test that the Arts feature is installed properly.',
-        'group' => 'FoA',
+      'name' => 'Theme settings',
+      'description' => 'Test that the profile theme settings are correct.',
+      'group' => 'FoA',
     );
   }
 
-  // Install profle and enable tests module.
   function setUp() {
     parent::setUp('unimelb_tests');
   }
-
-  // Tidy up mess.
-  function tearDown() {
-    parent::tearDown();
-  }
-
-  // Now then, for the actual tests.
 
   /**
    * Is the correct theme enabled and set as default?
@@ -65,6 +57,116 @@ class FoaTestCase extends DrupalWebTestCase {
       ->fetchField();
     $this->assertTrue($result, 'The admin theme is enabled.');
   }
+}
+
+/**
+ * Test install profile block settings.
+ */
+class FoaBlockTestCase extends FoaWebTestCase {
+  function setUp() {
+    parent::setUp('unimelb_tests');
+  }
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Block settings',
+      'description' => 'Test that the profile block settings are correct.',
+      'group' => 'FoA',
+    );
+  }
+
+  /**
+   * Check that required blocks are enabled.
+   *
+   * Also check they are in the correct regions with the correct page and
+   * visibility options. To add a block to test, just add an element to
+   * the (end of the) $blocks array.
+   */
+  function testFoaBlocks() {
+    // Themes.
+    $default_theme = variable_get('theme_default', '');
+
+    // An array we can cycle through to test the blocks.
+    $blocks = array();
+
+    $blocks['Banner'] = array(
+      ':module' => 'views',
+      ':delta' => 'slider-block',
+      ':theme' => $default_theme,
+      ':region' => 'slider',
+      ':visibility' => 1,
+      ':pages' => '<front>',
+    );
+
+    // Generate data to test for 6 frontpage blocks.
+    for ($i = 1; $i <= 6; $i++) {
+      $blocks['Front Page Block ' . $i]  = array(
+        ':module' => 'views',
+        ':delta' => 'front_page-block_' . $i,
+        ':theme' => $default_theme,
+        ':region' => 'home_column_' . $i,
+        ':visibility' => 1,
+        ':pages' => '<front>',
+      );
+    }
+
+    $blocks['Events'] = array(
+      ':module' => 'views',
+      ':delta' => 'events-block',
+      ':theme' => $default_theme,
+      ':region' => 'sidebar_right',
+      ':visibility' => 1,
+      ':pages' => '<front>',
+    );
+
+    $blocks['News'] = array(
+      ':module' => 'views',
+      ':delta' => 'news-block',
+      ':theme' => $default_theme,
+      ':region' => 'sidebar_right',
+      ':visibility' => 1,
+      ':pages' => '<front>',
+    );
+
+    $blocks['jQuery Navigation'] = array(
+      ':module' => 'jquerymenu',
+      ':delta' => 1,
+      ':theme' => $default_theme,
+      ':region' => 'navigation',
+      ':visibility' => 0,
+      ':pages' => '<front>',
+    );
+
+    $result = db_query("SELECT * FROM {block}");
+    foreach ($result as $row) {
+      error_log(print_r($row, TRUE));
+    }
+
+    // Cycle through the blocks array and test each block in turn by doing a simple database query.
+    foreach ($blocks as $title => $block) {
+      $query = 'SELECT status FROM {block} WHERE module = :module AND delta = :delta AND theme = :theme AND region = :region AND visibility = :visibility AND pages = :pages';
+      $status = db_query($query, $block)->fetchField();
+
+      $this->assertTrue(($status == 1), 'The ' . $title . ' block is enabled in the ' . $block[':region'] . ' region.');
+    }
+  }
+}
+
+/**
+ * Test install profile node permissions.
+ */
+class FoaPermissionTestCase extends FoaWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Permission settings',
+      'description' => 'Test that the profile permission settings are correct.',
+      'group' => 'FoA',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('unimelb_tests');
+  }
 
   /**
    * Check that each of the roles have the correct node permissions.
@@ -74,7 +176,10 @@ class FoaTestCase extends DrupalWebTestCase {
    * - Admins can create, edit and delete any nodes.
    */
   function testFoaNodePermissions() {
-    $this->assertTrue(TRUE, 'The FoA access tests go here :-)');
+    $this->assertTrue(TRUE, 'The FoA node access tests go here :-)');
   }
 
+  function testFoaFilterPermissions() {
+    $this->assertTrue(TRUE, 'The FoA filter access tests go here :-)');
+  }
 }
