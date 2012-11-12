@@ -141,9 +141,9 @@ class FoaWebTestCase extends DrupalWebTestCase {
         // here, so suppress any warnings about that missing variable.
         $success = @call_user_func_array($task[0], $task[1]);
 
-        // Optionally proudly tell our user what we did.
-        // $this->assertTrue(($success !== FALSE), t('Executed task: %task', array('%task' => $task[0])));
       }
+      // Proudly tell our user what we did.
+      $this->pass(t('Ran @count tasks from %task', array('@count' => count($batch['operations']), '%task' => $func)));
     }
 
     // Run cron once in that environment, as install.php does at the end of

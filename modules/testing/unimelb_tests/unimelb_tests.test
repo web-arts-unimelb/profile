@@ -21,9 +21,9 @@ class FoaThemeTestCase extends FoaWebTestCase {
   }
 
   /**
-   * Is the correct theme enabled and set as default?
+   * Are the correct themes enabled and set as defaults?
    */
-  function testFoaDefaultTheme() {
+  function testFoaThemeDefaults() {
     $default_theme = variable_get('theme_default', '');
 
     // Correct default?
@@ -37,12 +37,7 @@ class FoaThemeTestCase extends FoaWebTestCase {
       ->execute()
       ->fetchField();
     $this->assertTrue($result, 'The default theme is enabled.');
-  }
 
-  /**
-   * Is the correct admin theme enabled?
-   */
-  function testFoaAdminTheme() {
     $admin_theme = variable_get('admin_theme', '');
 
     // Correct admin theme?
@@ -175,11 +170,11 @@ class FoaPermissionTestCase extends FoaWebTestCase {
    * - Editors can edit their own nodes, but not create any.
    * - Admins can create, edit and delete any nodes.
    */
-  function testFoaNodePermissions() {
-    $this->assertTrue(TRUE, 'The FoA node access tests go here :-)');
-  }
+//  function testFoaNodePermissions() {
+//    $this->assertTrue(TRUE, 'The FoA node access tests go here :-)');
+//  }
 
-  function testFoaFilterPermissions() {
-    $this->assertTrue(TRUE, 'The FoA filter access tests go here :-)');
-  }
+//  function testFoaFilterPermissions() {
+//    $this->assertTrue(TRUE, 'The FoA filter access tests go here :-)');
+//  }
 }
