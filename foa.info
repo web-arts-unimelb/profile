@@ -53,8 +53,8 @@ dependencies[] = token
 dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_slideshow
-dependencies[] = uom_slider
 
 ; And finally, the Arts Features.
+dependencies[] = uom_slider
 dependencies[] = unimelb_arts
 dependencies[] = wysiwyg_arts
