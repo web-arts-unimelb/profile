@@ -68,7 +68,7 @@ function unimelb_arts_field_attach_presave($entity_type, $entity) {
     if ($field['type'] == 'text_with_summary' && !empty($entity->$field_name)) {
       $language = $entity->language;
       foreach ($entity->{$field_name}[$language] as $id => &$value) {
-        if (is_array($value['summary'])) {
+        if (isset($value['summary']) && is_array($value['summary'])) {
           $value['summary'] = $value['summary']['value'];
         }
       }
