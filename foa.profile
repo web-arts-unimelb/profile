@@ -253,6 +253,13 @@ function foa_profile_variables(&$context) {
   // Collapse module groups on permissions page.
   variable_set('admin_menu_tweak_permissions', 1);
 
+  // Tweak update module settings.
+  // Check for security updates once a week but do not send emails about it.
+  variable_set('update_check_disabled', 0);
+  variable_set('update_check_frequency', 7);
+  variable_set('update_notification_threshold', 'security');
+  variable_del('update_notify_emails');
+
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Tweaked system variables');
 }
