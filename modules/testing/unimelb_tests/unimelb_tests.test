@@ -174,16 +174,18 @@ class FoaPermissionTestCase extends FoaNodeAccessTestCase {
   function testFoaNodePermissions() {
     $map = array(
       'own' => array(
-        'authenticated user' => array('create' => FALSE, 'update' => FALSE, 'delete' => FALSE),
+        'anonymous user' => array('view' => TRUE, 'create' => FALSE, 'update' => FALSE, 'delete' => FALSE),
+        'authenticated user' => array('view' => TRUE, 'create' => FALSE, 'update' => FALSE, 'delete' => FALSE),
         'editor' => array('create' => FALSE, 'update' => TRUE, 'delete' => FALSE),
         'admin' => array('create' => TRUE, 'update' => TRUE, 'delete' => TRUE),
         'site admin' => array('create' => TRUE, 'update' => TRUE, 'delete' => TRUE),
       ),
       'any' => array(
-        'authenticated user' => array('create' => FALSE, 'update' => FALSE, 'delete' => FALSE),
-        'editor' => array('create' => FALSE, 'update' => FALSE, 'delete' => FALSE),
-        'admin' => array('create' => TRUE, 'update' => TRUE, 'delete' => TRUE),
-        'site admin' => array('create' => TRUE, 'update' => TRUE, 'delete' => TRUE),
+        'anonymous user' => array('view' => TRUE, 'update' => FALSE, 'delete' => FALSE),
+        'authenticated user' => array('view' => TRUE, 'update' => FALSE, 'delete' => FALSE),
+        'editor' => array('update' => FALSE, 'delete' => FALSE),
+        'admin' => array('update' => TRUE, 'delete' => TRUE),
+        'site admin' => array('update' => TRUE, 'delete' => TRUE),
       ),
     );
 
@@ -193,7 +195,8 @@ class FoaPermissionTestCase extends FoaNodeAccessTestCase {
       $nodes[$type] = $this->drupalCreateNode(array('uid' => 1, 'type' => $type));
     }
 
-    $roles = db_query('SELECT rid, name FROM {role} WHERE rid != :rid ORDER BY rid ASC', array(':rid' => DRUPAL_ANONYMOUS_RID));
+    // $roles = db_query('SELECT rid, name FROM {role} WHERE rid != :rid ORDER BY rid ASC', array(':rid' => DRUPAL_ANONYMOUS_RID));
+    $roles = db_query('SELECT rid, name FROM {role} ORDER BY rid ASC');
     // Create users with each role.
     foreach ($roles as $role) {
       $accounts[$role->name] = $this->foaCreateUser(array($role->rid => $role->name));
