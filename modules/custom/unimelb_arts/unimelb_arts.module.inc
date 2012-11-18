@@ -6,6 +6,13 @@
  */
 
 /**
+ * Implements hook_init().
+ */
+function unimelb_arts_init() {
+  drupal_add_css(drupal_get_path('module', 'unimelb_arts') . '/css/unimelb_arts.css');
+}
+
+/**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {

@@ -1,0 +1,4 @@
+/* Override the admin menu font size regardless of theme. */
+.html #admin-menu {
+  font-size: 1em;
+}
