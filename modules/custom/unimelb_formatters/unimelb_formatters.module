@@ -1,0 +1,83 @@
+<?php
+/**
+ * @file unimelb_formatters.module
+ * Provides field formatters for FoA sites.
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function unimelb_formatters_field_formatter_info() {
+  return array(
+    'unimelb_html5_phone_link' => array(
+      'label' => t('HTML5 Phone Link'),
+      'field types' => array('text'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function unimelb_formatters_field_formatter_view($obj_type, $object, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  switch ($display['type']) {
+    case 'unimelb_html5_phone_link':
+      // Common case: each value is displayed individually in a sub-element
+      // keyed by delta. The field.tpl.php template specifies the markup
+      // wrapping each value.
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => unimelb_formatters_field_formatter_unimelb_html5_phone_link($item));
+      }
+      break;
+  }
+
+  return $element;
+}
+
+/**
+ * Field Formatter; HTML5 Phone Link.
+ *
+ * Contains a little bit of smarts to render full international
+ * numbers if possible.
+ */
+function unimelb_formatters_field_formatter_unimelb_html5_phone_link($item) {
+  // Early return.
+  if (empty($item)) {
+    return;
+  }
+
+  // Check for an Australian mobile number.
+  if (strpos($item['safe_value'], '04') === 0) {
+    $phone = substr($item['safe_value'], 1);
+    $phone = strtr($phone, array(' ' => ''));
+    return '<a href="tel:+61'. $phone .'">+61 '. $item['safe_value'] .'</a>';
+  }
+  // Check for a landline number with the Victoria/Tassie prefix.
+  else if (strpos($item['safe_value'], '03') === 0) {
+    $phone = substr($item['safe_value'], 1);
+    $phone = strtr($phone, array(' ' => ''));
+    return '<a href="tel:+61'. $phone .'">+61 '. $item['safe_value'] .'</a>';
+  }
+  // Check for an interstate number.
+  else if (strpos($item['safe_value'], '0') === 0) {
+    $phone = strtr($item['safe_value'], array(' ' => ''));
+    return '<a href="tel:'. $phone .'">+61 '. $item['safe_value'] .'</a>';
+  }
+  // Check for an international number.
+  else if (strpos($item['safe_value'], '+') === 0) {
+    $phone = strtr($item['safe_value'], array(' ' => ''));
+    return '<a href="tel:'. $phone .'">'. $item['safe_value'] .'</a>';
+  }
+  // Assuming unprefixed local. Just add prefix.
+  else if (is_numeric($item['safe_value']{0})) {
+    $phone = strtr($item['safe_value'], array(' ' => ''));
+    return '<a href="tel:+613'. $phone .'">+61 3 '. $item['safe_value'] .'</a>';
+  }
+
+  // Not numeric, just return it and don't link it to anything.
+  return $item['safe_value'];
+}
+
