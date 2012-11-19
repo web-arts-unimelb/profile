@@ -30,10 +30,10 @@ dependencies[] = admin_menu
 dependencies[] = better_formats
 dependencies[] = css_splitter
 dependencies[] = diff
+dependencies[] = insert
 dependencies[] = prepro
 dependencies[] = sassy
 dependencies[] = wysiwyg
-dependencies[] = wysiwyg_fields
 
 ; These are used by the unimelb_arts Feature.
 dependencies[] = ctools
