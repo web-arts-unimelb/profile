@@ -1,0 +1,5 @@
+name = Formatters of Arts
+description = Provides field formatters to be used by Faculty of Arts websites.
+core = 7.x
+package = University of Melbourne
+version = 7.x-1.0
