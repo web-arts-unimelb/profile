@@ -1,0 +1,8 @@
+<?php
+/**
+ * @file
+ * Code for the Faculty of Arts Staff feature.
+ */
+
+include_once 'staff_arts.features.inc';
+include_once 'staff_arts.module.inc';

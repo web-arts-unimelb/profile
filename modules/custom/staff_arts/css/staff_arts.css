@@ -1,0 +1,27 @@
+/* Staff list styling */
+
+.view-id-staff table caption {
+  font-style: normal;
+  font-size: 18px;
+  font-weight: bold;
+  color: #036;
+  font-family: 'Droid Sans','Helvetica Neue',Arial,sans-serif;
+}
+
+.view-id-staff .views-field-title {
+  width: 23%;
+  min-width: 160px;
+}
+
+.view-id-staff .views-field-field-staff-position {
+}
+
+.view-id-staff .views-field-field-staff-phone {
+  width: 18%;
+  min-width: 98px;
+}
+
+.view-id-staff .views-field-field-staff-room {
+  width: 28%;
+  min-width: 99px;
+}
