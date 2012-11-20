@@ -6,6 +6,13 @@
  */
 
 /**
+ * Implements hook_init().
+ */
+function unimelb_arts_init() {
+  drupal_add_css(drupal_get_path('module', 'unimelb_arts') . '/css/unimelb_arts.css');
+}
+
+/**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
@@ -18,14 +25,17 @@ function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_attachments { display: none; }', 'inline');
 
   // Modify field label for image uploader in wysiwyg
+/*
   if(isset($form['field_shared_images'])) {
     $form['field_shared_images'][$form['language']['#value']]['#file_upload_title'] .= t(" (Press the '+' button above to see more images)");
   }
-
+*/
   // Modify field label for file uploader in wysiwyg
+/*
   if(isset($form['field_shared_attachments'])) {
     $form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'] .= t(" (Press the '+' button above to see more files)");
   }
+*/
 
   // Add a pretty summary to this fieldset tab.
   if (isset($form['field_shared_keywords'])) {
@@ -33,7 +43,6 @@ function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
       'js' => array(drupal_get_path('module', 'unimelb_arts') . '/js/keywords-summary.js'),
     );
   }
-
 }
 
 /**
@@ -68,7 +77,7 @@ function unimelb_arts_field_attach_presave($entity_type, $entity) {
     if ($field['type'] == 'text_with_summary' && !empty($entity->$field_name)) {
       $language = $entity->language;
       foreach ($entity->{$field_name}[$language] as $id => &$value) {
-        if (is_array($value['summary'])) {
+        if (isset($value['summary']) && is_array($value['summary'])) {
           $value['summary'] = $value['summary']['value'];
         }
       }

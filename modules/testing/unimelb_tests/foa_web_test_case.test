@@ -1,13 +1,17 @@
 <?php
 /**
- * @file foa_web_test_case.php
- *
- * Creates a Faculty of Arts Drupal for running tests on.
+ * @file foa_web_test_case.test
  *
  * As opposed to the standard DrupalWebTestCase, this class also executes
- * the profile's installation tasks before running tests.
+ * the profile's (batch) installation tasks before running tests.
+ *
+ * This file has the `.test' extension so that the simpletest module picks
+ * it up even when the module is not enabled.
  */
 
+/**
+ * Test case for Drupal tests that run profile tasks.
+ */
 class FoaWebTestCase extends DrupalWebTestCase {
   /**
    * The profile to install as a basis for testing.
@@ -111,17 +115,16 @@ class FoaWebTestCase extends DrupalWebTestCase {
       ':name' => $this->profile,
     ))->fetchField();
     if ($install_profile_module_exists) {
-      $success = module_enable(array($this->profile), FALSE);
-      $this->assertTrue($success, t('Enabled profile: %profile', array('%profile' => $this->profile)));
+      module_enable(array($this->profile), FALSE);
     }
 
     // Reset/rebuild all data structures after enabling the modules.
     $this->resetAll();
 
-    // The profile tasks above only run the install and enable hooks, not any batch
-    // tasks that may be defined in the .profile. Since we want to check the results
-    // of those batch tasks, they need to be executed!
-    //
+    // The profile tasks above only run the install and enable hooks, not
+    // any batch tasks that may be defined in the .profile. Since we want
+    // to check the results of those batch tasks they need to be run!
+
     // Grab the installation tasks defined by the profile.
     $func = "{$this->profile}_profile_tasks";
     $batch = $func('profile', '');
@@ -129,21 +132,28 @@ class FoaWebTestCase extends DrupalWebTestCase {
     // Batch tasks will be listed in the `operations' key of the Batch API
     // array of stuff we just got. If set, simply iterate over those and
     // call each in turn.
-    //
-    // This will probably fail horribly when the profile tasks take longer
-    // than max_execution_time to complete. However, I don't think that batch
-    // tasks can be called in a nested fashion, so if you have takss that
-    // take forever, they should maybe go in the profiles hook_enable().
     if (isset($batch['operations'])) {
+      // This will probably fail horribly when the profile tasks take longer
+      // than max_execution_time to complete. However, I don't think that
+      // batch tasks can be called in a nested fashion, so if you have tasks
+      // that take forever, they should maybe go in the profile hook_enable().
       foreach ($batch['operations'] as $task) {
+
         // Batch API wants an extra by-reference $context variable to show
-        // installation progress status. We really don't care about that
-        // here, so suppress any warnings about that missing variable.
+        // installation progress status. Unfortunately, call_user_func_array
+        // cannot pass variables by reference, so no matter what we do, we
+        // get a warning. Since we don't display the progress anyway, don't
+        // add the variable and suppress any warnings about it.
         $success = @call_user_func_array($task[0], $task[1]);
 
+        // Proudly tell our user what we did and whether it worked.
+        $this->assertTrue(($success !== FALSE), t('Executed install task %task', array('%task' => $task[0])));
+
+        // To try and get around the max_execution_time limit, try and extend
+        // our life a bit each time we finish processing a task. Hard limit is
+        // is the inevitable heat death of the universe.
+        drupal_set_time_limit($this->timeLimit);
       }
-      // Proudly tell our user what we did.
-      $this->pass(t('Ran @count tasks from %task', array('@count' => count($batch['operations']), '%task' => $func)));
     }
 
     // Run cron once in that environment, as install.php does at the end of
@@ -171,5 +181,41 @@ class FoaWebTestCase extends DrupalWebTestCase {
 
     drupal_set_time_limit($this->timeLimit);
     $this->setup = TRUE;
+  }
+}
+
+/**
+ * Test case for Drupal tests that run node access tasks.
+ */
+class FoaNodeAccessTestCase extends NodeAccessTestCase {
+  /**
+   * Create a user with a given set of roles.
+   *
+   * @param array $roles
+   *   Keyed rid => role array as present in the role table.
+   *
+   * @return object|false
+   *   A fully loaded user object with pass_raw property, or FALSE if account
+   *   creation fails.
+   */
+  function foaCreateUser(array $roles = array()) {
+    // Create a user with the correct roles.
+    $edit = array();
+    $edit['name']   = $this->randomName();
+    $edit['mail']   = $edit['name'] . '@example.com';
+    $edit['pass']   = user_password();
+    $edit['status'] = 1;
+    $edit['roles']  = $roles;
+
+    $account = user_save(drupal_anonymous_user(), $edit);
+
+    $this->assertTrue(!empty($account->uid), t('User created with name %name, pass %pass and roles %roles', array('%name' => $edit['name'], '%pass' => $edit['pass'], '%roles' => (implode(',', array_values($roles)))  )), t('User login'));
+    if (empty($account->uid)) {
+      return FALSE;
+    }
+
+    // Add the raw password so that we can log in as this user.
+    $account->pass_raw = $edit['pass'];
+    return $account;
   }
 }

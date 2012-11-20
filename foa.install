@@ -207,3 +207,11 @@ function foa_install() {
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
 }
+
+/**
+ * Disable the wysiwyg_fields module.
+ */
+function foa_update_7001() {
+  module_disable('wysiwyg_fields');
+  module_uninstall('wysiwyg_fields');
+}

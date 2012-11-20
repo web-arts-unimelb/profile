@@ -7,17 +7,16 @@
 /**
  * Test install profile theme settings.
  */
-class FoaThemeTestCase extends FoaWebTestCase {
+class FoaThemeTestCase extends DrupalWebTestCase {
+  // Use the Faculty of Arts profile.
+  protected $profile = 'foa';
+
   public static function getInfo() {
     return array(
       'name' => 'Theme settings',
       'description' => 'Test that the profile theme settings are correct.',
       'group' => 'FoA',
     );
-  }
-
-  function setUp() {
-    parent::setUp('unimelb_tests');
   }
 
   /**
@@ -58,9 +57,8 @@ class FoaThemeTestCase extends FoaWebTestCase {
  * Test install profile block settings.
  */
 class FoaBlockTestCase extends FoaWebTestCase {
-  function setUp() {
-    parent::setUp('unimelb_tests');
-  }
+  // Use the Faculty of Arts profile.
+  protected $profile = 'foa';
 
   public static function getInfo() {
     return array(
@@ -132,25 +130,25 @@ class FoaBlockTestCase extends FoaWebTestCase {
       ':pages' => '<front>',
     );
 
-    $result = db_query("SELECT * FROM {block}");
-    foreach ($result as $row) {
-      error_log(print_r($row, TRUE));
-    }
-
-    // Cycle through the blocks array and test each block in turn by doing a simple database query.
+    // Cycle through the blocks array and test each block in turn by doing a
+    // simple database query with defined conditions that check the region,
+    // visibility, theme and pages for which blocks are enabled.
     foreach ($blocks as $title => $block) {
       $query = 'SELECT status FROM {block} WHERE module = :module AND delta = :delta AND theme = :theme AND region = :region AND visibility = :visibility AND pages = :pages';
       $status = db_query($query, $block)->fetchField();
 
-      $this->assertTrue(($status == 1), 'The ' . $title . ' block is enabled in the ' . $block[':region'] . ' region.');
+      $this->assertTrue(($status == 1), t('The %title block is enabled in the %region region', array('%title' => $title, '%region' => $block[':region'])));
     }
   }
 }
 
 /**
- * Test install profile node permissions.
+ * Test feature node permissions.
  */
-class FoaPermissionTestCase extends FoaWebTestCase {
+class FoaPermissionTestCase extends FoaNodeAccessTestCase {
+  // Use the Faculty of Arts profile.
+  protected $profile = 'foa';
+
   public static function getInfo() {
     return array(
       'name' => 'Permission settings',
@@ -159,8 +157,9 @@ class FoaPermissionTestCase extends FoaWebTestCase {
     );
   }
 
+  // Install the FoA feature. Probably done by the profile anyway.
   function setUp() {
-    parent::setUp('unimelb_tests');
+    parent::setUp('unimelb_arts', 'uom_slider');
   }
 
   /**
@@ -169,12 +168,56 @@ class FoaPermissionTestCase extends FoaWebTestCase {
    * - Anonymous and authenticated users can not create or edit nodes.
    * - Editors can edit their own nodes, but not create any.
    * - Admins can create, edit and delete any nodes.
+   *
+   * Node types to test: page, news, event, slider.
    */
-//  function testFoaNodePermissions() {
-//    $this->assertTrue(TRUE, 'The FoA node access tests go here :-)');
-//  }
+  function testFoaNodePermissions() {
+    $map = array(
+      'own' => array(
+        'anonymous user' => array('view' => TRUE, 'create' => FALSE, 'update' => FALSE, 'delete' => FALSE),
+        'authenticated user' => array('view' => TRUE, 'create' => FALSE, 'update' => FALSE, 'delete' => FALSE),
+        'editor' => array('create' => FALSE, 'update' => TRUE, 'delete' => FALSE),
+        'admin' => array('create' => TRUE, 'update' => TRUE, 'delete' => TRUE),
+        'site admin' => array('create' => TRUE, 'update' => TRUE, 'delete' => TRUE),
+      ),
+      'any' => array(
+        'anonymous user' => array('view' => TRUE, 'update' => FALSE, 'delete' => FALSE),
+        'authenticated user' => array('view' => TRUE, 'update' => FALSE, 'delete' => FALSE),
+        'editor' => array('update' => FALSE, 'delete' => FALSE),
+        'admin' => array('update' => TRUE, 'delete' => TRUE),
+        'site admin' => array('update' => TRUE, 'delete' => TRUE),
+      ),
+    );
 
-//  function testFoaFilterPermissions() {
-//    $this->assertTrue(TRUE, 'The FoA filter access tests go here :-)');
-//  }
+    $types = array('page', 'news', 'event');
+    // Create nodes of each type.
+    foreach ($types as $type) {
+      $nodes[$type] = $this->drupalCreateNode(array('uid' => 1, 'type' => $type));
+    }
+
+    // $roles = db_query('SELECT rid, name FROM {role} WHERE rid != :rid ORDER BY rid ASC', array(':rid' => DRUPAL_ANONYMOUS_RID));
+    $roles = db_query('SELECT rid, name FROM {role} ORDER BY rid ASC');
+    // Create users with each role.
+    foreach ($roles as $role) {
+      $accounts[$role->name] = $this->foaCreateUser(array($role->rid => $role->name));
+      $accounts[$role->name]->map = $role->name;
+    }
+
+    $permutations = $this->generatePermutations(array(
+      'account' => $accounts,
+      'node' => $nodes,
+    ));
+
+    foreach ($permutations as $case) {
+      debug('Testing ' . $case['account']->map . ' any ' . $case['node']->type .' access.');
+      $this->assertNodeAccess($map['any'][$case['account']->map], $case['node'], $case['account']);
+
+      // Make this an own node, then test own access.
+      $case['node']->uid = $case['account']->uid;
+      node_save($case['node']);
+
+      debug('Testing ' . $case['account']->map . ' own ' . $case['node']->type .' access.');
+      $this->assertNodeAccess($map['any'][$case['account']->map], $case['node'], $case['account']);
+    }
+  }
 }

@@ -279,7 +279,7 @@ function unimelb_arts_field_default_fields() {
             'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
             'label' => 'Attachments',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(
@@ -289,6 +289,7 @@ function unimelb_arts_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'clipboard' => 0,
               'reference' => 'reference',
               'remote' => 0,
             ),
@@ -301,13 +302,44 @@ function unimelb_arts_field_default_fields() {
               'imce_mode' => 0,
             ),
             'source_reference' => array(
-              'autocomplete' => '0',
+              'autocomplete' => '1',
             ),
           ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'custom_formatters_unimel_download_small',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__slider' => 0,
+            'colorbox__thumbnail' => 0,
+            'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
+            'custom_formatters_unimel_download_small' => 'custom_formatters_unimel_download_small',
+            'icon_link' => 'icon_link',
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_thumbnail' => 0,
+            'link' => 'link',
+          ),
+          'insert_width' => '',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -345,7 +377,7 @@ function unimelb_arts_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'event',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'The first image listed here will be used as front page image if this event is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -390,7 +422,7 @@ function unimelb_arts_field_default_fields() {
             'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
             'label' => 'Images',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(
@@ -401,7 +433,7 @@ function unimelb_arts_field_default_fields() {
             'filefield_sources' => array(
               'attach' => 0,
               'clipboard' => 0,
-              'reference' => 0,
+              'reference' => 'reference',
               'remote' => 0,
             ),
             'source_attach' => array(
@@ -413,14 +445,45 @@ function unimelb_arts_field_default_fields() {
               'imce_mode' => 0,
             ),
             'source_reference' => array(
-              'autocomplete' => '0',
+              'autocomplete' => '1',
             ),
           ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'colorbox__medium',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 'colorbox__medium',
+            'colorbox__slider' => 0,
+            'colorbox__thumbnail' => 'colorbox__thumbnail',
+            'custom_formatters_unimel_download_large' => 0,
+            'custom_formatters_unimel_download_small' => 0,
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_thumbnail' => 0,
+            'link' => 0,
+          ),
+          'insert_width' => '',
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -463,7 +526,7 @@ function unimelb_arts_field_default_fields() {
       'bundle' => 'event',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter keywords to add to the keywords that are already configured in the theme.',
+      'description' => 'Enter event keywords to add to the global keywords that are already configured in the theme.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -587,7 +650,7 @@ function unimelb_arts_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -771,7 +834,7 @@ function unimelb_arts_field_default_fields() {
             'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
             'label' => 'Attachments',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(
@@ -781,6 +844,7 @@ function unimelb_arts_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'clipboard' => 0,
               'reference' => 'reference',
               'remote' => 0,
             ),
@@ -793,13 +857,44 @@ function unimelb_arts_field_default_fields() {
               'imce_mode' => 0,
             ),
             'source_reference' => array(
-              'autocomplete' => '0',
+              'autocomplete' => '1',
             ),
           ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'custom_formatters_unimel_download_small',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__slider' => 0,
+            'colorbox__thumbnail' => 0,
+            'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
+            'custom_formatters_unimel_download_small' => 'custom_formatters_unimel_download_small',
+            'icon_link' => 'icon_link',
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_thumbnail' => 0,
+            'link' => 'link',
+          ),
+          'insert_width' => '',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '4',
+        'weight' => '3',
       ),
     ),
   );
@@ -837,7 +932,7 @@ function unimelb_arts_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'news',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'The first image listed here will be used as front page image if this news is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -882,7 +977,7 @@ function unimelb_arts_field_default_fields() {
             'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
             'label' => 'Images',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(
@@ -893,7 +988,7 @@ function unimelb_arts_field_default_fields() {
             'filefield_sources' => array(
               'attach' => 0,
               'clipboard' => 0,
-              'reference' => 0,
+              'reference' => 'reference',
               'remote' => 0,
             ),
             'source_attach' => array(
@@ -905,14 +1000,45 @@ function unimelb_arts_field_default_fields() {
               'imce_mode' => 0,
             ),
             'source_reference' => array(
-              'autocomplete' => '0',
+              'autocomplete' => '1',
             ),
           ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'colorbox__medium',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 'colorbox__medium',
+            'colorbox__slider' => 0,
+            'colorbox__thumbnail' => 'colorbox__thumbnail',
+            'custom_formatters_unimel_download_large' => 0,
+            'custom_formatters_unimel_download_small' => 0,
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_thumbnail' => 0,
+            'link' => 0,
+          ),
+          'insert_width' => '',
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '3',
+        'weight' => '2',
       ),
     ),
   );
@@ -955,7 +1081,7 @@ function unimelb_arts_field_default_fields() {
       'bundle' => 'news',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter keywords to add to the keywords that are already configured in the theme.',
+      'description' => 'Enter news keywords to add to the global keywords that are already configured in the theme.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1079,7 +1205,7 @@ function unimelb_arts_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '2',
+        'weight' => '4',
       ),
     ),
   );
@@ -1252,8 +1378,8 @@ function unimelb_arts_field_default_fields() {
         'wysiwyg_fields' => array(
           'settings' => array(
             'advanced' => array(
-              'delete' => 1,
-              'hide' => 1,
+              'delete' => 0,
+              'hide' => 0,
             ),
             'formatters' => array(
               'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
@@ -1263,7 +1389,7 @@ function unimelb_arts_field_default_fields() {
             'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
             'label' => 'Attachments',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(
@@ -1273,6 +1399,7 @@ function unimelb_arts_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'clipboard' => 0,
               'reference' => 'reference',
               'remote' => 0,
             ),
@@ -1288,6 +1415,37 @@ function unimelb_arts_field_default_fields() {
               'autocomplete' => '1',
             ),
           ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'custom_formatters_unimel_download_small',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__slider' => 0,
+            'colorbox__thumbnail' => 0,
+            'custom_formatters_unimel_download_large' => 'custom_formatters_unimel_download_large',
+            'custom_formatters_unimel_download_small' => 'custom_formatters_unimel_download_small',
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_thumbnail' => 0,
+            'link' => 'link',
+          ),
+          'insert_width' => '',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
@@ -1329,7 +1487,7 @@ function unimelb_arts_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'page',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'The first image listed here will be used as front page image if this page is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -1365,8 +1523,8 @@ function unimelb_arts_field_default_fields() {
         'wysiwyg_fields' => array(
           'settings' => array(
             'advanced' => array(
-              'delete' => 1,
-              'hide' => 1,
+              'delete' => 0,
+              'hide' => 0,
             ),
             'formatters' => array(
               'colorbox' => 'colorbox',
@@ -1374,7 +1532,7 @@ function unimelb_arts_field_default_fields() {
             'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
             'label' => 'Images',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(
@@ -1385,7 +1543,7 @@ function unimelb_arts_field_default_fields() {
             'filefield_sources' => array(
               'attach' => 0,
               'clipboard' => 0,
-              'reference' => 0,
+              'reference' => 'reference',
               'remote' => 0,
             ),
             'source_attach' => array(
@@ -1397,9 +1555,40 @@ function unimelb_arts_field_default_fields() {
               'imce_mode' => 0,
             ),
             'source_reference' => array(
-              'autocomplete' => '0',
+              'autocomplete' => '1',
             ),
           ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'colorbox__medium',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 'colorbox__medium',
+            'colorbox__slider' => 0,
+            'colorbox__thumbnail' => 'colorbox__thumbnail',
+            'custom_formatters_unimel_download_large' => 0,
+            'custom_formatters_unimel_download_small' => 0,
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 'image_medium',
+            'image_slider' => 0,
+            'image_thumbnail' => 'image_thumbnail',
+            'link' => 0,
+          ),
+          'insert_width' => '',
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
@@ -1447,7 +1636,7 @@ function unimelb_arts_field_default_fields() {
       'bundle' => 'page',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter keywords to add to the keywords that are already configured in the theme.',
+      'description' => 'Enter page keywords to add to the global keywords that are already configured in the theme.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1571,7 +1760,7 @@ function unimelb_arts_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -1581,11 +1770,16 @@ function unimelb_arts_field_default_fields() {
   t('Attachments');
   t('Body');
   t('Date');
-  t('Enter keywords to add to the keywords that are already configured in the theme.');
+  t('Enter event keywords to add to the global keywords that are already configured in the theme.');
+  t('Enter news keywords to add to the global keywords that are already configured in the theme.');
+  t('Enter page keywords to add to the global keywords that are already configured in the theme.');
   t('Images');
   t('Keywords');
   t('Tag this content to create relationships with other items sharing the same tags.');
   t('Tags');
+  t('The first image listed here will be used as front page image if this event is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.');
+  t('The first image listed here will be used as front page image if this news is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.');
+  t('The first image listed here will be used as front page image if this page is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.');
   t('Upload and attach all files that should be displayed on this page.');
 
   return $fields;

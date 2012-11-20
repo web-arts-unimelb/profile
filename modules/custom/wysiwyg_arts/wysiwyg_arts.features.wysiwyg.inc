@@ -25,8 +25,6 @@ function wysiwyg_arts_wysiwyg_default_profiles() {
           'bold' => 1,
           'italic' => 1,
           'justifyleft' => 1,
-          'justifycenter' => 1,
-          'justifyright' => 1,
           'bullist' => 1,
           'numlist' => 1,
           'outdent' => 1,
@@ -48,16 +46,17 @@ function wysiwyg_arts_wysiwyg_default_profiles() {
       'verify_html' => 1,
       'preformatted' => 1,
       'convert_fonts_to_spans' => 1,
-      'remove_linebreaks' => 1,
+      'remove_linebreaks' => 0,
       'apply_source_formatting' => 1,
       'paste_auto_cleanup_on_paste' => 0,
       'block_formats' => 'p,address,pre,h2,h3,h4,h5,h6,div,blockquote,address,pre,code,dt,dd,img',
       'css_setting' => 'self',
-      'css_path' => 'profiles/foa/modules/custom/wysiwyg_arts/css/wysiwyg_arts.css',
+      'css_path' => 'profiles/foa/themes/custom/unimelb/css/unimelb_wysiwyg.css',
       'css_classes' => 'Image float left=wysiwyg-left
 Image float right=wysiwyg-right
 Notice=notice
-Important Notice=importantnotice',
+Important Notice=importantnotice
+',
     ),
     'rdf_mapping' => array(),
   );

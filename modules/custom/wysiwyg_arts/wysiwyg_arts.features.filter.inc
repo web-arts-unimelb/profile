@@ -27,11 +27,6 @@ function wysiwyg_arts_filter_default_formats() {
           'filter_html_nofollow' => 0,
         ),
       ),
-      'wysiwyg_fields' => array(
-        'weight' => '50',
-        'status' => '1',
-        'settings' => array(),
-      ),
     ),
   );
 
