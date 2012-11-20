@@ -8,6 +8,7 @@ project = staff_arts
 dependencies[] = auto_nodetitle
 dependencies[] = email
 dependencies[] = features
+dependencies[] = hs_taxonomy
 dependencies[] = link
 dependencies[] = strongarm
 dependencies[] = taxonomy
