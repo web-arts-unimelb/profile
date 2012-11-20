@@ -26,7 +26,9 @@ function staff_arts_element_info_alter(&$type) {
 function _staff_arts_link_field_process($element, $form_state, $complete_form) {
   if ($element['#field_name'] == 'field_staff_building') {
     $element['title']['#title'] = t('Building name');
+    $element['title']['#description'] = t('Enter the name of the building and optionally the building number.');
     $element['url']['#title'] = t('Map link');
+    $element['url']['#description'] = t('You can find the building map page via the !link.', array('!link' => l('University of Melbourne Maps site', 'http://maps.unimelb.edu.au', array('attributes' => array('target' => '_blank')))));
   }
   return $element;
 }
