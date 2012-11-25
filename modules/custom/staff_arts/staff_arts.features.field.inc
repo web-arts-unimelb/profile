@@ -100,7 +100,7 @@ function staff_arts_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -157,7 +157,7 @@ function staff_arts_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_staff_family_name',
       'label' => 'Family name',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
         'better_formats' => array(
           'allowed_formats' => array(
@@ -203,7 +203,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );
@@ -260,7 +260,7 @@ function staff_arts_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_staff_given_name',
       'label' => 'Given name',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
         'better_formats' => array(
           'allowed_formats' => array(
@@ -306,7 +306,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -373,7 +373,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -411,7 +411,7 @@ function staff_arts_field_default_fields() {
       'bundle' => 'staff',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Enter the phone number in full <i>+61 3 xxxx xxxx</i> format.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -476,7 +476,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -579,7 +579,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -617,7 +617,7 @@ function staff_arts_field_default_fields() {
       'bundle' => 'staff',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Enter the room number only, do not prefix it with <i>Room</i>.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -679,10 +679,10 @@ function staff_arts_field_default_fields() {
         'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'size' => '12',
+          'size' => '8',
         ),
         'type' => 'text_textfield',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -785,7 +785,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '1',
       ),
     ),
   );
@@ -868,7 +868,7 @@ function staff_arts_field_default_fields() {
         'module' => 'hs_taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_hs',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -876,6 +876,8 @@ function staff_arts_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Building');
+  t('Enter the phone number in full <i>+61 3 xxxx xxxx</i> format.');
+  t('Enter the room number only, do not prefix it with <i>Room</i>.');
   t('Family name');
   t('Given name');
   t('Mail');

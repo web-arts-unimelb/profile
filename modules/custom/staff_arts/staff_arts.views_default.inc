@@ -27,6 +27,8 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -109,13 +111,6 @@ function staff_arts_views_default_views() {
     'keywords' => 0,
     'tags' => 0,
   );
-  /* Relationship: Parent */
-  $handler->display->display_options['relationships']['parent']['id'] = 'parent';
-  $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
-  $handler->display->display_options['relationships']['parent']['field'] = 'parent';
-  $handler->display->display_options['relationships']['parent']['relationship'] = 'term_node_tid';
-  $handler->display->display_options['relationships']['parent']['ui_name'] = 'Parent';
-  $handler->display->display_options['relationships']['parent']['label'] = 'parent';
   /* Field: Content: Unit */
   $handler->display->display_options['fields']['field_staff_unit']['id'] = 'field_staff_unit';
   $handler->display->display_options['fields']['field_staff_unit']['table'] = 'field_data_field_staff_unit';
@@ -225,12 +220,6 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['fields']['field_staff_room']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_staff_room']['alter']['text'] = 'Room [field_staff_room] [field_staff_building]';
   $handler->display->display_options['fields']['field_staff_room']['type'] = 'text_plain';
-  /* Sort criterion: Taxonomy term: Weight */
-  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
-  $handler->display->display_options['sorts']['weight_1']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
-  $handler->display->display_options['sorts']['weight_1']['relationship'] = 'parent';
-  $handler->display->display_options['sorts']['weight_1']['order'] = 'DESC';
   /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
