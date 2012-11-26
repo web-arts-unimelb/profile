@@ -48,6 +48,7 @@ dependencies[] = linkimagefield
 dependencies[] = nodequeue
 dependencies[] = path
 dependencies[] = pathauto
+dependencies[] = redirect
 dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views

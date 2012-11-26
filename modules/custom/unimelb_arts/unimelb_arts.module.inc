@@ -24,18 +24,28 @@ function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_images { display: none; }', 'inline');
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_attachments { display: none; }', 'inline');
 
-  // Modify field label for image uploader in wysiwyg
-/*
-  if(isset($form['field_shared_images'])) {
-    $form['field_shared_images'][$form['language']['#value']]['#file_upload_title'] .= t(" (Press the '+' button above to see more images)");
+  // Add a UI element to easily add external direction to a node.
+  if (module_exists('redirect') && isset($form['redirect'])) {
+    $form['redirect']['external'] = _unimelb_arts_redirect_external($form['nid']['#value']);
+    if (empty($form['redirect']['external']['list']['#rows'])) {
+      $form['redirect']['external_actions'] = array(
+        '#theme' => 'links',
+        '#links' => array(
+          'external' => array(
+            'title' => t('Add URL redirect from this node'),
+            'href' => 'admin/config/search/redirect/add',
+            'query' => array(
+              'source' => 'node/' . $form['nid']['#value'],
+              'language' => $form['language']['#value'],
+            ) + drupal_get_destination(),
+          ),
+        ),
+        '#attributes' => array(
+          'class' => array('action-links'),
+        ),
+      );
+    }
   }
-*/
-  // Modify field label for file uploader in wysiwyg
-/*
-  if(isset($form['field_shared_attachments'])) {
-    $form['field_shared_attachments'][$form['language']['#value']]['#file_upload_title'] .= t(" (Press the '+' button above to see more files)");
-  }
-*/
 
   // Add a pretty summary to this fieldset tab.
   if (isset($form['field_shared_keywords'])) {
@@ -108,4 +118,30 @@ function unimelb_arts_preprocess_html(&$variables) {
     }
     $variables['node_keywords'] = implode(', ', $keywords);
   }
+}
+
+/**
+ * Helper to load external redirects for a given page.
+ *
+ * @param $nid
+ *   A valid node nid.
+ *
+ * @return
+ *   A redirect object if one is found or FALSE if none exist.
+ *
+ * @see unimelb_arts_form_node_form_alter()
+ * @see redirect_load_by_source()
+ * @see redirect_list_table()
+ */
+function _unimelb_arts_redirect_external($nid = NULL) {
+  if (empty($nid)) {
+    return FALSE;
+  }
+
+  $redirect = redirect_load_by_source('node/' . $nid);
+  if(empty($redirect))
+    return FALSE;
+
+  $header = array('redirect', 'status_code', 'language', 'count', 'access', 'operations');
+  return redirect_list_table(array($redirect->rid => $redirect), $header);
 }
