@@ -96,6 +96,79 @@ function unimelb_arts_field_attach_presave($entity_type, $entity) {
 }
 
 /**
+ * Implements hook_token_info().
+ */
+function unimelb_arts_token_info() {
+  $node['arts-event-path'] = array(
+    'name' => t('Arts: Event Path'),
+    'description' => t('The URL path for the date this event will be held.'),
+  );
+  $node['arts-event-path-day'] = array(
+    'name' => t('Arts: Event Day'),
+    'description' => t('The numeric day of the month this event will be held.'),
+  );
+  $node['arts-event-path-month'] = array(
+    'name' => t('Arts: Event Month'),
+    'description' => t('The numeric month for the date this event will be held.'),
+  );
+  $node['arts-event-path-year'] = array(
+    'name' => t('Arts: Event Year'),
+    'description' => t('The full year for the date this event will be held.'),
+  );
+
+  return array(
+    'tokens' => array(
+      'node' => $node,
+    ),
+  );
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function unimelb_arts_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $url_options = array('absolute' => TRUE);
+  if (isset($options['language'])) {
+    $url_options['language'] = $options['language'];
+    $langcode = $options['language']->language;
+  }
+  else {
+    $langcode = NULL;
+  }
+  $sanitize = !empty($options['sanitize']);
+
+  $replacements = array();
+
+  if ($type == 'node' && !empty($data['node'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'arts-event-path':
+          $path = _unimelb_arts_date_token($data['node'], '%Y/%m/%d', $langcode);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+
+        case 'arts-event-path-day':
+          $path = _unimelb_arts_date_token($data['node'], '%d', $langcode);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+
+        case 'arts-event-path-month':
+          $path = _unimelb_arts_date_token($data['node'], '%m', $langcode);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+
+        case 'arts-event-path-year':
+          $path = _unimelb_arts_date_token($data['node'], '%Y', $langcode);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
  * Implements hook_preprocess_html().
  *
  * This function checks the current node for contents in its keywords field
@@ -145,3 +218,28 @@ function _unimelb_arts_redirect_external($nid = NULL) {
   $header = array('redirect', 'status_code', 'language', 'count', 'access', 'operations');
   return redirect_list_table(array($redirect->rid => $redirect), $header);
 }
+
+/**
+ * Helper to create token data from date fields.
+ *
+ * @param $node
+ *   A valid node object.
+ * @param $format
+ *   A date() format string.
+ * @param $langcode
+ *   A language code.
+ *
+ * @return
+ *   A string.
+ */
+function _unimelb_arts_date_token($node, $format, $langcode) {
+  if (empty($node->field_event_date[$langcode][0])) {
+    return;
+  }
+
+  $date = strtotime($node->field_event_date[$langcode][0]['value']);
+  return strftime($format, $date);
+}
+
+
+
