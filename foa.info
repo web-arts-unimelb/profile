@@ -52,10 +52,11 @@ dependencies[] = redirect
 dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views
+dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 dependencies[] = views_slideshow
 
 ; And finally, the Arts Features.
-dependencies[] = uom_slider
 dependencies[] = unimelb_arts
+dependencies[] = uom_slider
 dependencies[] = wysiwyg_arts

@@ -59,28 +59,85 @@ function foa_profile_tasks() {
   // Enable theme.
   $batch['operations'][] = array('foa_profile_enable_theme', array());
 
-  // Put each of the frontpage view blocks in their regions.
-  for ($i = 1; $i <= 12; $i++) {
-    $batch['operations'][] = array('foa_profile_frontpage_block', array($i, 1, '<front>'));
-  }
-
   // Create a jQuerymenu.
   $batch['operations'][] = array('foa_profile_jquerymenu', array());
 
+  // Make a list of blocks :-)
+
+  // Grab theme info for the blocks.
+  $theme_default = variable_get('theme_default', 'unimelb');
+  $theme_admin = variable_get('admin_theme', 'rubik');
+
+  // Put each of the frontpage view blocks in their regions.
+  for ($i = 1; $i <= 12; $i++) {
+    $blocks[] = array(
+      'module' => 'views',
+      'delta' => 'front_page-block_' . $i,
+      'theme' => $theme_default,
+      'region' => 'home_column_' . $i,
+      'status' => 1,
+      'visibility' => 1,
+      'pages' => '<front>'
+    );
+  }
+
   // Create a jQuerymenu block for the frontend theme.
-  $batch['operations'][] = array('foa_profile_jquerymenu_block', array('theme_default', 'navigation', 0, '<front>'));
+  $blocks[] = array(
+    'module' => 'jquerymenu',
+    'delta' => variable_get('foa_jquerymenu', 0),
+    'theme' => $theme_default,
+    'region' => 'navigation',
+    'status' => 1,
+    'visibility' => 0,
+    'pages' => '<front>',
+    'title' => t('Home'),
+  );
 
   // Create a disabled jQuerymenu block for the admin theme.
-  $batch['operations'][] = array('foa_profile_jquerymenu_block', array('admin_theme', -1, 0, '<front>'));
+  $blocks[] = array(
+    'module' => 'jquerymenu',
+    'delta' => variable_get('foa_jquerymenu', 0),
+    'theme' => $theme_admin,
+    'region' => 'navigation',
+  );
 
   // Put the news block on the front page.
-  $batch['operations'][] = array('foa_profile_news_block', array('theme_default', 'sidebar_right', 1, '<front>'));
+  $blocks[] = array(
+    'module' => 'views',
+    'delta' => 'news-block',
+    'theme' => $theme_default,
+    'region' => 'sidebar_right',
+    'status' => 1,
+    'visibility' => 0,
+    'pages' => '<front>'
+  );
 
   // Put the events block on the front page.
-  $batch['operations'][] = array('foa_profile_events_block', array('theme_default', 'sidebar_right', 1, '<front>'));
+  $blocks[] = array(
+    'module' => 'views',
+    'delta' => 'events-block',
+    'theme' => $theme_default,
+    'region' => 'sidebar_right',
+    'status' => 1,
+    'visibility' => 0,
+    'pages' => '<front>'
+  );
 
   // Put the slider block on the front page.
-  $batch['operations'][] = array('foa_profile_slider_block', array('theme_default', 'slider', 1, '<front>'));
+  $blocks[] = array(
+    'module' => 'views',
+    'delta' => 'slider-block',
+    'theme' => $theme_default,
+    'region' => 'slider',
+    'status' => 1,
+    'visibility' => 1,
+    'pages' => '<front>',
+  );
+
+  // Batch all those blocks into the system.
+  foreach ($blocks as $block) {
+    $batch['operations'][] = array('_foa_profile_block', array($block));
+  }
 
   // Set some miscellaneous system variables.
   $batch['operations'][] = array('foa_profile_variables', array());
@@ -109,28 +166,6 @@ function foa_profile_enable_theme(&$context) {
 }
 
 /**
- * Put a frontpage view block in its region.
- *
- * Called by batch API.
- */
-function foa_profile_frontpage_block($delta, $visibility, $pages,  &$context) {
-  // Put this frontpage view block in its region.
-  db_update('block')
-    ->fields(array(
-      'status' => 1,
-      'visibility' => $visibility,
-      'pages' => $pages,
-      'region' => 'home_column_' . $delta,
-    ))
-    ->condition('module', 'views')
-    ->condition('delta', 'front_page-block_' . $delta)
-    ->condition('theme', variable_get('theme_default', 'unimelb'))
-    ->execute();
-  $context['results'] = __FUNCTION__;
-  $context['message'] = t('Enabled frontpage view block @delta', array('@delta' => $delta));
-}
-
-/**
  * Create the jQuerymenu navigation block.
  *
  * Called by batch API.
@@ -142,100 +177,6 @@ function foa_profile_jquerymenu(&$context) {
 
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Created a jQuerymenu for %menu', array('%menu' => 'Main menu'));
-}
-
-/**
- * Create and place the jQuerymenu navigation block.
- *
- * Called by batch API.
- */
-function foa_profile_jquerymenu_block($theme, $region, $visibility, $pages, &$context) {
-  db_insert('block')
-    ->fields(array(
-      'module' => 'jquerymenu',
-      'delta'  => variable_get('foa_jquerymenu', 0),
-      'theme'  => variable_get($theme, 'unimelb'),
-      'status' => (int) ($region != -1),
-      'weight' => 0,
-      'region' => $region,
-      'visibility'  => $visibility,
-      'pages'  => $pages,
-      'title'  => t('Home'),
-      'cache'  => -1,
-    ))
-    ->execute();
-
-  $context['results'] = __FUNCTION__;
-  $context['message'] = t('Created jQuerymenu block for %theme', array('%theme' => variable_get($theme, 'unimelb')));
-}
-
-/**
- * Create and place the news block.
- *
- * Called by batch API.
- */
-function foa_profile_news_block($theme, $region, $visibility, $pages, &$context) {
-  // Put this frontpage news block in its region.
-  db_update('block')
-    ->fields(array(
-      'status' => 1,
-      'visibility' => $visibility,
-      'pages' => $pages,
-      'region' => $region,
-    ))
-    ->condition('module', 'views')
-    ->condition('delta', 'news-block')
-    ->condition('theme', variable_get($theme, 'unimelb'))
-    ->execute();
-
-  $context['results'] = __FUNCTION__;
-  $context['message'] = t('Enabled frontpage news block');
-}
-
-/**
- * Create and place the events block.
- *
- * Called by batch API.
- */
-function foa_profile_events_block($theme, $region, $visibility, $pages, &$context) {
-  // Put this frontpage events block in its region.
-  db_update('block')
-    ->fields(array(
-      'status' => 1,
-      'visibility' => $visibility,
-      'pages' => $pages,
-      'region' => $region,
-      'visibility' => 1,
-    ))
-    ->condition('module', 'views')
-    ->condition('delta', 'events-block')
-    ->condition('theme', variable_get($theme, 'unimelb'))
-    ->execute();
-
-  $context['results'] = __FUNCTION__;
-  $context['message'] = t('Enabled frontpage events block');
-}
-
-/**
- * Place the slider block in its region.
- */
-function foa_profile_slider_block($theme, $region, $visibility, $pages, &$context) {
-  // Put the slider/banner view block in its region.
-  db_update('block')
-    ->fields(array(
-      'status' => 1,
-      'visibility' => $visibility,
-      'pages' => $pages,
-      'region' => $region,
-      'visibility' => 1,
-    ))
-    ->condition('module', 'views')
-    ->condition('delta', 'slider-block')
-    ->condition('theme', variable_get($theme, 'unimelb'))
-    ->execute();
-
-  $context['results'] = __FUNCTION__;
-  $context['message'] = t('Enabled slider block');
 }
 
 /**
@@ -279,4 +220,39 @@ function foa_profile_cleanup(&$context) {
 
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Cleaned up temporary variables');
+}
+
+/**
+ * Helper to insert a new entry in the {block} table.
+ *
+ * Avoids the lack of feature-included views blocks being
+ * present when the profile tasks run.
+ *
+ * @param $block
+ *   A keyed array containing the block information.
+ */
+function _foa_profile_block($block, &$context) {
+  // Set some defaults.
+  $default = array(
+    'module' => '',
+    'delta' => 0,
+    'theme' => variable_get('theme_default', 'unimelb'),
+    'status' => 0,
+    'weight' => 0,
+    'region' => -1,
+    'custom' => 0,
+    'visibility' => 0,
+    'pages' => '',
+    'title' => '',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $block += $default;
+
+  db_insert('block')
+    ->fields($block)
+    ->execute();
+
+  $context['results'] = __FUNCTION__;
+  $context['message'] = t('Added %theme block @delta in @region', array('%theme' => $block['theme'], '@delta' => $block['delta'], '@region' => $block['region']));
 }
