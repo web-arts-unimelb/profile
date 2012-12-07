@@ -13,11 +13,58 @@ function unimelb_arts_init() {
 }
 
 /**
+ * Implements hook_permissions().
+ *
+ * Add in custom permissions to allow more finegrained access access control.
+ *
+ * @see unimelb_arts_menu_alter()
+ * @see unimelb_arts_user_edit_access()
+ */
+function unimelb_arts_permission() {
+  return array(
+    'change user settings' => array(
+      'title' => t('Change User Settings'),
+      'description' => t('Change the way users register with the site.'),
+      'restrict access' => TRUE,
+    ),
+    'change role permissions' => array(
+      'title' => t('Change Role Permissions'),
+      'description' => t('Change the permissions assigned to roles.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
  * Implements hook_menu_alter().
+ *
+ * @see unimelb_arts_user_edit_access()
  */
 function unimelb_arts_menu_alter(&$items) {
   // Remove the password reset form.
   $items['user/password']['access callback'] = FALSE;
+
+  // Change the access callback for user edit.
+  $items['user/%user/edit']['access callback'] = 'unimelb_arts_user_edit_access';
+
+  // Change the required permission for the User Settings page.
+  $items['admin/config/people/accounts']['access arguments'] = array('change user settings');
+
+  // Change the permission for the Permissions page.
+  $items['admin/people/permissions']['access arguments'] = array('change role permissions');
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function unimelb_arts_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
+    // Only site admins can create more site admins.
+    if (!in_array('site admin', $GLOBALS['user']->roles)) {
+      $role = db_select('role', 'r')->fields('r')->condition('name', 'site admin', '=')->execute()->fetchObject();
+      unset ($form['account']['roles']['#options'][$role->rid]);
+    }
+  }
 }
 
 /**
@@ -249,5 +296,23 @@ function _unimelb_arts_date_token($node, $format, $langcode) {
   return strftime($format, $date);
 }
 
-
-
+/**
+ * Helper that stops non-site admins from editing site admins.
+ *
+ * Fall-through to the standard access test if the user is not
+ * trying to edit a site admin.
+ *
+ * @param $account
+ *   The user account to be edited.
+ *
+ * @return
+ *   TRUE or FALSE.
+ */
+function unimelb_arts_user_edit_access($account) {
+  if (in_array('site admin',$account->roles) && !in_array('site admin', $GLOBALS['user']->roles)) {
+    drupal_set_message(t('You do not have permission to edit site admins'), 'error');
+    watchdog('unimelb_arts', '%user tried to edit site admin %account', array('%user' => $GLOBALS['user']->name, '%account' => $account->name), WATCHDOG_INFO);
+    return FALSE;
+  }
+  return user_edit_access($account);
+}
