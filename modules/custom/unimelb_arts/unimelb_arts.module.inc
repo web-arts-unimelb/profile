@@ -27,6 +27,10 @@ function unimelb_arts_permission() {
       'description' => t('Change the way users register with the site.'),
       'restrict access' => TRUE,
     ),
+    'administer admin theme' => array(
+      'title' => t('Administer admin theme'),
+      'restrict access' => TRUE,
+    ),
     'change role permissions' => array(
       'title' => t('Change Role Permissions'),
       'description' => t('Change the permissions assigned to roles.'),
@@ -52,6 +56,18 @@ function unimelb_arts_menu_alter(&$items) {
 
   // Change the permission for the Permissions page.
   $items['admin/people/permissions']['access arguments'] = array('change role permissions');
+
+  // Change the access callback for the admin theme to its own permission.
+  $admin_theme = variable_get('admin_theme', 'rubik');
+  $items['admin/appearance/settings/' . $admin_theme]['access callback'] = 'user_access';
+  $items['admin/appearance/settings/' . $admin_theme]['access arguments'] = array('administer admin theme');
+
+  // Don't go messing with other themes if you're not a site admin.
+  $items['admin/appearance/enable']['access arguments']
+    = $items['admin/appearance/disable']['access arguments']
+    = $items['admin/appearance/default']['access arguments']
+    = array('administer admin theme');
+
 }
 
 /**
