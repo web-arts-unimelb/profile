@@ -45,6 +45,7 @@ dependencies[] = date_views
 dependencies[] = features
 dependencies[] = jquerymenu
 dependencies[] = linkimagefield
+dependencies[] = menu_admin_per_menu
 dependencies[] = nodequeue
 dependencies[] = path
 dependencies[] = pathauto
