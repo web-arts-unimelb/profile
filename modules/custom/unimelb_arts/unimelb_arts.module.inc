@@ -56,6 +56,27 @@ function unimelb_arts_menu_alter(&$items) {
 
 /**
  * Implements hook_form_FORM_ID_alter().
+ *
+ * Stop non-site admins for bulk editing site admins.
+ */
+function unimelb_arts_form_user_admin_account_alter(&$form, $form_state) {
+  if (!in_array('site admin', $GLOBALS['user']->roles)) {
+    $role = db_select('role', 'r')->fields('r')->condition('name', 'site admin', '=')->execute()->fetchObject();
+
+    unset ($form['options']['operation']['#options']['Add a role to the selected users']['add_role-' . $role->rid]);
+    unset ($form['options']['operation']['#options']['Remove a role from the selected users']['remove_role-' . $role->rid]);
+
+    foreach ($form['accounts']['#options'] as $uid => $item) {
+      $account = user_load($uid);
+      if (in_array('site admin', $account->roles)) {
+        unset($form['accounts']['#options'][$uid]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
  */
 function unimelb_arts_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
