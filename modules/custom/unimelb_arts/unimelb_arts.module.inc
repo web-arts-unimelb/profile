@@ -13,6 +13,14 @@ function unimelb_arts_init() {
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function unimelb_arts_menu_alter(&$items) {
+  // Remove the password reset form.
+  $items['user/password']['access callback'] = FALSE;
+}
+
+/**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
