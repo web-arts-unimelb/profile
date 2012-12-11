@@ -9,7 +9,7 @@
  *
  * Allows the profile to alter the site configuration form.
  */
-function foa_form_install_configure_form_alter(&$form, $form_state) {
+function skunkworks_form_install_configure_form_alter(&$form, $form_state) {
   // Pre-populate the site name with part of the server name.
   $site = strtoupper(strtr($_SERVER['SERVER_NAME'], array('www.' => '')));
   $form['site_information']['site_name']['#default_value'] = array_shift(explode('.', $site));
@@ -33,8 +33,8 @@ function foa_form_install_configure_form_alter(&$form, $form_state) {
 /**
  * Implements hook_install_tasks().
  */
-function foa_install_tasks(&$install_state) {
-  $tasks['foa_profile_tasks'] = array(
+function skunkworks_install_tasks(&$install_state) {
+  $tasks['skunkworks_profile_tasks'] = array(
     'display_name' => st('Customise site'),
     'display' => TRUE,
     'type' => 'batch',
@@ -49,7 +49,7 @@ function foa_install_tasks(&$install_state) {
  *
  * This is invoked as final install task.
  */
-function foa_profile_tasks() {
+function skunkworks_profile_tasks() {
 
   $batch = array(
     'title' => st('Customising your new Faculty of Arts website'),
@@ -57,93 +57,19 @@ function foa_profile_tasks() {
   );
 
   // Enable theme.
-  $batch['operations'][] = array('foa_profile_enable_theme', array());
-
-  // Create a jQuerymenu.
-  $batch['operations'][] = array('foa_profile_jquerymenu', array());
+  $batch['operations'][] = array('skunkworks_profile_enable_theme', array());
 
   // Make a list of blocks :-)
 
   // Grab theme info for the blocks.
-  $theme_default = variable_get('theme_default', 'unimelb');
+  $theme_default = variable_get('theme_default', 'twitter_bootstrap');
   $theme_admin = variable_get('admin_theme', 'rubik');
 
-  // Put each of the frontpage view blocks in their regions.
-  for ($i = 1; $i <= 12; $i++) {
-    $blocks[] = array(
-      'module' => 'views',
-      'delta' => 'front_page-block_' . $i,
-      'theme' => $theme_default,
-      'region' => 'home_column_' . $i,
-      'status' => 1,
-      'visibility' => 1,
-      'pages' => '<front>'
-    );
-  }
-
-  // Create a jQuerymenu block for the frontend theme.
-  $blocks[] = array(
-    'module' => 'jquerymenu',
-    'delta' => variable_get('foa_jquerymenu', 0),
-    'theme' => $theme_default,
-    'region' => 'navigation',
-    'status' => 1,
-    'visibility' => 0,
-    'pages' => '<front>',
-    'title' => t('Home'),
-  );
-
-  // Create a disabled jQuerymenu block for the admin theme.
-  $blocks[] = array(
-    'module' => 'jquerymenu',
-    'delta' => variable_get('foa_jquerymenu', 0),
-    'theme' => $theme_admin,
-    'region' => 'navigation',
-  );
-
-  // Put the news block on the front page.
-  $blocks[] = array(
-    'module' => 'views',
-    'delta' => 'news-block',
-    'theme' => $theme_default,
-    'region' => 'sidebar_right',
-    'status' => 1,
-    'visibility' => 0,
-    'pages' => '<front>'
-  );
-
-  // Put the events block on the front page.
-  $blocks[] = array(
-    'module' => 'views',
-    'delta' => 'events-block',
-    'theme' => $theme_default,
-    'region' => 'sidebar_right',
-    'status' => 1,
-    'visibility' => 0,
-    'pages' => '<front>'
-  );
-
-  // Put the slider block on the front page.
-  $blocks[] = array(
-    'module' => 'views',
-    'delta' => 'slider-block',
-    'theme' => $theme_default,
-    'region' => 'slider',
-    'status' => 1,
-    'visibility' => 1,
-    'pages' => '<front>',
-  );
-
-  // Batch all those blocks into the system.
-  foreach ($blocks as $block) {
-    $batch['operations'][] = array('_foa_profile_block', array($block));
-  }
-
   // Set some miscellaneous system variables.
-  $batch['operations'][] = array('foa_profile_variables', array());
+  $batch['operations'][] = array('skunkworks_profile_variables', array());
 
   // Cleanup mess.
-  $batch['operations'][] = array('foa_profile_cleanup', array());
+  $batch['operations'][] = array('skunkworks_profile_cleanup', array());
 
   return $batch;
 }
@@ -151,9 +77,9 @@ function foa_profile_tasks() {
 /**
  * Enable the `unimelb' theme.
  */
-function foa_profile_enable_theme(&$context) {
+function skunkworks_profile_enable_theme(&$context) {
   // Themes.
-  $default_theme = variable_get('theme_default', 'unimelb');
+  $default_theme = variable_get('theme_default', 'twitter_bootstrap');
 
   db_update('system')
     ->fields(array('status' => 1))
@@ -162,21 +88,7 @@ function foa_profile_enable_theme(&$context) {
     ->execute();
 
   $context['results'] = __FUNCTION__;
-  $context['message'] = t('Enabled Faculty of Arts theme');
-}
-
-/**
- * Create the jQuerymenu navigation block.
- *
- * Called by batch API.
- */
-function foa_profile_jquerymenu(&$context) {
-  // Create a `navigation' jQuerymenu.
-  $mid = db_insert('jquerymenus')->fields(array('menu_name' => 'main-menu'))->execute();
-  variable_set('foa_jquerymenu', $mid);
-
-  $context['results'] = __FUNCTION__;
-  $context['message'] = t('Created a jQuerymenu for %menu', array('%menu' => 'Main menu'));
+  $context['message'] = t('Enabled Twitter Bootstrap theme');
 }
 
 /**
@@ -184,7 +96,7 @@ function foa_profile_jquerymenu(&$context) {
  *
  * Called by batch API.
  */
-function foa_profile_variables(&$context) {
+function skunkworks_profile_variables(&$context) {
   // No automagic nodequeue views.
   variable_set('nodequeue_view_per_queue', 0);
 
@@ -210,13 +122,13 @@ function foa_profile_variables(&$context) {
  *
  * Called by batch API.
  */
-function foa_profile_cleanup(&$context) {
-  variable_del('foa_jquerymenu');
+function skunkworks_profile_cleanup(&$context) {
+  variable_del('skunkworks_jquerymenu');
 
   // Put back the original error level.
-  $error_level = variable_get('foa_error_level', 1);
+  $error_level = variable_get('skunkworks_error_level', 1);
   variable_set('error_level', $error_level);
-  variable_del('foa_error_level');
+  variable_del('skunkworks_error_level');
 
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Cleaned up temporary variables');
@@ -231,12 +143,12 @@ function foa_profile_cleanup(&$context) {
  * @param $block
  *   A keyed array containing the block information.
  */
-function _foa_profile_block($block, &$context) {
+function _skunkworks_profile_block($block, &$context) {
   // Set some defaults.
   $default = array(
     'module' => '',
     'delta' => 0,
-    'theme' => variable_get('theme_default', 'unimelb'),
+    'theme' => variable_get('theme_default', 'twitter_bootstrap'),
     'status' => 0,
     'weight' => 0,
     'region' => -1,

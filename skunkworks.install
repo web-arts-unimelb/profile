@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Install, update and uninstall functions for the foa install profile.
+ * Install, update and uninstall functions for the skunkworks install profile.
  */
 
 /**
@@ -11,12 +11,12 @@
  *
  * @see system_install()
  */
-function foa_install() {
+function skunkworks_install() {
   // Hide feature-related notices during install, as the installer is tested
   // and the user cannot fix the notices anyway. The original error level is
-  // restored in the cleanup task in foa.profile.
+  // restored in the cleanup task in skunkworks.profile.
   $error_level = variable_get('error_level', 1);
-  variable_set('foa_error_level', $error_level);
+  variable_set('skunkworks_error_level', $error_level);
   variable_set('error_level', 0);
 
   // Add text formats.
@@ -76,10 +76,10 @@ function foa_install() {
   filter_format_save($full_html_format);
 
   // Themes.
-  $default_theme = 'unimelb';
+  $default_theme = 'twitter_bootstrap';
   $admin_theme = 'rubik';
 
-  // Enable the unimelb theme.
+  // Enable the twitter_bootstrap theme.
   db_update('system')
     ->fields(array('status' => 1))
     ->condition('type', 'theme')
@@ -157,7 +157,7 @@ function foa_install() {
   user_role_save($editor_role);
 
   // Save the editor rid for use in the arts feature install.
-  variable_set('foa_editor_rid', $editor_role->rid);
+  variable_set('skunkworks_editor_rid', $editor_role->rid);
 
   // Enable permissions for editor role.
   user_role_grant_permissions($editor_role->rid, array('access content', $full_html_permission));
@@ -168,7 +168,7 @@ function foa_install() {
   user_role_save($admin_role);
 
   // Save the admin role for use in the arts feature install.
-  variable_set('foa_admin_rid', $admin_role->rid);
+  variable_set('skunkworks_admin_rid', $admin_role->rid);
 
   // Enable permissions for admin role.
   user_role_grant_permissions($admin_role->rid, array('access content', $full_html_permission));
@@ -206,23 +206,4 @@ function foa_install() {
     ->execute();
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
-}
-
-/**
- * Implements hook_update_N().
- *
- * Disable wysiwyg_fields.module.
- */
-function foa_update_7001() {
-  module_disable(array('wysiwyg_fields'));
-  module_uninstall(array('wysiwyg_fields'));
-}
-
-/**
- * Implements hook_update_N().
- *
- * Enable redirect.module.
- */
-function foa_update_7002() {
-  module_enable(array('redirect'));
 }

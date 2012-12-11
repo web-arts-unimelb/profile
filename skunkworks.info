@@ -1,9 +1,9 @@
-; @file foa.info
+; @file skunkworks.info
 ; Based on the `standard' Drupal profile.
 ;
 ; The toolbar and overlay modules have been removed.
 
-name = Faculty of Arts
+name = FoA Skunkworks
 description = Install Drupal with Faculty of Arts presets enabled.
 dependencies[] = block
 dependencies[] = contextual
@@ -23,12 +23,12 @@ dependencies[] = file
 dependencies[] = rdf
 
 core = 7.x
-version = "7.x-1.1"
+version = "7.x-0.1"
 
-; These are the FoA extras on top of the `standard' profile.
+; These are the Skunkworks extras on top of the `standard' profile.
 dependencies[] = admin_menu
 dependencies[] = better_formats
-dependencies[] = css_splitter
+; dependencies[] = css_splitter
 dependencies[] = diff
 dependencies[] = insert
 dependencies[] = prepro
@@ -43,8 +43,8 @@ dependencies[] = date_api
 dependencies[] = date_popup
 dependencies[] = date_views
 dependencies[] = features
-dependencies[] = jquerymenu
-dependencies[] = linkimagefield
+; dependencies[] = jquerymenu
+; dependencies[] = linkimagefield
 dependencies[] = menu_admin_per_menu
 dependencies[] = nodequeue
 dependencies[] = path
@@ -52,12 +52,13 @@ dependencies[] = pathauto
 dependencies[] = redirect
 dependencies[] = strongarm
 dependencies[] = token
+dependencies[] = twitter_bootstrap_ui
 dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = views_bulk_operations
-dependencies[] = views_slideshow
+; dependencies[] = views_slideshow
 
 ; And finally, the Arts Features.
 dependencies[] = unimelb_arts
-dependencies[] = uom_slider
+; dependencies[] = uom_slider
 dependencies[] = wysiwyg_arts
