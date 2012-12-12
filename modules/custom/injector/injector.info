@@ -1,0 +1,6 @@
+name = Injector
+description = Inject Marcoms header, footer and global CSS into your site.
+core = 7.x
+version = 7.x-0.1
+
+package = "University of Melbourne"

@@ -52,7 +52,6 @@ dependencies[] = pathauto
 dependencies[] = redirect
 dependencies[] = strongarm
 dependencies[] = token
-dependencies[] = twitter_bootstrap_ui
 dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = views_bulk_operations

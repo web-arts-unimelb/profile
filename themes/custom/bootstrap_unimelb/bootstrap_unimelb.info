@@ -1,0 +1,9 @@
+name = Unimelb Bootstrap
+description = "Unimelb subtheme based on Twitter Bootstrap."
+core = 7.x
+
+base theme = twitter_bootstrap
+
+stylesheets[all][] = scss/bootstrap_unimelb.scss
+
+stylesheets[all][] = css/bootstrap_unimelb_wysiwyg.css

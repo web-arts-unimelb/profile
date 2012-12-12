@@ -1,0 +1,85 @@
+<?php
+/**
+ *
+ */
+define('INJECTOR_HEADER', 1);
+define('INJECTOR_STYLES', 2);
+
+/**
+ * Implements hook_menu().
+ */
+function injector_menu() {
+  $items['admin/appearance/injector'] = array(
+    'title' => t('UoM Injector'),
+    'description' => t('Configure the University of Melbourne header and style injectors.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('injector_admin_form'),
+    'access arguments' => array('administer themes'),
+    'file' => 'injector.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_init().
+ *
+ * Inject Marcoms JS into the page.
+ */
+function injector_init() {
+  $options = variable_get('injector_options', array());
+  if (_injector_match_path($_GET['q'])) {
+    if (in_array(INJECTOR_STYLES, $options)) {
+      drupal_add_js('http://brand.unimelb.edu.au/override/override.js', 'external');
+    }
+    if (in_array(INJECTOR_HEADER, $options)) {
+      drupal_add_js('http://brand.unimelb.edu.au/global-header/js/injection.js', 'external');
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Add a body class is the header is being injected.
+ */
+function injector_preprocess_page(&$variables) {
+  $options = variable_get('injector_options', array());
+
+  if (_injector_match_path($_GET['q'])) {
+    if (in_array(INJECTOR_HEADER, $options)) {
+      $variables['classes_array'][] = 'injector-header';
+    }
+    if (in_array(INJECTOR_STYLES, $options)) {
+      $variables['classes_array'][] = 'injector-styles';
+    }
+  }
+}
+
+/**
+ * Check if the current path should display injector.
+ *
+ * @param $path
+ *   A URL path.
+ *
+ * @return
+ *   TRUE or FALSE.
+ */
+function _injector_match_path($path) {
+  $pages = variable_get('injector_path', '');
+
+  if ($pages) {
+    $path = drupal_strtolower(drupal_get_path_alias($path));
+    $page_match = drupal_match_path($path, INJECTOR_IGNORE_PATH);
+    if ($path != $_GET['q']) {
+      $page_match = $page_match || drupal_match_path($_GET['q'], INJECTOR_IGNORE_PATH);
+    }
+    $visibility = variable_get('injector_visibility', BLOCK_VISIBILITY_NOTLISTED);
+    $page_match = ($visibility xor $page_match);
+  }
+  else {
+    $visibility = variable_get('injector_visibility', BLOCK_VISIBILITY_NOTLISTED);
+    $page_match = !$visibility;
+  }
+  return $page_match;
+}
