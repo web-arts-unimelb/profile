@@ -15,6 +15,7 @@ function jquerymenu_init() {
       'hover' => variable_get('jquerymenu_hover', 0),
       'animate' => variable_get('jquerymenu_animate', 0),
       'edit_link' => variable_get('jquerymenu_edit_link', 0),
+      'click_to_expand' => variable_get('jq_click_to_expand', 0),
     )
   );
   drupal_add_js($settings, 'setting');
@@ -112,7 +113,7 @@ function jquerymenu_block_info() {
  * Implements hook_block_view().
  */
 function jquerymenu_block_view($delta = '') {
-  global $user;
+  global $user, $language;
 
   $block = array();
   // List of enabled jquerymenus.
@@ -131,6 +132,9 @@ function jquerymenu_block_view($delta = '') {
 
     // gets the data structure representing a named menu tree
     $menutree = menu_tree_all_data($menuname);
+    if (module_exists('i18n_menu')) {
+      $menutree = i18n_menu_localize_tree($menutree, $language->language);
+    }
     if (!empty($menutree)) {
       if ($delta == $mid) {
         if ($menuname == 'navigation' && !empty($user->uid)) {
@@ -298,7 +302,7 @@ function recursive_link_creator($items = array(), $trail, $parentid = '') {
       if ($item['link']['hidden'] != 1 && $item['link']['hidden'] != -1) {
         $output .= theme('jquerymenu_listitem', array(
           'item' => $item,
-          'title' => $item['link']['title'],
+          'title' => t($item['link']['title']),
           'path' => $path,
           'options' => $options,
           'state' => $state,
@@ -448,7 +452,7 @@ function theme_jquerymenu_links($variables) {
   if ($edit_path != NULL && user_access($edit_access)) {
     $edit_box = jquerymenu_edit_box($edit_path, $edit_text);
     if ($has_children != 0) {
-      $output .= $parentlink ? $edit_box . $plus . $title : $edit_box . $plus . $link;  
+      $output .= $parentlink ? $edit_box . $plus . $title : $edit_box . $plus . $link;
     }
     else {
       $output .= $edit_box . $link;
@@ -478,7 +482,7 @@ function jquerymenu_edit_box($edit_path, $edit_title = NULL) {
   }
   $path = base_path() . drupal_get_path('module', 'jquerymenu');
   $editimage = '<img src="' . $path . '/images/edit.png" alt="edit menu" />';
-  return '<span class="jquerymenu_link_edit">' . l($editimage, $edit_path, $options) . '</span>';
+  return '<span class="jquerymenu_link_edit" >' . l($editimage, $edit_path, $options) . '</span>';
 }
 
 /**
