@@ -41,7 +41,7 @@ function injector_init() {
 /**
  * Implements hook_preprocess_page().
  *
- * Add a body class is the header is being injected.
+ * Add a body class if the header is being injected.
  */
 function injector_preprocess_page(&$variables) {
   $options = variable_get('injector_options', array());
@@ -70,9 +70,9 @@ function _injector_match_path($path) {
 
   if ($pages) {
     $path = drupal_strtolower(drupal_get_path_alias($path));
-    $page_match = drupal_match_path($path, INJECTOR_IGNORE_PATH);
+    $page_match = drupal_match_path($path, $pages);
     if ($path != $_GET['q']) {
-      $page_match = $page_match || drupal_match_path($_GET['q'], INJECTOR_IGNORE_PATH);
+      $page_match = $page_match || drupal_match_path($_GET['q'], $pages);
     }
     $visibility = variable_get('injector_visibility', BLOCK_VISIBILITY_NOTLISTED);
     $page_match = ($visibility xor $page_match);
