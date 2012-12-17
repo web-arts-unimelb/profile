@@ -215,7 +215,6 @@ function foa_install() {
  */
 function foa_update_7001() {
   module_disable(array('wysiwyg_fields'));
-  module_uninstall(array('wysiwyg_fields'));
 }
 
 /**

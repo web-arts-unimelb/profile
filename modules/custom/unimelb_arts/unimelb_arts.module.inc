@@ -158,7 +158,8 @@ function unimelb_arts_field_widget_form_alter(&$element, &$form_state, $context)
     drupal_add_css(drupal_get_path('module', 'unimelb_arts') . '/css/frontpage-summary.css');
     $element['summary']['#type'] = 'text_format';
     if (module_exists('better_formats') && isset($form_state['field']['body']['und']['instance']['settings']['better_formats'])) {
-      $element['summary']['#format'] = array_shift(array_filter(array_keys($form_state['field']['body']['und']['instance']['settings']['better_formats']['allowed_formats'])));
+      $formats = array_filter(array_keys($form_state['field']['body']['und']['instance']['settings']['better_formats']['allowed_formats']));
+      $element['summary']['#format'] = array_shift($formats);
     }
     else {
       $element['summary']['#format'] = $element['#format'];
