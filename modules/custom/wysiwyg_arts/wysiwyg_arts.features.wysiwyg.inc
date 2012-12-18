@@ -41,6 +41,9 @@ function wysiwyg_arts_wysiwyg_default_profiles() {
         'paste' => array(
           'pasteword' => 1,
         ),
+        'table' => array(
+          'tablecontrols' => 1,
+        ),
       ),
       'toolbar_loc' => 'top',
       'toolbar_align' => 'left',
