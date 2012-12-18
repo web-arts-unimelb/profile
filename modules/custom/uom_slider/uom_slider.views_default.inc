@@ -105,6 +105,8 @@ function uom_slider_views_default_views() {
   $handler->display->display_options['fields']['field_slider_pager']['field'] = 'field_slider_pager';
   $handler->display->display_options['fields']['field_slider_pager']['label'] = '';
   $handler->display->display_options['fields']['field_slider_pager']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_slider_pager']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_slider_pager']['alter']['path'] = '[path]';
   $handler->display->display_options['fields']['field_slider_pager']['element_class'] = 'pager-text';
   $handler->display->display_options['fields']['field_slider_pager']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_slider_pager']['element_default_classes'] = FALSE;
