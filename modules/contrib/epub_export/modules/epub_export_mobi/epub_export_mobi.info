@@ -1,0 +1,13 @@
+name = EPUB Export Mobi
+description = Convert existing EPUB export documents to mobi (Amazon Kindle) format.
+core = 7.x
+php = 5.3
+
+dependencies[] = epub_export
+
+; Information added by drupal.org packaging script on 2012-12-01
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "epub_export"
+datestamp = "1354322826"
+
