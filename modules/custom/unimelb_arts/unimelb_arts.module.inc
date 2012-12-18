@@ -36,6 +36,10 @@ function unimelb_arts_permission() {
       'description' => t('Change the permissions assigned to roles.'),
       'restrict access' => TRUE,
     ),
+    'access help pages' => array(
+      'title' => t('Access Help Pages'),
+      'description' => t('View the help pages and menu items.'),
+    ),
   );
 }
 
@@ -67,6 +71,9 @@ function unimelb_arts_menu_alter(&$items) {
     = $items['admin/appearance/disable']['access arguments']
     = $items['admin/appearance/default']['access arguments']
     = array('administer admin theme');
+
+  // Change the permission for the Help pages.
+  $items['admin/help']['access arguments'] = array('access help pages');
 
 }
 
