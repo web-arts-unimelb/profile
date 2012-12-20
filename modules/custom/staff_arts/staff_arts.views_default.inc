@@ -238,6 +238,11 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['sorts']['field_staff_given_name_value']['id'] = 'field_staff_given_name_value';
   $handler->display->display_options['sorts']['field_staff_given_name_value']['table'] = 'field_data_field_staff_given_name';
   $handler->display->display_options['sorts']['field_staff_given_name_value']['field'] = 'field_staff_given_name_value';
+  /* Sort criterion: Nodequeue: Position */
+  $handler->display->display_options['sorts']['position']['id'] = 'position';
+  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['sorts']['position']['field'] = 'position';
+  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
   /* Contextual filter: Taxonomy term: Name */
   $handler->display->display_options['arguments']['name']['id'] = 'name';
   $handler->display->display_options['arguments']['name']['table'] = 'taxonomy_term_data';
@@ -269,6 +274,171 @@ function staff_arts_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Unit */
+  $handler->display->display_options['relationships']['term_node_tid']['id'] = 'term_node_tid';
+  $handler->display->display_options['relationships']['term_node_tid']['table'] = 'node';
+  $handler->display->display_options['relationships']['term_node_tid']['field'] = 'term_node_tid';
+  $handler->display->display_options['relationships']['term_node_tid']['ui_name'] = 'Unit';
+  $handler->display->display_options['relationships']['term_node_tid']['label'] = 'terms';
+  $handler->display->display_options['relationships']['term_node_tid']['required'] = TRUE;
+  $handler->display->display_options['relationships']['term_node_tid']['vocabularies'] = array(
+    'units' => 'units',
+    'keywords' => 0,
+    'tags' => 0,
+  );
+  /* Relationship: Nodequeue: Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 0;
+  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'slider' => 0,
+    'front_page' => 0,
+    'schools' => 0,
+    'about' => 0,
+    'research' => 0,
+    'office_of_graduate_studies' => 0,
+    'coursework_students' => 0,
+    'staff_list' => 0,
+  );
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Unit */
+  $handler->display->display_options['fields']['field_staff_unit']['id'] = 'field_staff_unit';
+  $handler->display->display_options['fields']['field_staff_unit']['table'] = 'field_data_field_staff_unit';
+  $handler->display->display_options['fields']['field_staff_unit']['field'] = 'field_staff_unit';
+  $handler->display->display_options['fields']['field_staff_unit']['label'] = '';
+  $handler->display->display_options['fields']['field_staff_unit']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_unit']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_staff_unit']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_staff_unit']['delta_limit'] = '1';
+  $handler->display->display_options['fields']['field_staff_unit']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_staff_unit']['delta_reversed'] = TRUE;
+  /* Field: Content: Building */
+  $handler->display->display_options['fields']['field_staff_building']['id'] = 'field_staff_building';
+  $handler->display->display_options['fields']['field_staff_building']['table'] = 'field_data_field_staff_building';
+  $handler->display->display_options['fields']['field_staff_building']['field'] = 'field_staff_building';
+  $handler->display->display_options['fields']['field_staff_building']['label'] = '';
+  $handler->display->display_options['fields']['field_staff_building']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_building']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_staff_building']['click_sort_column'] = 'url';
+  /* Field: Content: Mail */
+  $handler->display->display_options['fields']['field_staff_mail']['id'] = 'field_staff_mail';
+  $handler->display->display_options['fields']['field_staff_mail']['table'] = 'field_data_field_staff_mail';
+  $handler->display->display_options['fields']['field_staff_mail']['field'] = 'field_staff_mail';
+  $handler->display->display_options['fields']['field_staff_mail']['label'] = '';
+  $handler->display->display_options['fields']['field_staff_mail']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_mail']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_staff_mail']['type'] = 'email_plain';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = 'mailto:[field_staff_mail]';
+  $handler->display->display_options['fields']['title']['alter']['alt'] = 'Send an email to [title]';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Position */
+  $handler->display->display_options['fields']['field_staff_position']['id'] = 'field_staff_position';
+  $handler->display->display_options['fields']['field_staff_position']['table'] = 'field_data_field_staff_position';
+  $handler->display->display_options['fields']['field_staff_position']['field'] = 'field_staff_position';
+  $handler->display->display_options['fields']['field_staff_position']['type'] = 'text_plain';
+  /* Field: Content: Phone */
+  $handler->display->display_options['fields']['field_staff_phone']['id'] = 'field_staff_phone';
+  $handler->display->display_options['fields']['field_staff_phone']['table'] = 'field_data_field_staff_phone';
+  $handler->display->display_options['fields']['field_staff_phone']['field'] = 'field_staff_phone';
+  $handler->display->display_options['fields']['field_staff_phone']['type'] = 'unimelb_html5_phone_link';
+  $handler->display->display_options['fields']['field_staff_phone']['settings'] = array(
+    'relationship' => 'none',
+    'ui_name' => '',
+    'custom_label' => 0,
+    'label' => '',
+    'element_label_colon' => 0,
+    'exclude' => 0,
+    'element_type_enable' => 0,
+    'element_type' => '',
+    'element_class_enable' => 0,
+    'element_class' => '',
+    'element_label_type_enable' => 0,
+    'element_label_type' => '',
+    'element_label_class_enable' => 0,
+    'element_label_class' => '',
+    'element_wrapper_type_enable' => 0,
+    'element_wrapper_type' => '',
+    'element_wrapper_class_enable' => 0,
+    'element_wrapper_class' => '',
+    'element_default_classes' => 0,
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'absolute' => 0,
+      'replace_spaces' => 0,
+      'external' => 0,
+      'path_case' => 'none',
+      'link_class' => '',
+      'alt' => '',
+      'rel' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 0,
+      'ellipsis' => 0,
+      'more_link' => 0,
+      'more_link_text' => '',
+      'more_link_path' => '',
+      'html' => 0,
+      'strip_tags' => 0,
+      'preserve_tags' => '',
+      'trim_whitespace' => 0,
+      'nl2br' => 0,
+    ),
+    'empty' => '',
+    'empty_zero' => 0,
+    'hide_empty' => 0,
+    'hide_alter_empty' => 0,
+    'click_sort_column' => '',
+    'type' => '',
+    'field_api_classes' => 0,
+  );
+  /* Field: Content: Room */
+  $handler->display->display_options['fields']['field_staff_room']['id'] = 'field_staff_room';
+  $handler->display->display_options['fields']['field_staff_room']['table'] = 'field_data_field_staff_room';
+  $handler->display->display_options['fields']['field_staff_room']['field'] = 'field_staff_room';
+  $handler->display->display_options['fields']['field_staff_room']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_room']['alter']['text'] = '[field_staff_room] [field_staff_building]';
+  $handler->display->display_options['fields']['field_staff_room']['type'] = 'text_plain';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Nodequeue: Position */
+  $handler->display->display_options['sorts']['position']['id'] = 'position';
+  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['sorts']['position']['field'] = 'position';
+  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['sorts']['position']['order'] = 'DESC';
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['relationship'] = 'term_node_tid';
+  /* Sort criterion: Content: Sticky */
+  $handler->display->display_options['sorts']['sticky']['id'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['table'] = 'node';
+  $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
+  /* Sort criterion: Content: Family name (field_staff_family_name) */
+  $handler->display->display_options['sorts']['field_staff_family_name_value']['id'] = 'field_staff_family_name_value';
+  $handler->display->display_options['sorts']['field_staff_family_name_value']['table'] = 'field_data_field_staff_family_name';
+  $handler->display->display_options['sorts']['field_staff_family_name_value']['field'] = 'field_staff_family_name_value';
+  /* Sort criterion: Content: Given name (field_staff_given_name) */
+  $handler->display->display_options['sorts']['field_staff_given_name_value']['id'] = 'field_staff_given_name_value';
+  $handler->display->display_options['sorts']['field_staff_given_name_value']['table'] = 'field_data_field_staff_given_name';
+  $handler->display->display_options['sorts']['field_staff_given_name_value']['field'] = 'field_staff_given_name_value';
   $handler->display->display_options['path'] = 'about/staff-list/%';
   $handler->display->display_options['menu']['title'] = 'Staff';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -299,6 +469,46 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['relationships']['parent']['field'] = 'parent';
   $handler->display->display_options['relationships']['parent']['relationship'] = 'term_node_tid';
   $handler->display->display_options['relationships']['parent']['required'] = TRUE;
+  /* Relationship: Nodequeue: Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 0;
+  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'slider' => 0,
+    'front_page' => 0,
+    'schools' => 0,
+    'about' => 0,
+    'research' => 0,
+    'office_of_graduate_studies' => 0,
+    'coursework_students' => 0,
+    'staff_list' => 0,
+  );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Nodequeue: Position */
+  $handler->display->display_options['sorts']['position']['id'] = 'position';
+  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['sorts']['position']['field'] = 'position';
+  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['sorts']['position']['order'] = 'DESC';
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['relationship'] = 'term_node_tid';
+  /* Sort criterion: Content: Sticky */
+  $handler->display->display_options['sorts']['sticky']['id'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['table'] = 'node';
+  $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
+  /* Sort criterion: Content: Family name (field_staff_family_name) */
+  $handler->display->display_options['sorts']['field_staff_family_name_value']['id'] = 'field_staff_family_name_value';
+  $handler->display->display_options['sorts']['field_staff_family_name_value']['table'] = 'field_data_field_staff_family_name';
+  $handler->display->display_options['sorts']['field_staff_family_name_value']['field'] = 'field_staff_family_name_value';
+  /* Sort criterion: Content: Given name (field_staff_given_name) */
+  $handler->display->display_options['sorts']['field_staff_given_name_value']['id'] = 'field_staff_given_name_value';
+  $handler->display->display_options['sorts']['field_staff_given_name_value']['table'] = 'field_data_field_staff_given_name';
+  $handler->display->display_options['sorts']['field_staff_given_name_value']['field'] = 'field_staff_given_name_value';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Taxonomy term: Name */
   $handler->display->display_options['arguments']['name']['id'] = 'name';
