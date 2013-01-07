@@ -222,6 +222,10 @@ function unimelb_arts_token_info() {
     'name' => t('Arts: Event Year'),
     'description' => t('The full year for the date this event will be held.'),
   );
+  $node['arts-tag-path'] = array(
+    'name' => t('Arts: Tag Path'),
+    'description' => t('The path created by adding up the paths on all tags on this node.'),
+  );
 
   return array(
     'tokens' => array(
@@ -266,6 +270,11 @@ function unimelb_arts_tokens($type, $tokens, array $data = array(), array $optio
 
         case 'arts-event-path-year':
           $path = _unimelb_arts_date_token($data['node'], '%Y', $langcode);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+
+        case 'arts-tag-path':
+          $path = _unimelb_arts_tag_path($data['node'], $langcode);
           $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
           break;
       }
@@ -346,6 +355,72 @@ function _unimelb_arts_date_token($node, $format, $langcode) {
 
   $date = strtotime($node->field_event_date[$langcode][0]['value']);
   return strftime($format, $date);
+}
+
+/**
+ * Helper to create token data from taxonomy terms.
+ *
+ * @param $node
+ *   A valid node object.
+ * @param $langcode
+ *   A language code.
+ *
+ * @return
+ *   A string.
+ */
+function _unimelb_arts_tag_path($node, $langcode) {
+  // Haz tags?
+  if (isset($node->field_shared_tags) && !empty($node->field_shared_tags[$langcode])) {
+   $trees = array();
+    foreach ($node->field_shared_tags[$langcode] as $item) {
+      $trees[$item['tid']]['depth'] = _unimelb_arts_tag_depth($item['tid']);
+
+      // Loop until we get to the top term.
+      $parent = $item['tid'];
+      while (!empty($parent)) {
+        $trees[$item['tid']]['lineage'][] = $parent;
+        $parent = db_query("SELECT parent FROM {taxonomy_term_hierarchy} WHERE tid = :tid", array(':tid' => $parent))->fetchField();
+      }
+    }
+
+    // Sort, so we can grab the deepest item.
+    uasort($trees, '_unimelb_arts_depth_sort');
+    $tree = array_shift($trees);
+
+    // Make a pretty path.
+    foreach ($tree['lineage'] as $idx => $tid) {
+      $term = taxonomy_term_load($tid);
+      $tree['path'][] = $term->field_tag_path_token[$langcode][0]['safe_value'];
+    }
+
+    return implode('/', array_reverse($tree['path']));
+  }
+}
+
+/**
+ * Helper to calculate the depth of a given taxonomy term.
+ *
+ * @param $tid
+ *   A taxonomy term id.
+ *
+ * @return
+ *   An integer.
+ */
+function _unimelb_arts_tag_depth($tid) {
+  $tree = array();
+  $parent = $tid;
+  while (!empty($parent)) {
+    $tree[] = $parent;
+    $parent = db_query("SELECT parent FROM {taxonomy_term_hierarchy} WHERE tid = :tid", array(':tid' => $parent))->fetchField();
+  }
+  return count($tree);
+}
+
+/**
+ * Callback helper to sort the term lineage array by depth.
+ */
+function _unimelb_arts_depth_sort($a, $b) {
+  return $a['depth'] < $b['depth'];
 }
 
 /**
