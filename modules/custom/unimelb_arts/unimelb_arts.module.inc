@@ -146,7 +146,14 @@ function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
-  // Add a pretty summary to this fieldset tab.
+  // Add a pretty summary to the structure fieldset tab.
+  if (isset($form['field_shared_tags'])) {
+    $form['field_shared_tags']['#attached'] = array(
+      'js' => array(drupal_get_path('module', 'unimelb_arts') . '/js/tags-summary.js'),
+    );
+  }
+
+  // Add a pretty summary to the keywords fieldset tab.
   if (isset($form['field_shared_keywords'])) {
     $form['field_shared_keywords']['#attached'] = array(
       'js' => array(drupal_get_path('module', 'unimelb_arts') . '/js/keywords-summary.js'),

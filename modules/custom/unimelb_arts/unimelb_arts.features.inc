@@ -50,7 +50,7 @@ function unimelb_arts_image_default_styles() {
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => '340',
-          'height' => '200',
+          'height' => '160',
         ),
         'weight' => '1',
       ),

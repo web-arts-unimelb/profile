@@ -1205,7 +1205,7 @@ function unimelb_arts_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '4',
+        'weight' => '3',
       ),
     ),
   );
@@ -1765,16 +1765,115 @@ function unimelb_arts_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-tags-field_tag_path_token'.
+  $fields['taxonomy_term-tags-field_tag_path_token'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_tag_path_token',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'tags',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Enter a lowercase alphanumeric string that should be used in generate URL paths for content tagged with this tag. This field may <em>not</em> contain spaces or any kind of HTML!',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_tag_path_token',
+      'label' => 'Path token',
+      'required' => 0,
+      'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'filtered_html' => 'filtered_html',
+            'full_html' => 'full_html',
+            'plain_text' => 'plain_text',
+          ),
+          'allowed_formats_toggle' => 0,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'filtered_html' => array(
+                'weight' => '0',
+              ),
+              'full_html' => array(
+                'weight' => '0',
+              ),
+              'plain_text' => array(
+                'weight' => '10',
+              ),
+            ),
+          ),
+        ),
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Path token',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '1',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Attachments');
   t('Body');
   t('Date');
+  t('Enter a lowercase alphanumeric string that should be used in generate URL paths for content tagged with this tag. This field may <em>not</em> contain spaces or any kind of HTML!');
   t('Enter event keywords to add to the global keywords that are already configured in the theme.');
   t('Enter news keywords to add to the global keywords that are already configured in the theme.');
   t('Enter page keywords to add to the global keywords that are already configured in the theme.');
   t('Images');
   t('Keywords');
+  t('Path token');
   t('Tag this content to create relationships with other items sharing the same tags.');
   t('Tags');
   t('The first image listed here will be used as front page image if this event is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.');

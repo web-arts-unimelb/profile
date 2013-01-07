@@ -23,10 +23,11 @@ function unimelb_arts_strongarm() {
   $strongarm->name = 'admin_menu_devel_modules_skip';
   $strongarm->value = array(
     'admin_devel' => 0,
-    'coder' => 0,
     'devel' => 0,
     'devel_node_access' => 0,
     'field_ui' => 0,
+    'rules_admin' => 0,
+    'stringoverrides' => 0,
     'views_ui' => 0,
   );
   $export['admin_menu_devel_modules_skip'] = $strongarm;
@@ -49,14 +50,14 @@ function unimelb_arts_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'admin_menu_tweak_modules';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['admin_menu_tweak_modules'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'admin_menu_tweak_permissions';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['admin_menu_tweak_permissions'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -377,6 +378,9 @@ system/ajax/*';
           'weight' => '0',
         ),
         'path' => array(
+          'weight' => '6',
+        ),
+        'redirect' => array(
           'weight' => '7',
         ),
       ),
@@ -416,6 +420,9 @@ system/ajax/*';
           'weight' => '0',
         ),
         'path' => array(
+          'weight' => '5',
+        ),
+        'redirect' => array(
           'weight' => '6',
         ),
       ),
@@ -455,7 +462,10 @@ system/ajax/*';
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '4',
+          'weight' => '5',
+        ),
+        'redirect' => array(
+          'weight' => '6',
         ),
       ),
       'display' => array(),
@@ -533,7 +543,7 @@ system/ajax/*';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_page_pattern';
-  $strongarm->value = '';
+  $strongarm->value = '[node:arts-tag-path]/[node:title]';
   $export['pathauto_node_page_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
