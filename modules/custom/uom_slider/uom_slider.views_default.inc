@@ -89,16 +89,17 @@ function uom_slider_views_default_views() {
     'slider' => 'slider',
     'front_page' => 0,
   );
-  /* Field: Content: Path */
-  $handler->display->display_options['fields']['path']['id'] = 'path';
-  $handler->display->display_options['fields']['path']['table'] = 'node';
-  $handler->display->display_options['fields']['path']['field'] = 'path';
-  $handler->display->display_options['fields']['path']['relationship'] = 'field_slider_link_target_id';
-  $handler->display->display_options['fields']['path']['label'] = '';
-  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['path']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
+  /* Field: Content: Slider image */
+  $handler->display->display_options['fields']['field_slider_image_1']['id'] = 'field_slider_image_1';
+  $handler->display->display_options['fields']['field_slider_image_1']['table'] = 'field_data_field_slider_image';
+  $handler->display->display_options['fields']['field_slider_image_1']['field'] = 'field_slider_image';
+  $handler->display->display_options['fields']['field_slider_image_1']['label'] = 'Link';
+  $handler->display->display_options['fields']['field_slider_image_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_slider_image_1']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_slider_image_1']['type'] = 'custom_formatters_banner_link';
+  $handler->display->display_options['fields']['field_slider_image_1']['settings'] = array(
+    'image_style' => '',
+  );
   /* Field: Content: Pager label */
   $handler->display->display_options['fields']['field_slider_pager']['id'] = 'field_slider_pager';
   $handler->display->display_options['fields']['field_slider_pager']['table'] = 'field_data_field_slider_pager';
@@ -106,7 +107,7 @@ function uom_slider_views_default_views() {
   $handler->display->display_options['fields']['field_slider_pager']['label'] = '';
   $handler->display->display_options['fields']['field_slider_pager']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_slider_pager']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_slider_pager']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['field_slider_pager']['alter']['path'] = '[field_slider_image_1]';
   $handler->display->display_options['fields']['field_slider_pager']['element_class'] = 'pager-text';
   $handler->display->display_options['fields']['field_slider_pager']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_slider_pager']['element_default_classes'] = FALSE;
