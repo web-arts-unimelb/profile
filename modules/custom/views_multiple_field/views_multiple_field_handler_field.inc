@@ -67,11 +67,14 @@ class views_multiple_field_handler_field extends views_handler_field {
    */
   function render($values) {
     $value = NULL;
+    $items = array();
+    
     if (!empty($this->options['views_multiple_field_field'])) {
       foreach ($values->{$this->options['views_multiple_field_field']} as $item) {
         $items[] = check_plain($item['rendered']['#markup']);
       }
     }
-    return implode($this->options['views_multiple_field_separator'], $items);
+  
+  	return implode($this->options['views_multiple_field_separator'], $items);  
   }
 }
