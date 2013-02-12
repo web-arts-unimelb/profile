@@ -80,23 +80,15 @@ function uom_slider_field_default_fields() {
       'settings' => array(
         'better_formats' => array(
           'allowed_formats' => array(
-            'filtered_html' => 0,
             'full_html' => 'full_html',
-            'php_code' => 0,
-            'plain_text' => 0,
+            'plain_text' => 'plain_text',
           ),
-          'allowed_formats_toggle' => 1,
+          'allowed_formats_toggle' => 0,
           'default_order_toggle' => 0,
           'default_order_wrapper' => array(
             'formats' => array(
-              'filtered_html' => array(
-                'weight' => '0',
-              ),
               'full_html' => array(
                 'weight' => '0',
-              ),
-              'php_code' => array(
-                'weight' => '11',
               ),
               'plain_text' => array(
                 'weight' => '10',
@@ -107,6 +99,18 @@ function uom_slider_field_default_fields() {
         'display_summary' => 1,
         'text_processing' => '1',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Image Caption',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -293,7 +297,6 @@ function uom_slider_field_default_fields() {
           'allowed_formats' => array(
             'filtered_html' => 0,
             'full_html' => 'full_html',
-            'php_code' => 0,
             'plain_text' => 0,
           ),
           'allowed_formats_toggle' => 1,
@@ -306,9 +309,6 @@ function uom_slider_field_default_fields() {
               'full_html' => array(
                 'weight' => '0',
               ),
-              'php_code' => array(
-                'weight' => '11',
-              ),
               'plain_text' => array(
                 'weight' => '10',
               ),
@@ -318,6 +318,18 @@ function uom_slider_field_default_fields() {
         'display_summary' => 0,
         'text_processing' => '1',
         'user_register_form' => FALSE,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Pager Label',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
