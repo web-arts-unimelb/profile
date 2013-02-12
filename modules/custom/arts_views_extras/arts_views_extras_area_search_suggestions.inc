@@ -11,13 +11,20 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
 
   function option_definition() {
     $options = parent::option_definition();
+    $options['prefix'] = array('default' => '');
     $options['filter'] = array('default' => '');
-    $options['empty'] = array('default' => TRUE);
     return $options;
   }
 
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
+
+    $form['prefix'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Prefix'),
+      '#description' => t('A prefix (or title) to show in front of the search suggestions.'),
+      '#default_value' => $this->options['prefix'],
+    );
 
     // Get a list of the available exposed filters.
     $options = array();
@@ -33,18 +40,12 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
       '#options' => $options,
       '#default_value' => $this->options['filter'],
     );
-
-    $form['empty'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Only offer suggestions if the field has not returned any items'),
-      '#default_value' => $this->options['empty'],
-    );
   }
 
   function render($empty = FALSE) {
     $filter = $this->options['filter'];
 
-    if ($empty && $this->options['empty']) {
+    if ($empty) {
       if (!empty($this->view->exposed_input[$filter])) {
         $query = db_select('search_index', 's')
           ->distinct()
@@ -67,8 +68,8 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
         while($record = $result->fetchAssoc()) {
           $suggestions[] = $record['word'];
         }
-        return t('No awards were found, you might want to try searching for: %suggestions',
-          array('%suggestions' => implode(', ', $suggestions)));
+        return t('@prefix %suggestions',
+          array('@prefix' => $this->options['prefix'], '%suggestions' => implode(', ', $suggestions)));
       }
     }
   }
