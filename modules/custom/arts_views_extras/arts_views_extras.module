@@ -6,7 +6,7 @@
 /**
  * Implements hook_views_api().
  */
-function views_multiple_field_views_api() {
+function arts_views_extras_views_api() {
   return array(
     'api' => 3,
   );

@@ -1,5 +1,5 @@
-name = Views Multiple Field
-description = Provides a sanitised single project tag that can be used to create links in Views.
+name = Arts Views Extras
+description = Provides extra Views field and area handlers for FoA websites.
 core = 7.x
 package = University of Melbourne
 
@@ -7,5 +7,6 @@ dependencies[] = unimelb_arts
 dependencies[] = field
 dependencies[] = views
 
-files[] = views_multiple_field.views.inc
+files[] = arts_views_extras.views.inc
 files[] = views_multiple_field_handler_field.inc
+files[] = views_empty_search_suggestions_area.inc
