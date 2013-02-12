@@ -3,6 +3,9 @@
  * @file
  */
 
+define('MATCH_LEVENSHTEIN', 0);
+define('MATCH_SIMILAR_TEXT', 1);
+
 /**
  * Implements hook_views_api().
  */

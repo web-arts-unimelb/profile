@@ -14,7 +14,7 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
     $options['prefix'] = array('default' => '');
     $options['filter'] = array('default' => '');
     $options['limit'] = array('default' => 5);
-    $options['match'] = array('default' => MATCH_LEHVENSTEIN);
+    $options['match'] = array('default' => MATCH_LEVENSHTEIN);
     return $options;
   }
 
@@ -49,7 +49,7 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
       '#description' => t('Select the PHP function to use to calculate string similarity for output order.'),
       '#type' => 'select',
       '#options' => array(
-        MATCH_LEHVENSTEIN => t('lehvenstein() - O(L1*L2)'),
+        MATCH_LEVENSHTEIN => t('levenshtein() - O(L1*L2)'),
         MATCH_SIMILAR_TEXT => t('similar_text() - O(N^3)'),
       ),
       '#default_value' => $this->options['match'],
@@ -131,16 +131,16 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
         else {
           $match = levenshtein($record['word'], $word);
         }
-        $suggestions[$match] = $record['word'];
+        $suggestions[$record['word']] = $match;
       }
     }
 
-    // Sort the list of suggestions by reverse levenshtein distance, so closer
+    // Sort the list of suggestions by reverse match distance, so closer
     // is at the top.
-    krsort($suggestions);
+    arsort($suggestions);
 
     // Remove duplicates and return.
-    return array_splice(array_unique($suggestions), 0, $this->options['limit']);
+    return array_splice(array_unique(array_keys($suggestions)), 0, $this->options['limit']);
   }
 
 }
