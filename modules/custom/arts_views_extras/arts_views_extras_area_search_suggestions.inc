@@ -21,7 +21,7 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
 
     // Get a list of the available exposed filters.
     $options = array();
-    foreach ($this->view->display_handler->get_handlers('field') as $filter => $handler) {
+    foreach ($this->view->display_handler->get_handlers('filter') as $filter => $handler) {
       $options[$filter] = $handler->ui_name();
     }
 
@@ -39,17 +39,38 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
       '#title' => t('Only offer suggestions if the field has not returned any items'),
       '#default_value' => $this->options['empty'],
     );
-
-    dpm($form);
   }
 
   function render($empty = FALSE) {
     $filter = $this->options['filter'];
 
-    if (!$empty || !empty($this->options['empty'])) {
-      return t('Foobar!');
+    if ($empty && $this->options['empty']) {
+      if (!empty($this->view->exposed_input[$filter])) {
+        $query = db_select('search_index', 's')
+          ->distinct()
+          ->range(0,5)
+          ->fields('s', array('word'))
+          ->condition('s.type', 'node')
+          ->orderBy('s.score', 'DESC');
+
+        $or = db_or();
+        $words = explode(' ', $this->view->exposed_input[$filter]);
+        foreach ($words as $word) {
+          $word = db_like($word);
+          $or->condition('s.word', '%%' . $word . '%%', 'LIKE');
+        }
+        $query->condition($or);
+
+        $result = $query->execute();
+
+        $suggestions = array();
+        while($record = $result->fetchAssoc()) {
+          $suggestions[] = $record['word'];
+        }
+        return t('No awards were found, you might want to try searching for: %suggestions',
+          array('%suggestions' => implode(', ', $suggestions)));
+      }
     }
-    return t('Minge');
   }
 
 }

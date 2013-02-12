@@ -9,4 +9,4 @@ dependencies[] = views
 
 files[] = arts_views_extras.views.inc
 files[] = views_multiple_field_handler_field.inc
-files[] = views_empty_search_suggestions_area.inc
+files[] = arts_views_extras_area_search_suggestions.inc
