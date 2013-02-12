@@ -104,13 +104,13 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
 
     // Calculate relevancy using levenshtein().
     while($record = $result->fetchAssoc()) {
-      foreach ($word as $word) {
+      foreach ($words as $word) {
         // Filter out the literal words we searched for to begin with.
         if ($word == $record['word']) {
           continue;
         }
         $lev = levenshtein($record['word'], $word);
-        $uggestions[$lev] = $record['word'];
+        $suggestions[$lev] = $record['word'];
       }
     }
 
