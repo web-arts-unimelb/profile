@@ -67,10 +67,12 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
         $suggestions = $this->soundexes($this->view->exposed_input[$filter]);
 
         if (!empty($suggestions)) {
-          return t('@prefix@thing %suggestions.', array(
+          $last = array_pop($suggestions);
+          return t('@prefix@thing %suggestions%last.', array(
             '@prefix' => $this->options['prefix'],
             '@thing' => !empty($this->options['prefix']) ? ': ' : '',
-            '%suggestions' => implode(', ', $suggestions)
+            '%suggestions' => implode(', ', $suggestions),
+            '%last' => ' or ' . $last,
           ));
         }
 
