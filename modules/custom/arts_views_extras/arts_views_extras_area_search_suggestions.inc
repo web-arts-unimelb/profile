@@ -83,8 +83,16 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
         while($record = $result->fetchAssoc()) {
           $suggestions[] = $record['word'];
         }
-        return t('@prefix %suggestions',
-          array('@prefix' => $this->options['prefix'], '%suggestions' => implode(', ', $suggestions)));
+
+        if (!empty($suggestions)) {
+          return t('@prefix@thing %suggestions.', array(
+            '@prefix' => $this->options['prefix'],
+            '@thing' => !empty($this->options['prefix']) ? ': ' : '',
+            '%suggestions' => implode(', ', $suggestions)
+          ));
+        }
+
+        return '';
       }
     }
   }
