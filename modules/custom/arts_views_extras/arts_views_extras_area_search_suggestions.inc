@@ -13,6 +13,7 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
     $options = parent::option_definition();
     $options['prefix'] = array('default' => '');
     $options['filter'] = array('default' => '');
+    $options['limit'] = array('default' => 5);
     return $options;
   }
 
@@ -40,6 +41,20 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
       '#options' => $options,
       '#default_value' => $this->options['filter'],
     );
+
+    $limits = array();
+    for ($i = 1; $i <= 10; $i++) {
+      $limits[$i] = $i;
+    }
+    // List of fields, pick one.
+    $form['limit'] = array(
+      '#title' => t('Limit'),
+      '#description' => t('Limit the number of suggestions to display.'),
+      '#type' => 'select',
+      '#options' => $limits,
+      '#default_value' => $this->options['limit'],
+    );
+
   }
 
   function render($empty = FALSE) {
@@ -49,7 +64,7 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
       if (!empty($this->view->exposed_input[$filter])) {
         $query = db_select('search_index', 's')
           ->distinct()
-          ->range(0,5)
+          ->range(0, $this->options['limit'])
           ->fields('s', array('word'))
           ->condition('s.type', 'node')
           ->orderBy('s.score', 'DESC');
