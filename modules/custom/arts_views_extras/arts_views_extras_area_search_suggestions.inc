@@ -14,6 +14,7 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
     $options['prefix'] = array('default' => '');
     $options['filter'] = array('default' => '');
     $options['limit'] = array('default' => 5);
+    $options['match'] = array('default' => MATCH_LEHVENSTEIN);
     return $options;
   }
 
@@ -40,6 +41,18 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
       '#type' => 'select',
       '#options' => $options,
       '#default_value' => $this->options['filter'],
+    );
+
+    // Matching algorithm.
+    $form['match'] = array(
+      '#title' => t('Match'),
+      '#description' => t('Select the PHP function to use to calculate string similarity for output order.'),
+      '#type' => 'select',
+      '#options' => array(
+        MATCH_LEHVENSTEIN => t('lehvenstein() - O(L1*L2)'),
+        MATCH_SIMILAR_TEXT => t('similar_text() - O(N^3)'),
+      ),
+      '#default_value' => $this->options['match'],
     );
 
     $limits = array();
@@ -104,15 +117,21 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
 
     $result = $query->execute();
 
-    // Calculate relevancy using levenshtein().
+    // Calculate relevancy using the preferred algorithm.
     while($record = $result->fetchAssoc()) {
       foreach ($words as $word) {
         // Filter out the literal words we searched for to begin with.
         if ($word == $record['word']) {
           continue;
         }
-        $lev = levenshtein($record['word'], $word);
-        $suggestions[$lev] = $record['word'];
+        if ($this->options['match'] == MATCH_SIMILAR_TEXT) {
+          similar_text($record['word'], $word, $match);
+          $match = 100 - $match;
+        }
+        else {
+          $match = levenshtein($record['word'], $word);
+        }
+        $suggestions[$match] = $record['word'];
       }
     }
 
@@ -121,7 +140,7 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
     krsort($suggestions);
 
     // Remove duplicates and return.
-    return array_unique($suggestions);
+    return array_splice(array_unique($suggestions), 0, $this->options['limit']);
   }
 
 }
