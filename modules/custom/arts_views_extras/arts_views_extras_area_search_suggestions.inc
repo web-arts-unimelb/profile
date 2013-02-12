@@ -62,29 +62,9 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
 
     if ($empty) {
       if (!empty($this->view->exposed_input[$filter])) {
-        $query = db_select('search_index', 's')
-          ->distinct()
-          ->range(0, $this->options['limit'])
-          ->fields('s', array('word'))
-          ->condition('s.type', 'node')
-          ->orderBy('s.score', 'DESC');
 
-        $or = db_or();
-        $words = explode(' ', $this->view->exposed_input[$filter]);
-        foreach ($words as $word) {
-          $word = db_like($word);
-          $or->condition('s.word', '%%' . $word . '%%', 'LIKE');
-        }
-        $query->condition($or);
-
-        $result = $query->execute();
-
-        $suggestions = array();
-        while($record = $result->fetchAssoc()) {
-          if (!in_array($record['word'], $words)) {
-            $suggestions[] = $record['word'];
-          }
-        }
+        // Grab suggestions.
+        $suggestions = $this->soundexes($this->view->exposed_input[$filter]);
 
         if (!empty($suggestions)) {
           return t('@prefix@thing %suggestions.', array(
@@ -97,6 +77,49 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
         return '';
       }
     }
+  }
+
+  /**
+   * Look for similar sounding words in the search index table.
+   */
+  function soundexes($filter) {
+    $suggestions = array();
+
+    $query = db_select('search_index', 's')
+      ->distinct()
+      ->range(0, $this->options['limit'])
+      ->fields('s', array('word'))
+      ->condition('s.type', 'node')
+      ->orderBy('s.score', 'DESC');
+
+    // Add a soundex compare (OR) for each word in the filter.
+    $or = db_or();
+    $words = explode(' ', $filter);
+    foreach ($words as $word) {
+      $or->where('STRCMP(SOUNDEX(s.word), SOUNDEX(:word)) = 0', array(':word' => $word));
+    }
+    $query->condition($or);
+
+    $result = $query->execute();
+
+    // Calculate relevancy using levenshtein().
+    while($record = $result->fetchAssoc()) {
+      foreach ($word as $word) {
+        // Filter out the literal words we searched for to begin with.
+        if ($word == $record['word']) {
+          continue;
+        }
+        $lev = levenshtein($record['word'], $word);
+        $uggestions[$lev] = $record['word'];
+      }
+    }
+
+    // Sort the list of suggestions by reverse levenshtein distance, so closer
+    // is at the top.
+    krsort($suggestions);
+
+    // Remove duplicates and return.
+    return array_unique($suggestions);
   }
 
 }
