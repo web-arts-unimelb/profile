@@ -81,7 +81,9 @@ class arts_views_extras_area_search_suggestions extends views_handler_area {
 
         $suggestions = array();
         while($record = $result->fetchAssoc()) {
-          $suggestions[] = $record['word'];
+          if (!in_array($words, $record['word'])) {
+            $suggestions[] = $record['word'];
+          }
         }
 
         if (!empty($suggestions)) {
