@@ -158,7 +158,7 @@ function uom_slider_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'slider',
       'deleted' => '0',
-      'description' => 'Slider image will be resized to 690x240 automatically.',
+      'description' => 'Slider image will be resized to 700x240 automatically.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -350,7 +350,7 @@ function uom_slider_field_default_fields() {
   t('Image caption');
   t('Pager label');
   t('Slider image');
-  t('Slider image will be resized to 690x240 automatically.');
+  t('Slider image will be resized to 700x240 automatically.');
   t('This text will be shown on the small pager to the right of the main slider. When a user hovers the mouse over this text, the main slider displays the image and caption you enter below.');
 
   return $fields;
