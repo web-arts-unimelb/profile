@@ -4,3 +4,6 @@
 [submodule "themes/custom/admin_unimelb"]
 	path = themes/custom/admin_unimelb
 	url = git@github.com:web-arts-unimelb/admin_unimelb.git
+[submodule "libraries/flexslider"]
+	path = libraries/flexslider
+	url = git://github.com/woothemes/FlexSlider.git
