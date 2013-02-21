@@ -7,3 +7,6 @@
 [submodule "libraries/flexslider"]
 	path = libraries/flexslider
 	url = git://github.com/woothemes/FlexSlider.git
+[submodule "modules/custom/insert_video"]
+  path = modules/custom/insert_video
+  url = http://git.drupal.org/project/insert_video.git
