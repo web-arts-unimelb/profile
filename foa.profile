@@ -249,9 +249,21 @@ function _foa_profile_block($block, &$context) {
 
   $block += $default;
 
-  db_insert('block')
-    ->fields($block)
-    ->execute();
+  // Oogly. It seems that depending on feature version, the blocks may or may
+  // not get created as intended. Catch the AlreadyExists error and run an
+  // update query in that case.
+  try {
+    db_insert('block')
+      ->fields($block)
+      ->execute();
+  } catch (Exception $e) {
+    db_update('block')
+      ->fields($block)
+      ->condition('module', $block['module'])
+      ->condition('delta', $block['delta'])
+      ->condition('theme', $block['theme'])
+      ->execute();
+  }
 
   $context['results'] = __FUNCTION__;
   $context['message'] = t('Added %theme block @delta in @region', array('%theme' => $block['theme'], '@delta' => $block['delta'], '@region' => $block['region']));
