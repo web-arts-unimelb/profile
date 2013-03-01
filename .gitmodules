@@ -10,3 +10,6 @@
 [submodule "modules/custom/insert_video"]
   path = modules/custom/insert_video
   url = http://git.drupal.org/project/insert_video.git
+[submodule "modules/custom/askunimelb_widgets"]
+	path = modules/custom/askunimelb_widgets
+	url = git@github.com:web-arts-unimelb/askunimelb_widgets.git
