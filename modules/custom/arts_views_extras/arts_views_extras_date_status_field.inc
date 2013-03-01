@@ -29,7 +29,10 @@ class arts_views_extras_date_status_field extends views_handler_field {
         continue;
       }
 
-dpm($field);
+      // Only date fields.
+      if ($handler->field_info['module'] != 'date') {
+        continue;
+      }
 
       $title = (empty($handler->options['ui_name']))
         ? t('@group: @title', array('@group' => $handler->definition['group'], '@title' => $handler->definition['title']))
@@ -65,11 +68,23 @@ dpm($field);
     $items = array();
 
     if (!empty($this->options['status_date_field'])) {
-      foreach ($values->{$this->options['status_date_field']} as $item) {
-        $items[] = check_plain($item['rendered']['#markup']);
+      $dates = $values->{$this->options['status_date_field']}[0]['raw'];
+
+      // Convert the dates and check if time() is between them.
+      $start = strtotime($dates['value']);
+      $end   = strtotime($dates['value2']);
+      $now   = time();
+
+      // If there are dates and now is in the correct range, we're open and
+      // otherwise closed. If no dates, return empty.
+      if ($start <= $now && $now <= $end) {
+        return t('Open');
+      }
+      else {
+        return t('Closed');
       }
     }
 
-    return $items;
+    return t('');
   }
 }
