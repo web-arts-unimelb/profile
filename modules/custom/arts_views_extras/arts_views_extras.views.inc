@@ -31,7 +31,7 @@ function arts_views_extras_views_data() {
     'title' => t('Status by Date'),
     'group' => t('Faculty of Arts'),
     'help' => t('Provide open of closed status through a date field value.'),
-    'area' => array(
+    'field' => array(
       'help' => t('Provide open of closed status through a date field value.'),
       'handler' => 'arts_views_extras_date_status_field',
     ),
