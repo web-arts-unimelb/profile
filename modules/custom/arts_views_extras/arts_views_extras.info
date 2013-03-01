@@ -6,7 +6,9 @@ package = University of Melbourne
 dependencies[] = unimelb_arts
 dependencies[] = field
 dependencies[] = views
+dependencies[] = date
 
 files[] = arts_views_extras.views.inc
 files[] = views_multiple_field_handler_field.inc
 files[] = arts_views_extras_area_search_suggestions.inc
+files[] = arts_views_extras_date_status_field.inc
