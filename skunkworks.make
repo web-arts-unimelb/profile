@@ -3,7 +3,7 @@ api = 2
 core = 7.x
 
 ;
-; Contrib modules used by the FoA Skunkworks install profile.
+; Contrib modules used by the Skunkworks install profile.
 ;
 projects[admin_menu][version] = "3.0-rc3"
 projects[admin_menu][subdir] = contrib
@@ -127,7 +127,16 @@ projects[wysiwyg][version] = "2.2"
 projects[wysiwyg][subdir] = contrib
 
 ;
-; Themes used by the FoA install profile.
+; Custom modules used by the Skunkworks install profile.
+;
+projects[askunimelb_widgets][type] = "module"
+projects[askunimelb_widgets][download][type] = "git"
+projects[askunimelb_widgets][download][url] = "https://github.com/web-arts-unimelb/askunimelb_widgets.git"
+projects[askunimelb_widgets][download][branch] = "master"
+projects[askunimelb_widgets][subdir] = custom
+
+;
+; Themes used by the Skunkworks install profile.
 ;
 projects[bootstrap][version] = "2.0"
 projects[bootstrap][subdir] = contrib
@@ -139,7 +148,7 @@ projects[tao][version] = "3.0-beta4"
 projects[tao][subdir] = contrib
 
 ;
-; Libraries used by the FoA Skunkworks install profile.
+; Libraries used by the Skunkworks install profile.
 ;
 ; @see http://drupal.org/project/bootstrap
 libraries[bootstrap][download][type] = "get"
