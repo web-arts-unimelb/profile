@@ -25,6 +25,8 @@ projects[ctools][subdir] = contrib
 
 projects[custom_formatters][version] = "2.2"
 projects[custom_formatters][subdir] = contrib
+; @see http://drupal.org/node/1939118
+projects[custom_formatters][patch][] = "http://drupal.org/files/no_makefile.patch"
 
 projects[date][version] = "2.6"
 projects[date][subdir] = contrib
