@@ -53,16 +53,52 @@ body.logo #g-global-menu-logo {
   .nav > .active > a:focus {
     font-family: 'alternate gothic', 'HelveticaNeueBoldCondensed', 'HelveticaNeue-Bold-Condensed', 'Helvetica Neue Bold Condensed', 'Haettenschweiler', 'impact', sans-serif;
     font-weight: normal;
-    text-transform: uppercase;
+    text-transform: none;
     font-size: 23px;
     background: none;
     color: #A8C5E0;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   }
-  .nav .caret {
-    border-top-color: #A8C5E0;
-    border-bottom-color: #A8C5E0;
+
+  .nav {
+    // Open drop-down.
+    li.dropdown.open > .dropdown-toggle,
+    li.dropdown.active > .dropdown-toggle,
+    li.dropdown.open.active > .dropdown-toggle {
+      color: #EEEE00;
+      background: none;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    // Mess with the caret.
+    .caret,
+    li.dropdown > .dropdown-toggle .caret {
+      border-top-color: #A8C5E0;
+      border-bottom-color: #A8C5E0;
+    }
+    li.dropdown > a:hover .caret {
+      border-top-color: #EEEE00;
+      border-bottom-color: #EEEE00;
+    }
+
+    // Mess with the caret on open drop-down.
+    li.dropdown.open > .dropdown-toggle .caret,
+    li.dropdown.active > .dropdown-toggle .caret,
+    li.dropdown.open.active > .dropdown-toggle .caret {
+      border-top-color: #A8C5E0;
+      border-bottom-color: #A8C5E0;
+    }
   }
+}
+
+
+/* Float menu and search to the right. */
+#main-menu {
+  float:right;
+}
+
+.navbar-search.pull-left {
+  float: right; // Yes, really.
 }
 
 @media (max-width: 979px) {
