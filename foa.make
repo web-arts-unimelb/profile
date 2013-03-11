@@ -28,6 +28,8 @@ projects[ctools][subdir] = contrib
 
 projects[custom_formatters][version] = "2.2"
 projects[custom_formatters][subdir] = contrib
+; @see http://drupal.org/node/1939118
+projects[custom_formatters][patch][] = "http://drupal.org/files/no_makefile.patch"
 
 projects[date][version] = "2.6"
 projects[date][subdir] = contrib
@@ -134,6 +136,8 @@ projects[wysiwyg][subdir] = contrib
 
 projects[wysiwyg_fields][version] = "1.x-dev"
 projects[wysiwyg_fields][subdir] = contrib
+; Stop wysiwyg_fields running its own makefile.
+projects[wysiwyg_fields][patch][] = "http://drupalcode.org/project/wysiwyg_fields.git/blob_plain/refs/heads/7.x-1.x:/no_makefile.patch"
 
 ;
 ; Custom modules used by the FoA install profile.
