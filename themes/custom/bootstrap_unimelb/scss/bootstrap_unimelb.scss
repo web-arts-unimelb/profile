@@ -1,8 +1,21 @@
+/* Fontage */
+@font-face {
+  font-family: 'alternate gothic'; font-weight: normal; font-style: normal;
+  src: url('http://brand.unimelb.edu.au/global-header/fonts/style_219.eot');
+  src: url('http://brand.unimelb.edu.au/global-header/fonts/style_219.eot?#iefix') format('embedded-opentype'),
+       url('http://brand.unimelb.edu.au/global-header/fonts/style_219.woff') format('woff'),
+       url('http://brand.unimelb.edu.au/global-header/fonts/style_219.ttf') format('truetype'),
+       url('http://brand.unimelb.edu.au/global-header/fonts/style_219.svg#AlternateGothicNo2BT-Regular') format('svg'); }
+
 /* Overrides. */
 
 /* UniMelb blue background. */
 .navbar-inner {
-  // font-family: 'HelveticaNeueBoldCondensed', 'HelveticaNeue-Bold-Condensed', 'Helvetica Neue Bold Condensed', 'Haettenschweiler', 'impact', sans-serif;
+  li a {
+    -webkit-transition: color 200ms linear;
+    font-family: 'alternate gothic', 'HelveticaNeueBoldCondensed', 'HelveticaNeue-Bold-Condensed', 'Helvetica Neue Bold Condensed', 'Haettenschweiler', 'impact', sans-serif;
+    font-weight: normal;
+  }
 
   // background-color: #003366; /* fallback color, place your own */
   background-color: #003168;
@@ -55,7 +68,7 @@ body.logo #g-global-menu-logo {
     font-family: 'alternate gothic', 'HelveticaNeueBoldCondensed', 'HelveticaNeue-Bold-Condensed', 'Helvetica Neue Bold Condensed', 'Haettenschweiler', 'impact', sans-serif;
     font-weight: normal;
     text-transform: none;
-    font-size: 23px;
+    font-size: 26px;
     background: none;
     color: #A8C5E0;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
