@@ -138,10 +138,11 @@ projects[wysiwyg][subdir] = contrib
 ; Custom modules used by the FoA install profile.
 ;
 projects[askunimelb_widgets][type] = "module"
+projects[askunimelb_widgets][subdir] = custom
 projects[askunimelb_widgets][download][type] = "git"
 projects[askunimelb_widgets][download][url] = "https://github.com/web-arts-unimelb/askunimelb_widgets.git"
 projects[askunimelb_widgets][download][branch] = "master"
-projects[askunimelb_widgets][subdir] = custom
+projects[askunimelb_widgets][download][working-copy] = TRUE
 
 ;
 ; Contrib themes used by the FoA install profile.
@@ -156,10 +157,11 @@ projects[tao][subdir] = contrib
 ; Custom themes used by the FoA install profile.
 ;
 projects[unimelb][type] = "theme"
+projects[unimelb][subdir] = custom
 projects[unimelb][download][type] = "git"
 projects[unimelb][download][url] = "https://github.com/web-arts-unimelb/unimelb.git"
 projects[unimelb][download][branch] = "master"
-projects[unimelb][subdir] = custom
+projects[askunimelb_widgets][download][working-copy] = TRUE
 
 ;
 ; Libraries used by the FoA install profile.
