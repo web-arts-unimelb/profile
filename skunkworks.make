@@ -132,10 +132,11 @@ projects[wysiwyg][subdir] = contrib
 ; Custom modules used by the Skunkworks install profile.
 ;
 projects[askunimelb_widgets][type] = "module"
+projects[askunimelb_widgets][subdir] = custom
 projects[askunimelb_widgets][download][type] = "git"
 projects[askunimelb_widgets][download][url] = "https://github.com/web-arts-unimelb/askunimelb_widgets.git"
 projects[askunimelb_widgets][download][branch] = "master"
-projects[askunimelb_widgets][subdir] = custom
+projects[askunimelb_widgets][download][working-copy] = TRUE
 
 ;
 ; Themes used by the Skunkworks install profile.
@@ -163,11 +164,11 @@ libraries[colorbox][download][url] = "https://github.com/jackmoore/colorbox/arch
 libraries[colorbox][directory_name] = "colorbox"
 libraries[colorbox][destination] = "libraries"
 
-libraries[cycle][download][type] = "git"
-libraries[cycle][download][url] = "https://github.com/FunnyMonkey/FunnyMonkey-EPUB-Package.git"
-libraries[cycle][download][branch] = "master"
-libraries[cycle][directory_name] = "FunnyMonkey-EPUB-Package"
-libraries[cycle][destination] = "libraries"
+libraries[epub][download][type] = "git"
+libraries[epub][download][url] = "https://github.com/FunnyMonkey/FunnyMonkey-EPUB-Package.git"
+libraries[epub][download][branch] = "master"
+libraries[epub][directory_name] = "FunnyMonkey-EPUB-Package"
+libraries[epub][destination] = "libraries"
 
 libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "http://github.com/downloads/tinymce/tinymce/tinymce_3.5.8.zip"
