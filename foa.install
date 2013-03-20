@@ -173,6 +173,9 @@ function foa_install() {
   // Enable permissions for admin role.
   user_role_grant_permissions($admin_role->rid, array('access content', $full_html_permission));
 
+	// Grant extra permissions for admin role
+	_grant_admin_permissions($admin_role->rid);
+
   // Create a default role for site administrators, with all available permissions assigned.
   $site_admin_role = new stdClass();
   $site_admin_role->name = 'site admin';
@@ -224,4 +227,34 @@ function foa_update_7001() {
  */
 function foa_update_7002() {
   module_enable(array('redirect'));
+}
+
+/*
+ * Grant extra permissions
+ */ 
+function _grant_admin_permissions($rid = null) {
+	$permission_rows = array(
+		array($rid, "administer main-menu menu items", "menu_admin_per_menu"),
+		array($rid, "access administration pages", "system"),
+		array($rid, "access site in maintenance mode", "system"),
+		array($rid, "view the administration theme", "system"),
+	);
+	
+	foreach($permission_rows as $permission)
+	{
+		_grant_permission($permission);
+	}
+}
+
+function _grant_permission($permission = array()) {
+	$is_existed = db_query('SELECT 1 FROM {role_permission} WHERE rid = :rid AND permission = :permission AND module = :module', array(':rid'=>$permission[0], ':permission'=>$permission[1], ':module'=>$permission[2]))->fetchField();
+	
+	if($is_existed == 1)
+	{
+		// Skip
+	}
+	else
+	{
+		db_query('INSERT INTO {role_permission} SET rid = :rid, permission = :permission, module = :module', array(':rid'=>$permission[0], ':permission'=>$permission[1], ':module'=>$permission[2]));
+	}
 }
