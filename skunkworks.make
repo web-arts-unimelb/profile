@@ -34,7 +34,7 @@ projects[date][subdir] = contrib
 projects[diff][version] = "3.2"
 projects[diff][subdir] = contrib
 
-projects[ds][version] = "2.0"
+projects[ds][version] = "2.2"
 projects[ds][subdir] = contrib
 
 projects[email][version] = "1.2"
@@ -116,7 +116,7 @@ projects[token][subdir] = contrib
 projects[twitter_bootstrap_ui][version] = "2.x-dev"
 projects[twitter_bootstrap_ui][subdir] = contrib
 
-projects[views][version] = "3.5"
+projects[views][version] = "3.6"
 projects[views][subdir] = contrib
 
 projects[views_bulk_operations][version] = "3.1"
