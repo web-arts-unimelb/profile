@@ -148,6 +148,13 @@ function foa_install() {
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 
+	// Grant extra permissions for admin role
+	$permissions = array(
+		array(DRUPAL_AUTHENTICATED_RID, "view the administration theme", "system"),
+	);
+	_grant_permissions($permissions);
+
+
   // Full HTML permission goes on our new roles.
   $full_html_permission = filter_permission_name($full_html_format);
 
@@ -162,6 +169,13 @@ function foa_install() {
   // Enable permissions for editor role.
   user_role_grant_permissions($editor_role->rid, array('access content', $full_html_permission));
 
+	// Grant extra permissions for editor role
+	$permissions = array(
+		array($editor_role->rid, "view the administration theme", "system"),
+	);
+	_grant_permissions($permissions);
+
+
   $admin_role = new stdClass();
   $admin_role->name = 'admin';
   $admin_role->weight = 3;
@@ -174,7 +188,14 @@ function foa_install() {
   user_role_grant_permissions($admin_role->rid, array('access content', $full_html_permission));
 
 	// Grant extra permissions for admin role
-	_grant_admin_permissions($admin_role->rid);
+	$permissions = array(
+		array($admin_role->rid, "administer main-menu menu items", "menu_admin_per_menu"),
+		array($admin_role->rid, "access administration pages", "system"),
+		array($admin_role->rid, "access site in maintenance mode", "system"),
+		array($admin_role->rid, "view the administration theme", "system"),
+	);
+	_grant_permissions($permissions);
+
 
   // Create a default role for site administrators, with all available permissions assigned.
   $site_admin_role = new stdClass();
@@ -230,17 +251,10 @@ function foa_update_7002() {
 }
 
 /*
- * Grant extra permissions
+ * Grant permissions
  */ 
-function _grant_admin_permissions($rid = null) {
-	$permission_rows = array(
-		array($rid, "administer main-menu menu items", "menu_admin_per_menu"),
-		array($rid, "access administration pages", "system"),
-		array($rid, "access site in maintenance mode", "system"),
-		array($rid, "view the administration theme", "system"),
-	);
-	
-	foreach($permission_rows as $permission)
+function _grant_permissions($permissions = array()) {
+	foreach($permissions as $permission)
 	{
 		_grant_permission($permission);
 	}
