@@ -162,7 +162,6 @@ function _ldap_authentication_user_login_authenticate_validate(&$form_state) {
       if ($detailed_watchdog_log) {
       watchdog('ldap_authentication', '%username : Previously authenticated in mixed mode or uid=1', $watchdog_tokens, WATCHDOG_DEBUG);
       }
-
       return;  // already passed previous authentication validation
     }
     elseif ($auth_conf->authenticationMode == LDAP_AUTHENTICATION_EXCLUSIVE) {
@@ -496,11 +495,6 @@ function _ldap_authentication_user_login_authenticate_validate(&$form_state) {
     }
   }
 
-
-  // Gary
-  __assign_ldap_server($authname, $auth_conf);
-
-
   /**
   * we now have valid, ldap authenticated username with an account authmapped to ldap_authentication.
   * since user_external_login_register can't deal with user mail attribute and doesn't do much else, it is not
@@ -569,41 +563,4 @@ function ldap_authentication_redirect_to_ldap_help() {
     return "Misconfigured LDAP Help Link";
   }
 
-}
-
-
-// Gary
-function __assign_ldap_server($authname, $auth_conf)
-{
-
-	$account = user_load_by_name($authname);
-
-	__get_ldap_server($auth_conf, $sid, $ldap_server);
-	$ldap_user = $ldap_server->user_lookup($authname);
-
-	if(empty($account->data['ldap_authentication']['init']['sid'])) 
-	{
-  		// save 'init' data to know the origin of the ldap authentication provisioned account
-		$edit['data']['ldap_authentication']['init'] = array(
-			'sid'  => $sid,
-			'dn'   => $ldap_user['dn'],
-			'mail' => $ldap_user['mail'],
-		);
-		user_save($account, $edit);
-    }
-}
-
-// NOTE:
-// We hard code centaur server here.
-// We need to find a better way to retrieve a ldap server name
-function __get_ldap_server($auth_conf, &$sid, &$ldap_server)
-{
-	$ldap_server_name = "centaur";
-	foreach($auth_conf->enabledAuthenticationServers as $sid => $ldap_server)
-	{
-		if($ldap_server->name == $ldap_server_name)
-		{
-			return $sid;
-		}
-	}
 }
