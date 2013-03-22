@@ -124,8 +124,8 @@ function unimelb_arts_update_7002(&$sandbox) {
 
   // If the formats are already present, exit.
   foreach ($formats as $type => $info) {
-    $exists = db_query('SELECT COUNT(type) FROM {date_format_type} WHERE type = :type', array(':type' => $type))->fetchCol();
-    if ($exists) {
+    $exists = variable_get('date_format_' . $type, NULL);
+    if (!empty($exists)) {
       continue;
     }
 
@@ -144,6 +144,8 @@ function unimelb_arts_update_7002(&$sandbox) {
         'locked' => 0
       ))
       ->execute();
+
+    variable_set('date_format_' . $type, $info['format']);
   }
 }
 
