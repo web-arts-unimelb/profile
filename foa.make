@@ -31,7 +31,7 @@ projects[unimelb][subdir] = custom
 projects[unimelb][download][type] = "git"
 projects[unimelb][download][url] = "https://github.com/web-arts-unimelb/unimelb.git"
 projects[unimelb][download][branch] = "master"
-projects[askunimelb_widgets][download][working-copy] = TRUE
+projects[unimelb][download][working-copy] = TRUE
 
 ;
 ; Libraries used by the FoA install profile.
