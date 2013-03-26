@@ -75,6 +75,11 @@ class arts_views_extras_date_status_field extends views_handler_field {
       $end   = strtotime($dates['value2']);
       $now   = time();
 
+      // If there are no values, we're open right?
+      if (empty($start) || empty($end)) {
+        return t('Open');
+      }
+
       // Add a day to the closing date, so an award closes at midnight at the
       // end of the chosen day, rather than at the start.
       $end += (60 * 60 * 24);
@@ -89,6 +94,6 @@ class arts_views_extras_date_status_field extends views_handler_field {
       }
     }
 
-    return t('');
+    return t('Open');
   }
 }
