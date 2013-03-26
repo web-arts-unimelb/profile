@@ -75,6 +75,10 @@ class arts_views_extras_date_status_field extends views_handler_field {
       $end   = strtotime($dates['value2']);
       $now   = time();
 
+      // Add a day to the closing date, so an award closes at midnight at the
+      // end of the chosen day, rather than at the start.
+      $end += (60 * 60 * 24);
+
       // If there are dates and now is in the correct range, we're open and
       // otherwise closed. If no dates, return empty.
       if ($start <= $now && $now <= $end) {
