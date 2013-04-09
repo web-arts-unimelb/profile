@@ -13,6 +13,26 @@ function unimelb_arts_custom_formatters_defaults() {
   $formatter = new stdClass();
   $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
   $formatter->api_version = 2;
+  $formatter->name = 'styled_conditional_date_time';
+  $formatter->label = 'Styled conditional date time';
+  $formatter->description = '';
+  $formatter->mode = 'php';
+  $formatter->field_types = 'date, datestamp, datetime';
+  $formatter->code = '// Strings in source that needs to be replaced or removed.
+$replace = array(\' - 00:00\' => \'\');
+
+foreach ($variables[\'#items\'] as $item) {
+  $input = drupal_render(field_view_value(\'node\', $variables[\'#object\'], $variables[\'#field\'][\'field_name\'], $item));
+  $output = strtr($input, $replace);
+  print "<strong>". $output. "</strong><br/>";
+}
+';
+  $formatter->fapi = '';
+  $export['styled_conditional_date_time'] = $formatter;
+
+  $formatter = new stdClass();
+  $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
+  $formatter->api_version = 2;
   $formatter->name = 'summary_without_images';
   $formatter->label = 'summary without images';
   $formatter->description = 'Displays the body summary or teaser with images removed.';
