@@ -921,7 +921,7 @@ function unimelb_arts_views_default_views() {
   <div class="soll-event-date-day">[field_event_date]</div>
   <div class="soll-event-date-my">[field_event_date_1] [field_event_date_2]</div>
 </div>
-<strong>[title]</strong>';
+<strong>[title]</strong><br/><br/>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -1916,7 +1916,7 @@ function unimelb_arts_views_default_views() {
   /* Display: News Block */
   $handler = $view->new_display('block', 'News Block', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = '<br/><a href="/news">News</a>';
+  $handler->display->display_options['title'] = '<a href="/news">News</a>';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
