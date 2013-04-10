@@ -921,7 +921,7 @@ function unimelb_arts_views_default_views() {
   <div class="soll-event-date-day">[field_event_date]</div>
   <div class="soll-event-date-my">[field_event_date_1] [field_event_date_2]</div>
 </div>
-<strong>[title]</strong><br/><br/>';
+<strong>[title]</strong><br/>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
