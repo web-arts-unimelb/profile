@@ -68,32 +68,33 @@ class arts_views_extras_date_status_field extends views_handler_field {
     $items = array();
 
     if (!empty($this->options['status_date_field'])) {
-      $dates = $values->{$this->options['status_date_field']}[0]['raw'];
+      if (isset($values->{$this->options['status_date_field']}[0])) {
+        $dates = $values->{$this->options['status_date_field']}[0]['raw'];
 
-      // Convert the dates and check if time() is between them.
-      $start = strtotime($dates['value']);
-      $end   = strtotime($dates['value2']);
-      $now   = time();
+        // Convert the dates and check if time() is between them.
+        $start = strtotime($dates['value']);
+        $end   = strtotime($dates['value2']);
+        $now   = time();
 
-      // If there are no values, we're open right?
-      if (empty($start) || empty($end)) {
-        return t('Open');
-      }
+        // If there are no values, we're open right?
+        if (empty($start) || empty($end)) {
+          return t('Open');
+        }
 
-      // Add a day to the closing date, so an award closes at midnight at the
-      // end of the chosen day, rather than at the start.
-      $end += (60 * 60 * 24);
+        // Add a day to the closing date, so an award closes at midnight at the
+        // end of the chosen day, rather than at the start.
+        $end += (60 * 60 * 24);
 
-      // If there are dates and now is in the correct range, we're open and
-      // otherwise closed. If no dates, return empty.
-      if ($start <= $now && $now <= $end) {
-        return t('Open');
-      }
-      else {
-        return t('Closed');
+        // If there are dates and now is in the correct range, we're open and
+        // otherwise closed. If no dates, return empty.
+        if ($start <= $now && $now <= $end) {
+          return t('Open');
+        }
+        else {
+          return t('Closed');
+        }
       }
     }
-
     return t('Open');
   }
 }
