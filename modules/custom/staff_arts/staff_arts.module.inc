@@ -32,3 +32,13 @@ function _staff_arts_link_field_process($element, $form_state, $complete_form) {
   }
   return $element;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function staff_arts_form_views_form_staff_attachment_1_alter(&$form, $form_state, $form_id) {
+  // Hide the sort order save button on attachment views without results.
+  if (empty($form['output']['#markup'])) {
+    $form['#access'] = FALSE;
+  }
+}
