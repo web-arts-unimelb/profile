@@ -17,13 +17,6 @@ function staff_arts_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: create webform content.
-  $permissions['create webform content'] = array(
-    'name' => 'create webform content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: delete any staff content.
   $permissions['delete any staff content'] = array(
     'name' => 'delete any staff content',

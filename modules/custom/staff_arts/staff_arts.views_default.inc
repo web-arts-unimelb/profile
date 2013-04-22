@@ -109,12 +109,22 @@ function staff_arts_views_default_views() {
     'keywords' => 0,
     'tags' => 0,
   );
+  /* Field: Draggableviews: Content */
+  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
+  $handler->display->display_options['fields']['draggableviews']['table'] = 'node';
+  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
+  $handler->display->display_options['fields']['draggableviews']['label'] = 'Weight';
+  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['draggableviews']['draggableviews']['save_button_label'] = 'Save sort order';
+  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 1;
   /* Field: Content: Unit */
   $handler->display->display_options['fields']['field_staff_unit']['id'] = 'field_staff_unit';
   $handler->display->display_options['fields']['field_staff_unit']['table'] = 'field_data_field_staff_unit';
   $handler->display->display_options['fields']['field_staff_unit']['field'] = 'field_staff_unit';
   $handler->display->display_options['fields']['field_staff_unit']['label'] = '';
   $handler->display->display_options['fields']['field_staff_unit']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_unit']['alter']['text'] = '%1';
   $handler->display->display_options['fields']['field_staff_unit']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_staff_unit']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_staff_unit']['delta_limit'] = '1';
@@ -270,6 +280,12 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'staff' => 'staff',
   );
+  /* Filter criterion: Taxonomy term: Parent term */
+  $handler->display->display_options['filters']['parent']['id'] = 'parent';
+  $handler->display->display_options['filters']['parent']['table'] = 'taxonomy_term_hierarchy';
+  $handler->display->display_options['filters']['parent']['field'] = 'parent';
+  $handler->display->display_options['filters']['parent']['relationship'] = 'term_node_tid';
+  $handler->display->display_options['filters']['parent']['value']['value'] = '0';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -287,33 +303,28 @@ function staff_arts_views_default_views() {
     'keywords' => 0,
     'tags' => 0,
   );
-  /* Relationship: Nodequeue: Queue */
-  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
-  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
-  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
-  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 0;
-  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
-    'slider' => 0,
-    'front_page' => 0,
-    'schools' => 0,
-    'about' => 0,
-    'research' => 0,
-    'office_of_graduate_studies' => 0,
-    'coursework_students' => 0,
-    'staff_list' => 0,
-  );
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Draggableviews: Content */
+  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
+  $handler->display->display_options['fields']['draggableviews']['table'] = 'node';
+  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
+  $handler->display->display_options['fields']['draggableviews']['label'] = 'Weight';
+  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['draggableviews']['draggableviews']['save_button_label'] = 'Save sort order';
+  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 1;
   /* Field: Content: Unit */
   $handler->display->display_options['fields']['field_staff_unit']['id'] = 'field_staff_unit';
   $handler->display->display_options['fields']['field_staff_unit']['table'] = 'field_data_field_staff_unit';
   $handler->display->display_options['fields']['field_staff_unit']['field'] = 'field_staff_unit';
   $handler->display->display_options['fields']['field_staff_unit']['label'] = '';
   $handler->display->display_options['fields']['field_staff_unit']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_unit']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_unit']['alter']['text'] = '%1';
   $handler->display->display_options['fields']['field_staff_unit']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_staff_unit']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_staff_unit']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_staff_unit']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_staff_unit']['delta_reversed'] = TRUE;
   /* Field: Content: Building */
   $handler->display->display_options['fields']['field_staff_building']['id'] = 'field_staff_building';
   $handler->display->display_options['fields']['field_staff_building']['table'] = 'field_data_field_staff_building';
@@ -415,30 +426,17 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['fields']['field_staff_room']['alter']['text'] = '[field_staff_room] [field_staff_building]';
   $handler->display->display_options['fields']['field_staff_room']['type'] = 'text_plain';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Nodequeue: Position */
-  $handler->display->display_options['sorts']['position']['id'] = 'position';
-  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
-  $handler->display->display_options['sorts']['position']['field'] = 'position';
-  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
-  $handler->display->display_options['sorts']['position']['order'] = 'DESC';
   /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['relationship'] = 'term_node_tid';
-  /* Sort criterion: Content: Sticky */
-  $handler->display->display_options['sorts']['sticky']['id'] = 'sticky';
-  $handler->display->display_options['sorts']['sticky']['table'] = 'node';
-  $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
-  $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
-  /* Sort criterion: Content: Family name (field_staff_family_name) */
-  $handler->display->display_options['sorts']['field_staff_family_name_value']['id'] = 'field_staff_family_name_value';
-  $handler->display->display_options['sorts']['field_staff_family_name_value']['table'] = 'field_data_field_staff_family_name';
-  $handler->display->display_options['sorts']['field_staff_family_name_value']['field'] = 'field_staff_family_name_value';
-  /* Sort criterion: Content: Given name (field_staff_given_name) */
-  $handler->display->display_options['sorts']['field_staff_given_name_value']['id'] = 'field_staff_given_name_value';
-  $handler->display->display_options['sorts']['field_staff_given_name_value']['table'] = 'field_data_field_staff_given_name';
-  $handler->display->display_options['sorts']['field_staff_given_name_value']['field'] = 'field_staff_given_name_value';
+  /* Sort criterion: Draggableviews: Weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'draggableviews_structure';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['draggableviews_setting_view'] = 'self';
+  $handler->display->display_options['sorts']['weight_1']['draggableviews_setting_new_items_bottom_list'] = 1;
   $handler->display->display_options['path'] = 'about/staff-list/%';
   $handler->display->display_options['menu']['title'] = 'Staff';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -469,46 +467,18 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['relationships']['parent']['field'] = 'parent';
   $handler->display->display_options['relationships']['parent']['relationship'] = 'term_node_tid';
   $handler->display->display_options['relationships']['parent']['required'] = TRUE;
-  /* Relationship: Nodequeue: Queue */
-  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
-  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
-  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
-  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 0;
-  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
-    'slider' => 0,
-    'front_page' => 0,
-    'schools' => 0,
-    'about' => 0,
-    'research' => 0,
-    'office_of_graduate_studies' => 0,
-    'coursework_students' => 0,
-    'staff_list' => 0,
-  );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Nodequeue: Position */
-  $handler->display->display_options['sorts']['position']['id'] = 'position';
-  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
-  $handler->display->display_options['sorts']['position']['field'] = 'position';
-  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
-  $handler->display->display_options['sorts']['position']['order'] = 'DESC';
   /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['relationship'] = 'term_node_tid';
-  /* Sort criterion: Content: Sticky */
-  $handler->display->display_options['sorts']['sticky']['id'] = 'sticky';
-  $handler->display->display_options['sorts']['sticky']['table'] = 'node';
-  $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
-  $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
-  /* Sort criterion: Content: Family name (field_staff_family_name) */
-  $handler->display->display_options['sorts']['field_staff_family_name_value']['id'] = 'field_staff_family_name_value';
-  $handler->display->display_options['sorts']['field_staff_family_name_value']['table'] = 'field_data_field_staff_family_name';
-  $handler->display->display_options['sorts']['field_staff_family_name_value']['field'] = 'field_staff_family_name_value';
-  /* Sort criterion: Content: Given name (field_staff_given_name) */
-  $handler->display->display_options['sorts']['field_staff_given_name_value']['id'] = 'field_staff_given_name_value';
-  $handler->display->display_options['sorts']['field_staff_given_name_value']['table'] = 'field_data_field_staff_given_name';
-  $handler->display->display_options['sorts']['field_staff_given_name_value']['field'] = 'field_staff_given_name_value';
+  /* Sort criterion: Draggableviews: Weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'draggableviews_structure';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['draggableviews_setting_view'] = 'self';
+  $handler->display->display_options['sorts']['weight_1']['draggableviews_setting_new_items_bottom_list'] = 1;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Taxonomy term: Name */
   $handler->display->display_options['arguments']['name']['id'] = 'name';
@@ -523,6 +493,23 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['arguments']['name']['limit'] = '0';
   $handler->display->display_options['arguments']['name']['path_case'] = 'lower';
   $handler->display->display_options['arguments']['name']['transform_dash'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'staff' => 'staff',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
