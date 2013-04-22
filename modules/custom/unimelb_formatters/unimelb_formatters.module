@@ -45,7 +45,7 @@ function unimelb_formatters_field_formatter_view($obj_type, $object, $field, $in
  */
 function unimelb_formatters_field_formatter_unimelb_html5_phone_link($item) {
   // Early return.
-  if (empty($item)) {
+  if ((empty($item) || empty($item['safe_value'])) {
     return;
   }
 
