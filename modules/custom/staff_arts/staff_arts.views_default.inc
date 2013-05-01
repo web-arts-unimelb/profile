@@ -424,6 +424,7 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['fields']['field_staff_room']['field'] = 'field_staff_room';
   $handler->display->display_options['fields']['field_staff_room']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_staff_room']['alter']['text'] = '[field_staff_room] [field_staff_building]';
+  $handler->display->display_options['fields']['field_staff_room']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_staff_room']['type'] = 'text_plain';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Taxonomy term: Weight */

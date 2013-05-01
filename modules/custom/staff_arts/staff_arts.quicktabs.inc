@@ -67,6 +67,14 @@ function staff_arts_quicktabs_default_quicktabs() {
       'weight' => '-95',
       'type' => 'view',
     ),
+    6 => array(
+      'vid' => 'staff',
+      'display' => 'page',
+      'args' => 'centre-for-advanced-journalism',
+      'title' => 'Centre for Advanced Journalism',
+      'weight' => '-94',
+      'type' => 'view',
+    ),
   );
   $quicktabs->renderer = 'accordion';
   $quicktabs->style = 'nostyle';
@@ -75,6 +83,7 @@ function staff_arts_quicktabs_default_quicktabs() {
     'jquery_ui' => array(
       'autoHeight' => 0,
       'collapsible' => 1,
+      'collapsed' => 0,
     ),
   );
 
@@ -83,6 +92,7 @@ function staff_arts_quicktabs_default_quicktabs() {
   t('Arts Business Centre');
   t('Arts Student Centre');
   t('Associate and Assistant Deans');
+  t('Centre for Advanced Journalism');
   t('Office of Graduate Studies');
   t('Office of the Dean');
   t('School Heads and Managers');
