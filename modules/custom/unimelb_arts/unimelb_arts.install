@@ -107,6 +107,16 @@ function unimelb_arts_update_7001(&$sandbox) {
 }
 
 /**
+ * Implements hook_update_N().
+ *
+ * Empty update to placate sites that had a temporary update and whose schema
+ * version is now 7002.
+ */
+function unimelb_arts_update_7002(&$sandbox) {
+  return t('Returning a string.');
+}
+
+/**
  * Implements hook_uninstall().
  */
 function unimelb_arts_uninstall() {
