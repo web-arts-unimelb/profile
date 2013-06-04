@@ -10,6 +10,7 @@ projects[block_titlelink][subdir] = contrib
 
 projects[jquerymenu][version] = "4.0-alpha3"
 projects[jquerymenu][subdir] = contrib
+projects[jquerymenu][patch][] = "https://raw.github.com/web-arts-unimelb/profile/foa-drush-make/patches/jquerymenu-schema.patch"
 
 projects[jquery_update][version] = "2.3"
 projects[jquery_update][subdir] = contrib
