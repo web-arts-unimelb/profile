@@ -10,6 +10,189 @@
 function staff_arts_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'node-staff-body'.
+  $fields['node-staff-body'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(
+        0 => 'node',
+      ),
+      'field_name' => 'body',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
+      'translatable' => '0',
+      'type' => 'text_with_summary',
+    ),
+    'field_instance' => array(
+      'bundle' => 'staff',
+      'default_value' => array(
+        0 => array(
+          'summary' => array(
+            'format' => 'full_html',
+            'value' => '',
+          ),
+          'value' => '',
+          'format' => 'full_html',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 9,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'body',
+      'label' => 'Body',
+      'required' => 0,
+      'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'filtered_html' => 'filtered_html',
+            'full_html' => 'full_html',
+            'php_code' => 'php_code',
+            'plain_text' => 'plain_text',
+          ),
+          'allowed_formats_toggle' => 1,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'filtered_html' => array(
+                'weight' => '0',
+              ),
+              'full_html' => array(
+                'weight' => '0',
+              ),
+              'php_code' => array(
+                'weight' => '11',
+              ),
+              'plain_text' => array(
+                'weight' => '10',
+              ),
+            ),
+          ),
+        ),
+        'display_summary' => 0,
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '20',
+          'summary_rows' => 5,
+        ),
+        'type' => 'text_textarea_with_summary',
+        'weight' => '5',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-staff-field_shared_tags'.
+  $fields['node-staff-field_shared_tags'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_tags',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'tags',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'staff',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 11,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_tags',
+      'label' => 'Tags',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '14',
+      ),
+    ),
+  );
+
   // Exported field: 'node-staff-field_staff_building'.
   $fields['node-staff-field_staff_building'] = array(
     'field_config' => array(
@@ -100,7 +283,7 @@ function staff_arts_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '8',
+        'weight' => '10',
       ),
     ),
   );
@@ -203,7 +386,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -306,7 +489,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '2',
       ),
     ),
   );
@@ -373,7 +556,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => '4',
+        'weight' => '6',
       ),
     ),
   );
@@ -476,7 +659,7 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '6',
+        'weight' => '8',
       ),
     ),
   );
@@ -579,7 +762,141 @@ function staff_arts_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '5',
+        'weight' => '7',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-staff-field_staff_profile_image'.
+  $fields['node-staff-field_staff_profile_image'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_staff_profile_image',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'image',
+      'settings' => array(
+        'default_image' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'image',
+    ),
+    'field_instance' => array(
+      'bundle' => 'staff',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => '',
+          ),
+          'type' => 'image',
+          'weight' => 12,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_staff_profile_image',
+      'label' => 'Profile image',
+      'required' => 0,
+      'settings' => array(
+        'alt_field' => 0,
+        'default_image' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'png gif jpg jpeg',
+        'max_filesize' => '',
+        'max_resolution' => '',
+        'min_resolution' => '',
+        'title_field' => 0,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'image',
+        'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(
+              'attach' => 0,
+              'clipboard' => 0,
+              'reference' => 0,
+              'remote' => 0,
+            ),
+            'source_attach' => array(
+              'absolute' => '0',
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
+          'insert' => 0,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'auto',
+          'insert_styles' => array(
+            'auto' => 'auto',
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__slider' => 0,
+            'colorbox__square_thumbnail' => 0,
+            'colorbox__thumbnail' => 0,
+            'custom_formatters_unimel_download_large' => 0,
+            'custom_formatters_unimel_download_small' => 0,
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_square_thumbnail' => 0,
+            'image_thumbnail' => 0,
+            'link' => 0,
+            'media_youtube_image' => 0,
+            'media_youtube_video' => 0,
+          ),
+          'insert_width' => '',
+          'preview_image_style' => 'thumbnail',
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'image_image',
+        'weight' => '4',
       ),
     ),
   );
@@ -682,7 +999,7 @@ function staff_arts_field_default_fields() {
           'size' => '8',
         ),
         'type' => 'text_textfield',
-        'weight' => '7',
+        'weight' => '9',
       ),
     ),
   );
@@ -727,7 +1044,7 @@ function staff_arts_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 8,
+          'weight' => '8',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -868,13 +1185,14 @@ function staff_arts_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '9',
+        'weight' => '11',
       ),
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Body');
   t('Building');
   t('Enter the phone number in full <i>+61 3 xxxx xxxx</i> format.');
   t('Enter the room number only, do not prefix it with <i>Room</i>.');
@@ -883,7 +1201,9 @@ function staff_arts_field_default_fields() {
   t('Mail');
   t('Phone');
   t('Position');
+  t('Profile image');
   t('Room');
+  t('Tags');
   t('Title');
   t('Unit');
 

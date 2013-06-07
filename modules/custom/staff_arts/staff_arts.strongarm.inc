@@ -44,7 +44,10 @@ function staff_arts_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '10',
+          'weight' => '12',
+        ),
+        'redirect' => array(
+          'weight' => '13',
         ),
       ),
       'display' => array(),

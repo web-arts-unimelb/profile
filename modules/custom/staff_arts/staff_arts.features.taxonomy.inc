@@ -13,7 +13,7 @@ function staff_arts_taxonomy_default_vocabularies() {
       'name' => 'Units',
       'machine_name' => 'units',
       'description' => 'Business units to help categorise staff.',
-      'hierarchy' => '1',
+      'hierarchy' => '0',
       'module' => 'taxonomy',
       'weight' => '0',
       'rdf_mapping' => array(

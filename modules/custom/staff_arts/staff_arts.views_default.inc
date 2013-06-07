@@ -248,11 +248,6 @@ function staff_arts_views_default_views() {
   $handler->display->display_options['sorts']['field_staff_given_name_value']['id'] = 'field_staff_given_name_value';
   $handler->display->display_options['sorts']['field_staff_given_name_value']['table'] = 'field_data_field_staff_given_name';
   $handler->display->display_options['sorts']['field_staff_given_name_value']['field'] = 'field_staff_given_name_value';
-  /* Sort criterion: Nodequeue: Position */
-  $handler->display->display_options['sorts']['position']['id'] = 'position';
-  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
-  $handler->display->display_options['sorts']['position']['field'] = 'position';
-  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
   /* Contextual filter: Taxonomy term: Name */
   $handler->display->display_options['arguments']['name']['id'] = 'name';
   $handler->display->display_options['arguments']['name']['table'] = 'taxonomy_term_data';
