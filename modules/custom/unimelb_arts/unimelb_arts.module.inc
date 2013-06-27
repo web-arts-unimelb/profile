@@ -393,7 +393,6 @@ function _unimelb_arts_tag_path($node, $langcode) {
       $tree['path'][] = $term->field_tag_path_token[$langcode][0]['safe_value'];
     }
 
-    // Reverse the path, so we have top -> bottom.
     $path = array_reverse($tree['path']);
 
     // A tag path token can contain the same snippet as its parent item, we
