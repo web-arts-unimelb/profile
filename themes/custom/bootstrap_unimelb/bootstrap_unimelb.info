@@ -9,3 +9,4 @@ stylesheets[all][] = scss/bootstrap_unimelb.scss
 stylesheets[all][] = css/bootstrap_unimelb_wysiwyg.css
 
 scripts[] = js/google_tag_manager.js
+scripts[] = js/local.js

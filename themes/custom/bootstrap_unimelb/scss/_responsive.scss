@@ -1,0 +1,48 @@
+/**
+ * Responsive markup for smaller-screen devices such as tablets and phones.
+ */
+
+
+.video-container {
+	position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+} 
+
+/* Youtube width */
+@media screen and (min-width: 640px) {
+	.video-container {
+		padding-bottom: 0;
+		width: 640px;
+    height: 360px;
+	}	
+
+	.video-container iframe,
+	.video-container object,
+	.video-container embed {	
+		width: 640px;
+		height: 360px;
+	}
+
+}
+
+/* Smartphones (portrait and landscape) */
+@media screen and (max-width: 480px) {
+
+}
+
+/* Smartphones (portrait) ----------- */
+@media screen and (max-width : 320px) {
+
+}
+
