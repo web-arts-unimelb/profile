@@ -343,6 +343,93 @@ function uom_ldap_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_profile_profile'.
+  $fields['user-user-field_profile_profile'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_profile_profile',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Add any relevant information that should be displayed on your user profile. Do not include any information that is already provided by <em>Find an Expert</em>.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 13,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_profile_profile',
+      'label' => 'Profile',
+      'required' => 0,
+      'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'complete_full_html' => 0,
+            'filtered_html' => 0,
+            'full_html' => 'full_html',
+            'plain_text' => 0,
+          ),
+          'allowed_formats_toggle' => 1,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'complete_full_html' => array(
+                'weight' => '0',
+              ),
+              'filtered_html' => array(
+                'weight' => '0',
+              ),
+              'full_html' => array(
+                'weight' => '0',
+              ),
+              'plain_text' => array(
+                'weight' => '10',
+              ),
+            ),
+          ),
+        ),
+        'text_processing' => '1',
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '10',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_profile_room'.
   $fields['user-user-field_profile_room'] = array(
     'field_config' => array(
@@ -515,11 +602,13 @@ function uom_ldap_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add any relevant information that should be displayed on your user profile. Do not include any information that is already provided by <em>Find an Expert</em>.');
   t('Display name');
   t('Enter the Find an Expert URL resource URL that provides information for this academic staff member. Leave blank for professional staff.');
   t('FaE Resource');
   t('Phone');
   t('Position');
+  t('Profile');
   t('Room');
   t('Title');
 
