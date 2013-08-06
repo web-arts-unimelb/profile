@@ -1,0 +1,11 @@
+--- a/jquerymenu.install  2013-06-04 11:32:26.902088364 +1000
++++ b/jquerymenu.install 2013-06-04 11:34:47.582093328 +1000
+@@ -29,7 +29,7 @@
+   );
+   return $schema;
+ }
+-function jquerymenu_update_1() {
++function jquerymenu_update_7001() {
+   // This is a one time cleanup to remove blocks and menus that have gotten out of sync.
+   // This update will reset blocks that were created directly by jquery menu
+   // you will need to visit the blocks page after running this to re-enable those blocks.

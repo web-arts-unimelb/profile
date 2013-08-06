@@ -371,7 +371,7 @@ function _unimelb_arts_date_token($node, $format, $langcode) {
 function _unimelb_arts_tag_path($node, $langcode) {
   // Haz tags?
   if (isset($node->field_shared_tags) && !empty($node->field_shared_tags[$langcode])) {
-   $trees = array();
+    $trees = array();
     foreach ($node->field_shared_tags[$langcode] as $item) {
       $trees[$item['tid']]['depth'] = _unimelb_arts_tag_depth($item['tid']);
 
@@ -393,7 +393,18 @@ function _unimelb_arts_tag_path($node, $langcode) {
       $tree['path'][] = $term->field_tag_path_token[$langcode][0]['safe_value'];
     }
 
-    return implode('/', array_reverse($tree['path']));
+    $path = array_reverse($tree['path']);
+
+    // A tag path token can contain the same snippet as its parent item, we
+    // check for that here and remove them, so that path components do not
+    // double up.
+    if (count($path) > 1) {
+      for ($i = 0; $i < count($path) - 1; $i++) {
+        $path[$i + 1] = preg_replace('/^' . preg_quote($path[$i]) . '\//', '', $path[$i + 1]);
+      }
+    }
+
+    return implode('/', $path);
   }
 }
 
