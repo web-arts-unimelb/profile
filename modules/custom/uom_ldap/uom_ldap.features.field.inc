@@ -75,7 +75,7 @@ function uom_ldap_field_default_fields() {
         'title_maxlength' => '128',
         'title_value' => '',
         'url' => 0,
-        'user_register_form' => 0,
+        'user_register_form' => 1,
         'validate_url' => 1,
       ),
       'widget' => array(
@@ -83,7 +83,7 @@ function uom_ldap_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '8',
+        'weight' => '32',
       ),
     ),
   );

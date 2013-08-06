@@ -23,10 +23,9 @@ function uom_ldap_field_group_info() {
     'label' => 'Details',
     'weight' => '3',
     'children' => array(
-      0 => 'group_profile_team',
+      0 => 'group_misc',
       1 => 'group_profile_contact',
-      2 => 'group_misc',
-      3 => 'group_profile_fae',
+      2 => 'group_profile_fae',
     ),
     'format_type' => 'accordion',
     'format_settings' => array(
@@ -84,11 +83,11 @@ function uom_ldap_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'field_profile_display_name',
-      1 => 'field_profile_room',
-      2 => 'field_profile_phone',
-      3 => 'field_profile_position',
+      1 => 'field_profile_phone',
+      2 => 'field_profile_position',
+      3 => 'field_profile_room',
       4 => 'field_profile_title',
-      5 => 'picture',
+      5 => 'field_profile_profile',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(

@@ -51,8 +51,8 @@ function uom_ldap_strongarm() {
       'username' => 'cn',
       'mail' => 'mail',
       'field_profile_display_name' => 'displayname',
-      'field_profile_room' => 'physicaldeliveryofficename',
       'field_profile_phone' => 'telephonenumber',
+      'field_profile_room' => 'physicaldeliveryofficename',
       'field_profile_title' => 'uomtitle',
     ),
     'derivedMapping' => array(

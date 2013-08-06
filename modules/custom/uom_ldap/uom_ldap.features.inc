@@ -13,6 +13,10 @@ function uom_ldap_ctools_plugin_api() {
     return array("version" => "1");
   }
   list($module, $api) = func_get_args();
+  if ($module == "ldap_authorization" && $api == "ldap_authorization") {
+    return array("version" => "1");
+  }
+  list($module, $api) = func_get_args();
   if ($module == "ldap_query" && $api == "ldap_query") {
     return array("version" => "1");
   }
