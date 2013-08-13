@@ -448,8 +448,8 @@ function _unimelb_arts_depth_sort($a, $b) {
  */
 function unimelb_arts_user_edit_access($account) {
   if (in_array('site admin',$account->roles) && !in_array('site admin', $GLOBALS['user']->roles)) {
-    drupal_set_message(t('You do not have permission to edit site admins'), 'error');
-    watchdog('unimelb_arts', '%user tried to edit site admin %account', array('%user' => $GLOBALS['user']->name, '%account' => $account->name), WATCHDOG_INFO);
+    // drupal_set_message(t('You do not have permission to edit site admins'), 'error');
+    // watchdog('unimelb_arts', '%user tried to edit site admin %account', array('%user' => $GLOBALS['user']->name, '%account' => $account->name), WATCHDOG_INFO);
     return FALSE;
   }
   return user_edit_access($account);
