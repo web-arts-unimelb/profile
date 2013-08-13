@@ -18,11 +18,18 @@ projects[jquery_update][subdir] = contrib
 projects[linkimagefield][version] = "1.x-dev"
 projects[linkimagefield][subdir] = contrib
 
+projects[rdfx][version] = "2.0-alpha4"
+projects[rdfx][subdir] = contrib
+
 projects[search_config][version] = "1.0"
 projects[search_config][subdir] = contrib
 
+projects[sparql][version] = "2.0-alpha4"
+projects[sparql][subdir] = contrib
+
 projects[views_accordion][version] = "1.0-rc2"
 projects[views_accordion][subdir] = contrib
+
 
 ;
 ; Custom modules (and features) used by FoA.
@@ -34,6 +41,20 @@ projects[arts_video_gallery][download][url] = "https://github.com/web-arts-unime
 projects[arts_video_gallery][download][branch] = "master"
 projects[arts_video_gallery][directory_name] = "arts_video_gallery"
 projects[arts_video_gallery][download][working-copy] = TRUE
+
+projects[faeprofile][type] = "module"
+projects[faeprofile][subdir] = custom
+projects[faeprofile][download][type] = "git"
+projects[faeprofile][download][url] = "https://github.com/web-arts-unimelb/faeprofile.git"
+projects[faeprofile][download][branch] = "master"
+projects[faeprofile][download][working-copy] = TRUE
+
+projects[uom_fae_api][type] = "module"
+projects[uom_fae_api][subdir] = custom
+projects[uom_fae_api][download][type] = "git"
+projects[uom_fae_api][download][url] = "https://github.com/web-arts-unimelb/uom_fae_api.git"
+projects[uom_fae_api][download][branch] = "master"
+projects[uom_fae_api][download][working-copy] = TRUE
 
 ;
 ; Custom themes used by the FoA install profile.
@@ -48,6 +69,11 @@ projects[unimelb][download][working-copy] = TRUE
 ;
 ; Libraries used by the FoA install profile.
 ;
+libraries[ARC2][download][type] = "get"
+libraries[ARC2][download][url] = "http://github.com/semsol/arc2/tarball/master"
+libraries[ARC2][directory_name] = "ARC2"
+libraries[ARC2][destination] = "libraries"
+
 libraries[jquery.cycle][download][type] = "git"
 libraries[jquery.cycle][download][url] = "https://github.com/malsup/cycle.git"
 libraries[jquery.cycle][download][branch] = "master"
