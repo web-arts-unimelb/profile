@@ -206,7 +206,7 @@ function uom_ldap_field_default_fields() {
       'label' => 'Staff type',
       'required' => 0,
       'settings' => array(
-        'user_register_form' => 0,
+        'user_register_form' => 1,
       ),
       'widget' => array(
         'active' => 1,
