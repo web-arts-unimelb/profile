@@ -86,9 +86,10 @@ function uom_ldap_field_group_info() {
       0 => 'field_profile_display_name',
       1 => 'field_profile_phone',
       2 => 'field_profile_position',
-      3 => 'field_profile_room',
-      4 => 'field_profile_title',
-      5 => 'field_profile_profile',
+      3 => 'field_profile_profile',
+      4 => 'field_profile_room',
+      5 => 'field_profile_title',
+      6 => 'field_profile_images',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
