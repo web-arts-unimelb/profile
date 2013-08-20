@@ -113,7 +113,7 @@ function unimelb_arts_update_7001(&$sandbox) {
  * version is now 7002.
  */
 function unimelb_arts_update_7002(&$sandbox) {
-  return t('Returning a string.');
+  return t('Returning a text string only.');
 }
 
 /**

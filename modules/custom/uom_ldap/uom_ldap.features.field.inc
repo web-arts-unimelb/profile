@@ -10,6 +10,70 @@
 function uom_ldap_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'user-user-field_award_study_area'.
+  $fields['user-user-field_award_study_area'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_award_study_area',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'study_area',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '9',
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_award_study_area',
+      'label' => 'Subject area',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '33',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_fae_resource'.
   $fields['user-user-field_fae_resource'] = array(
     'field_config' => array(
@@ -48,10 +112,9 @@ function uom_ldap_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'link',
           'settings' => array(),
-          'type' => 'link_default',
-          'weight' => 12,
+          'type' => 'hidden',
+          'weight' => '7',
         ),
       ),
       'entity_type' => 'user',
@@ -84,6 +147,70 @@ function uom_ldap_field_default_fields() {
         'settings' => array(),
         'type' => 'link_field',
         'weight' => '32',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_person_type'.
+  $fields['user-user-field_person_type'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_person_type',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'person_type',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '10',
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_person_type',
+      'label' => 'Staff type',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '34',
       ),
     ),
   );
@@ -128,7 +255,7 @@ function uom_ldap_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
       ),
       'entity_type' => 'user',
@@ -173,6 +300,68 @@ function uom_ldap_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_profile_hide'.
+  $fields['user-user-field_profile_hide'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_profile_hide',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'Check this box if this account belongs to an administrator or someone else who should not be included on staff lists.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '1',
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_profile_hide',
+      'label' => 'Do not show on staff lists',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '35',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_profile_phone'.
   $fields['user-user-field_profile_phone'] = array(
     'field_config' => array(
@@ -210,10 +399,9 @@ function uom_ldap_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 2,
+          'type' => 'hidden',
+          'weight' => '5',
         ),
       ),
       'entity_type' => 'user',
@@ -295,10 +483,9 @@ function uom_ldap_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 3,
+          'type' => 'hidden',
+          'weight' => '3',
         ),
       ),
       'entity_type' => 'user',
@@ -378,10 +565,9 @@ function uom_ldap_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 13,
+          'type' => 'hidden',
+          'weight' => '6',
         ),
       ),
       'entity_type' => 'user',
@@ -467,10 +653,9 @@ function uom_ldap_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 1,
+          'type' => 'hidden',
+          'weight' => '4',
         ),
       ),
       'entity_type' => 'user',
@@ -552,10 +737,9 @@ function uom_ldap_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 6,
+          'type' => 'hidden',
+          'weight' => '2',
         ),
       ),
       'entity_type' => 'user',
@@ -603,13 +787,17 @@ function uom_ldap_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Add any relevant information that should be displayed on your user profile. Do not include any information that is already provided by <em>Find an Expert</em>.');
+  t('Check this box if this account belongs to an administrator or someone else who should not be included on staff lists.');
   t('Display name');
+  t('Do not show on staff lists');
   t('Enter the Find an Expert URL resource URL that provides information for this academic staff member. Leave blank for professional staff.');
   t('FaE Resource');
   t('Phone');
   t('Position');
   t('Profile');
   t('Room');
+  t('Staff type');
+  t('Subject area');
   t('Title');
 
   return $fields;
