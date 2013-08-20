@@ -10,6 +10,71 @@
 function uom_ldap_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'user-user-field_award_study_area'.
+  $fields['user-user-field_award_study_area'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_award_study_area',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'study_area',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 14,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_award_study_area',
+      'label' => 'Subject area',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '33',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_fae_resource'.
   $fields['user-user-field_fae_resource'] = array(
     'field_config' => array(
@@ -84,6 +149,71 @@ function uom_ldap_field_default_fields() {
         'settings' => array(),
         'type' => 'link_field',
         'weight' => '32',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_person_type'.
+  $fields['user-user-field_person_type'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_person_type',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'person_type',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 15,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_person_type',
+      'label' => 'Staff type',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '34',
       ),
     ),
   );
@@ -610,6 +740,8 @@ function uom_ldap_field_default_fields() {
   t('Position');
   t('Profile');
   t('Room');
+  t('Staff type');
+  t('Subject area');
   t('Title');
 
   return $fields;
