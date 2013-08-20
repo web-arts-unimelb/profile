@@ -10,8 +10,20 @@
 function unimelb_formatters_field_formatter_info() {
   return array(
     'unimelb_html5_phone_link' => array(
-      'label' => t('HTML5 Phone Link'),
+      'label' => t('HTML5 phone number link'),
       'field types' => array('text'),
+    ),
+    'unimelb_phone' => array(
+      'label' => t('Phone number'),
+      'field types' => array('text'),
+    ),
+    'unimelb_text_list_ul' => array(
+      'label' => t('Unordered text list'),
+      'field types' => array('text', 'text_long', 'text_with_summary'),
+    ),
+    'unimelb_text_list_ol' => array(
+      'label' => t('Ordered text list'),
+      'field types' => array('text', 'text_long', 'text_with_summary'),
     ),
   );
 }
@@ -32,10 +44,97 @@ function unimelb_formatters_field_formatter_view($obj_type, $object, $field, $in
         $element[$delta] = array('#markup' => unimelb_formatters_field_formatter_unimelb_html5_phone_link($item));
       }
       break;
+
+    case 'unimelb_phone':
+      // Common case: each value is displayed individually in a sub-element
+      // keyed by delta. The field.tpl.php template specifies the markup
+      // wrapping each value.
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => unimelb_formatters_field_formatter_unimelb_phone($item));
+      }
+      break;
+
+    case 'unimelb_text_list_ul':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => unimelb_formatters_field_formatter_unimelb_text_list($item, 'ul'));
+      }
+      break;
+
+    case 'unimelb_text_list_ol':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => unimelb_formatters_field_formatter_unimelb_text_list($item, 'ol'));
+      }
+
   }
 
   return $element;
 }
+
+/**
+ * Helper function that formats a phone number accoridng to the
+ * unimelb style guide.
+ */
+function _unimelb_formatters_format_unimelb_phone($item) {
+  // Early return.
+  if (empty($item) || empty($item['safe_value'])) {
+    return $item;
+  }
+
+  // If the number contains an alpha, just return it as-is.
+  if (preg_match('/[^+ 0-9\-]/', $item['value'])) {
+    return $item;
+  }
+
+  // Implode the whole string, remove all but [+0-9].
+  $raw = preg_replace('/[^+0-9]/', '', $item['value']);
+
+  if ($raw{0} == '+') {
+    // Already a prefixed international number.
+    $rev = strrev($raw);
+    $safe = substr($rev, 0, 4) . ' ' . substr($rev, 4, 4) . ' ' . substr($rev, 8, 1) . ' ' . substr($rev, 9);
+  }
+  else if (strlen($raw) == 8) {
+    // 8 digits? Local number.
+    $raw = '+613' . $raw;
+    $rev = strrev($raw);
+    $safe = substr($rev, 0, 4) . ' ' . substr($rev, 4, 4) . ' ' . substr($rev, 8, 1) . ' ' . substr($rev, 9);
+  }
+  else if (strlen($raw) == 10) {
+    // 10 digits? Prefixed national.
+    $raw = '+61' . substr($raw, 1);
+    $rev = strrev($raw);
+
+    // If we're 04 or 05 we're mobile.
+    if (strpos($raw, '+614') === 0 || strpos($raw, '+615') === 0) {
+      $safe = substr($rev, 0, 3) . ' ' . substr($rev, 3, 3) . ' ' . substr($rev, 6, 3) . ' ' . substr($rev, 9);
+    }
+    else {
+      $safe = substr($rev, 0, 4) . ' ' . substr($rev, 4, 4) . ' ' . substr($rev, 8, 1) . ' ' . substr($rev, 9);
+    }
+  }
+  else {
+    // No idea, just return.
+    return $item;
+  }
+
+  // Un-reverse the safe string for display.
+  $item['safe_value'] = check_plain(strrev($safe));
+  $item['value'] = $raw;
+
+  return $item;
+}
+
+/**
+ * Field Formatter; Phone number.
+ *
+ * Contains a little bit of smarts to render full international
+ * numbers if possible.
+ */
+function unimelb_formatters_field_formatter_unimelb_phone($item) {
+  $phone = _unimelb_formatters_format_unimelb_phone($item);
+  return $phone['safe_value'];
+}
+
 
 /**
  * Field Formatter; HTML5 Phone Link.
@@ -45,39 +144,18 @@ function unimelb_formatters_field_formatter_view($obj_type, $object, $field, $in
  */
 function unimelb_formatters_field_formatter_unimelb_html5_phone_link($item) {
   // Early return.
-  if (empty($item)) {
+  if (empty($item) || empty($item['safe_value'])) {
     return;
   }
 
-  // Check for an Australian mobile number.
-  if (strpos($item['safe_value'], '04') === 0) {
-    $phone = substr($item['safe_value'], 1);
-    $phone = strtr($phone, array(' ' => ''));
-    return '<a href="tel:+61'. $phone .'">+61 '. $item['safe_value'] .'</a>';
-  }
-  // Check for a landline number with the Victoria/Tassie prefix.
-  else if (strpos($item['safe_value'], '03') === 0) {
-    $phone = substr($item['safe_value'], 1);
-    $phone = strtr($phone, array(' ' => ''));
-    return '<a href="tel:+61'. $phone .'">+61 '. $item['safe_value'] .'</a>';
-  }
-  // Check for an interstate number.
-  else if (strpos($item['safe_value'], '0') === 0) {
-    $phone = strtr($item['safe_value'], array(' ' => ''));
-    return '<a href="tel:'. $phone .'">+61 '. $item['safe_value'] .'</a>';
-  }
-  // Check for an international number.
-  else if (strpos($item['safe_value'], '+') === 0) {
-    $phone = strtr($item['safe_value'], array(' ' => ''));
-    return '<a href="tel:'. $phone .'">'. $item['safe_value'] .'</a>';
-  }
-  // Assuming unprefixed local. Just add prefix.
-  else if (is_numeric($item['safe_value']{0})) {
-    $phone = strtr($item['safe_value'], array(' ' => ''));
-    return '<a href="tel:+613'. $phone .'">+61 3 '. $item['safe_value'] .'</a>';
-  }
-
-  // Not numeric, just return it and don't link it to anything.
-  return $item['safe_value'];
+  $phone = _unimelb_formatters_format_unimelb_phone($item);
+  return l($phone['safe_value'], 'tel:' . $phone['value']);
 }
 
+/**
+ * Format multi-line text as list items.
+ */
+function unimelb_formatters_field_formatter_unimelb_text_list($item, $list = 'ul') {
+  $list = explode("\n", trim($item['value']));
+  return '<' . $list . '><li>' . implode('</li><li>', $list) .'</li></' . $list . '>';
+}
