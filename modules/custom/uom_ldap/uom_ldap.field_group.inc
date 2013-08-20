@@ -51,10 +51,11 @@ function uom_ldap_field_group_info() {
     'label' => 'Preferences',
     'weight' => '8',
     'children' => array(
-      0 => 'redirect',
-      1 => 'account',
-      2 => 'timezone',
-      3 => 'wysiwyg',
+      0 => 'field_profile_hide',
+      1 => 'redirect',
+      2 => 'account',
+      3 => 'timezone',
+      4 => 'wysiwyg',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(

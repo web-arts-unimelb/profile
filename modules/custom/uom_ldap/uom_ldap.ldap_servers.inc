@@ -22,7 +22,7 @@ function uom_ldap_default_ldap_servers() {
   $ldap_servers_conf->tls = FALSE;
   $ldap_servers_conf->bind_method = TRUE;
   $ldap_servers_conf->binddn = 'cn=100us-WebLDAP,ou=Local Accounts,ou=100,ou=Business Units,dc=unimelb,dc=edu,dc=au';
-  $ldap_servers_conf->bindpw = 'Fursday...';
+  $ldap_servers_conf->bindpw = 'changeme';
   $ldap_servers_conf->basedn = array(
     0 => 'dc=unimelb,dc=edu,dc=au',
   );
