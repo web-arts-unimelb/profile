@@ -49,6 +49,14 @@ projects[faeprofile][download][url] = "https://github.com/web-arts-unimelb/faepr
 projects[faeprofile][download][branch] = "master"
 projects[faeprofile][download][working-copy] = TRUE
 
+; uom_events includes a makefile that fetches the API library it needs.
+projects[uom_events][type] = "module"
+projects[uom_events][subdir] = custom
+projects[uom_events][download][type] = "git"
+projects[uom_events][download][url] = "https://github.com/web-arts-unimelb/uom_events.git"
+projects[uom_events][download][branch] = "master"
+projects[uom_events][download][working-copy] = TRUE
+
 projects[uom_fae_api][type] = "module"
 projects[uom_fae_api][subdir] = custom
 projects[uom_fae_api][download][type] = "git"
@@ -71,7 +79,7 @@ projects[unimelb][download][working-copy] = TRUE
 ;
 libraries[ARC2][download][type] = "get"
 libraries[ARC2][download][url] = "http://github.com/semsol/arc2/tarball/master"
-libraries[ARC2][directory_name] = "ARC2"
+libraries[ARC2][directory_name] = "ARC2/arc"
 libraries[ARC2][destination] = "libraries"
 
 libraries[jquery.cycle][download][type] = "git"
