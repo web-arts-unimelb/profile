@@ -114,7 +114,7 @@ function uom_ldap_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '8',
         ),
       ),
       'entity_type' => 'user',
@@ -362,6 +362,151 @@ function uom_ldap_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_profile_images'.
+  $fields['user-user-field_profile_images'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '4',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_profile_images',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'image',
+      'settings' => array(
+        'default_image' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'image',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'deleted' => '0',
+      'description' => 'To add images in your profile, first upload them here. Then choose a style and click <em>Insert</a>. Images will be resized automatically. To insert a link to the full-size image, choose one of the <em>Colorbox</em> styles.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '7',
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_profile_images',
+      'label' => 'Images',
+      'required' => 0,
+      'settings' => array(
+        'alt_field' => 1,
+        'default_image' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'png gif jpg jpeg',
+        'filefield_paths' => array(
+          'active_updating' => 0,
+          'file_name' => array(
+            'options' => array(
+              'pathauto' => 1,
+              'transliterate' => 0,
+            ),
+            'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+          ),
+          'file_path' => array(
+            'options' => array(
+              'pathauto' => 1,
+              'transliterate' => 0,
+            ),
+            'value' => 'profile/[user:name-raw]',
+          ),
+          'retroactive_update' => 0,
+        ),
+        'filefield_paths_enabled' => 1,
+        'max_filesize' => '',
+        'max_resolution' => '',
+        'min_resolution' => '',
+        'title_field' => 1,
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'image',
+        'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(
+              'attach' => 0,
+              'clipboard' => 0,
+              'reference' => 0,
+              'remote' => 0,
+              'upload' => 'upload',
+            ),
+            'source_attach' => array(
+              'absolute' => '0',
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => 0,
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'colorbox__medium',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 'colorbox__medium',
+            'colorbox__slider' => 0,
+            'colorbox__square_thumbnail' => 0,
+            'colorbox__thumbnail' => 'colorbox__thumbnail',
+            'colorbox__widescreen_preview' => 0,
+            'custom_formatters_unimel_download_large' => 0,
+            'custom_formatters_unimel_download_small' => 0,
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 'image_medium',
+            'image_slider' => 0,
+            'image_square_thumbnail' => 0,
+            'image_thumbnail' => 'image_thumbnail',
+            'image_widescreen_preview' => 0,
+            'link' => 0,
+          ),
+          'insert_width' => '',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+          'preview_image_style' => 'thumbnail',
+          'progress_indicator' => 'bar',
+        ),
+        'type' => 'image_image',
+        'weight' => '7',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_profile_phone'.
   $fields['user-user-field_profile_phone'] = array(
     'field_config' => array(
@@ -577,7 +722,6 @@ function uom_ldap_field_default_fields() {
       'settings' => array(
         'better_formats' => array(
           'allowed_formats' => array(
-            'complete_full_html' => 0,
             'filtered_html' => 0,
             'full_html' => 'full_html',
             'plain_text' => 0,
@@ -586,9 +730,6 @@ function uom_ldap_field_default_fields() {
           'default_order_toggle' => 0,
           'default_order_wrapper' => array(
             'formats' => array(
-              'complete_full_html' => array(
-                'weight' => '0',
-              ),
               'filtered_html' => array(
                 'weight' => '0',
               ),
@@ -608,7 +749,11 @@ function uom_ldap_field_default_fields() {
         'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'rows' => '10',
+          'maxlength_js' => '',
+          'maxlength_js_enforce' => 0,
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+          'maxlength_js_truncate_html' => 0,
+          'rows' => '15',
         ),
         'type' => 'text_textarea',
         'weight' => '6',
@@ -792,6 +937,7 @@ function uom_ldap_field_default_fields() {
   t('Do not show on staff lists');
   t('Enter the Find an Expert URL resource URL that provides information for this academic staff member. Leave blank for professional staff.');
   t('FaE Resource');
+  t('Images');
   t('Phone');
   t('Position');
   t('Profile');
@@ -799,6 +945,7 @@ function uom_ldap_field_default_fields() {
   t('Staff type');
   t('Subject area');
   t('Title');
+  t('To add images in your profile, first upload them here. Then choose a style and click <em>Insert</a>. Images will be resized automatically. To insert a link to the full-size image, choose one of the <em>Colorbox</em> styles.');
 
   return $fields;
 }
