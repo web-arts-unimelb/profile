@@ -5,3 +5,4 @@
  */
 
 include_once 'uom_ldap.features.inc';
+include_once 'uom_ldap.module.inc';
