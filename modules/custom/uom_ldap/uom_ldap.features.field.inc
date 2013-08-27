@@ -929,6 +929,56 @@ function uom_ldap_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_sort_weight'.
+  $fields['user-user-field_sort_weight'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_sort_weight',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '11',
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_sort_weight',
+      'label' => 'Sort weight',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '36',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Add any relevant information that should be displayed on your user profile. Do not include any information that is already provided by <em>Find an Expert</em>.');
@@ -942,6 +992,7 @@ function uom_ldap_field_default_fields() {
   t('Position');
   t('Profile');
   t('Room');
+  t('Sort weight');
   t('Staff type');
   t('Subject area');
   t('Title');
