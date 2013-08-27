@@ -1,0 +1,44 @@
+<?php
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_install().
+ */
+function uom_ldap_install() {
+  _uom_ldap_enable_block();
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function uom_ldap_update_7000(&$sandbox) {
+  _uom_ldap_enable_block();
+}
+
+/**
+ * Helper that enables a views block on the staff page.
+ */
+function _uom_ldap_enable_block() {
+  $block = array(
+    'module' => 'views',
+    'delta' => '-exp-staff-page',
+    'theme' => variable_get('theme_default', 'unimelb'),
+    'status' => 1,
+    'weight' => 0,
+    'region' => 'sidebar_right',
+    'pages' => 'about/staff',
+    'title' => '<none>',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  // Check if the block already exists, just place it in that case.
+  $bid = db_query("SELECT bid FROM {block} WHERE module = 'views' and delta = '-exp-staff-page' AND theme = :theme", array(':theme' => variable_get('theme_default', 'unimelb')))->fetchField();
+  if (empty($bid)) {
+    db_insert('block')->fields(array_keys($block))->values($block)->execute();
+  }
+  else {
+    db_query("UPDATE {block} SET status = 1, region = 'sidebar_right' WHERE bid = :bid", array(':bid' => $bid));
+  }
+}
