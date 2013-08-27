@@ -64,6 +64,13 @@ projects[uom_fae_api][download][url] = "https://github.com/web-arts-unimelb/uom_
 projects[uom_fae_api][download][branch] = "master"
 projects[uom_fae_api][download][working-copy] = TRUE
 
+projects[uom_ldap_authentication][type] = "module"
+projects[uom_ldap_authentication][subdir] = custom
+projects[uom_ldap_authentication][download][type] = "git"
+projects[uom_ldap_authentication][download][url] = "https://github.com/web-arts-unimelb/uom_ldap_authentication.git"
+projects[uom_ldap_authentication][download][branch] = "master"
+projects[uom_ldap_authentication][download][working-copy] = TRUE
+
 ;
 ; Custom themes used by the FoA install profile.
 ;
