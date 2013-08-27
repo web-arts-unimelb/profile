@@ -5,6 +5,9 @@ core = 7.x
 ;
 ; Contrib modules used by the FoA install profile.
 ;
+projects[better_exposed_filters][version] = "3.0-beta3"
+projects[better_exposed_filters][subdir] = contrib
+
 projects[block_titlelink][version] = "1.3"
 projects[block_titlelink][subdir] = contrib
 
