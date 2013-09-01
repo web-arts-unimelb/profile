@@ -10,7 +10,7 @@
 function uom_ldap_taxonomy_default_vocabularies() {
   return array(
     'person_type' => array(
-      'name' => 'person_type',
+      'name' => 'Type of staff',
       'machine_name' => 'person_type',
       'description' => '',
       'hierarchy' => '0',

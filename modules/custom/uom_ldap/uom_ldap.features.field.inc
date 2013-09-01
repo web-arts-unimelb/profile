@@ -319,7 +319,7 @@ function uom_ldap_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => '',
-          1 => '',
+          1 => 'Do not show this user on staff lists',
         ),
         'allowed_values_function' => '',
       ),
@@ -354,7 +354,7 @@ function uom_ldap_field_default_fields() {
         'active' => 1,
         'module' => 'options',
         'settings' => array(
-          'display_label' => 1,
+          'display_label' => 0,
         ),
         'type' => 'options_onoff',
         'weight' => '35',

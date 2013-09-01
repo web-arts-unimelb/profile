@@ -90,6 +90,7 @@ function uom_ldap_field_group_info() {
       3 => 'field_profile_room',
       4 => 'field_profile_title',
       5 => 'field_profile_profile',
+      6 => 'field_profile_images',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
