@@ -38,7 +38,7 @@ function uom_ldap_views_default_views() {
       'allow_secondary' => 0,
       'secondary_label' => 'Advanced options',
     ),
-    'field_award_study_area_tid' => array(
+    'field_person_area_tid' => array(
       'bef_format' => 'bef',
       'more_options' => array(
         'bef_select_all_none' => 0,
@@ -155,17 +155,17 @@ function uom_ldap_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Relationship: Field: Area of study (field_award_study_area) */
-  $handler->display->display_options['relationships']['field_award_study_area_tid']['id'] = 'field_award_study_area_tid';
-  $handler->display->display_options['relationships']['field_award_study_area_tid']['table'] = 'field_data_field_award_study_area';
-  $handler->display->display_options['relationships']['field_award_study_area_tid']['field'] = 'field_award_study_area_tid';
-  $handler->display->display_options['relationships']['field_award_study_area_tid']['label'] = 'Study area';
+  /* Relationship: User: Subject area (field_person_area) */
+  $handler->display->display_options['relationships']['field_person_area_tid']['id'] = 'field_person_area_tid';
+  $handler->display->display_options['relationships']['field_person_area_tid']['table'] = 'field_data_field_person_area';
+  $handler->display->display_options['relationships']['field_person_area_tid']['field'] = 'field_person_area_tid';
+  $handler->display->display_options['relationships']['field_person_area_tid']['label'] = 'Subject area';
   /* Relationship: User: Staff type (field_person_type) */
   $handler->display->display_options['relationships']['field_person_type_tid']['id'] = 'field_person_type_tid';
   $handler->display->display_options['relationships']['field_person_type_tid']['table'] = 'field_data_field_person_type';
   $handler->display->display_options['relationships']['field_person_type_tid']['field'] = 'field_person_type_tid';
   $handler->display->display_options['relationships']['field_person_type_tid']['label'] = 'Staff type';
-  /* Field: Field: Area of study */
+  /* Field: Field: Subject area */
   $handler->display->display_options['fields']['field_award_study_area']['id'] = 'field_award_study_area';
   $handler->display->display_options['fields']['field_award_study_area']['table'] = 'field_data_field_award_study_area';
   $handler->display->display_options['fields']['field_award_study_area']['field'] = 'field_award_study_area';
@@ -263,7 +263,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
   $handler->display->display_options['sorts']['weight_1']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
-  $handler->display->display_options['sorts']['weight_1']['relationship'] = 'field_award_study_area_tid';
+  $handler->display->display_options['sorts']['weight_1']['relationship'] = 'field_person_area_tid';
   $handler->display->display_options['sorts']['weight_1']['expose']['label'] = 'Weight';
   /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -294,7 +294,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['filters']['field_profile_display_name_value']['table'] = 'field_data_field_profile_display_name';
   $handler->display->display_options['filters']['field_profile_display_name_value']['field'] = 'field_profile_display_name_value';
   $handler->display->display_options['filters']['field_profile_display_name_value']['operator'] = 'not empty';
-  /* Filter criterion: Field: Area of study (field_award_study_area) */
+  /* Filter criterion: Field: Subject area (field_award_study_area) */
   $handler->display->display_options['filters']['field_award_study_area_tid']['id'] = 'field_award_study_area_tid';
   $handler->display->display_options['filters']['field_award_study_area_tid']['table'] = 'field_data_field_award_study_area';
   $handler->display->display_options['filters']['field_award_study_area_tid']['field'] = 'field_award_study_area_tid';
@@ -362,7 +362,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
-      'field' => 'field_award_study_area',
+      'field' => 'field_person_area',
       'rendered' => 1,
       'rendered_strip' => 0,
     ),
@@ -371,6 +371,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['style_options']['columns'] = array(
     'field_award_study_area' => 'field_award_study_area',
+    'field_person_area' => 'field_person_area',
     'uid' => 'uid',
     'mail' => 'mail',
     'field_profile_phone' => 'field_profile_phone',
@@ -384,6 +385,11 @@ function uom_ldap_views_default_views() {
     'field_award_study_area' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_person_area' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -439,16 +445,15 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field: Area of study */
-  $handler->display->display_options['fields']['field_award_study_area']['id'] = 'field_award_study_area';
-  $handler->display->display_options['fields']['field_award_study_area']['table'] = 'field_data_field_award_study_area';
-  $handler->display->display_options['fields']['field_award_study_area']['field'] = 'field_award_study_area';
-  $handler->display->display_options['fields']['field_award_study_area']['label'] = '';
-  $handler->display->display_options['fields']['field_award_study_area']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_award_study_area']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_award_study_area']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_award_study_area']['group_rows'] = FALSE;
-  $handler->display->display_options['fields']['field_award_study_area']['delta_offset'] = '0';
+  /* Field: User: Subject area */
+  $handler->display->display_options['fields']['field_person_area']['id'] = 'field_person_area';
+  $handler->display->display_options['fields']['field_person_area']['table'] = 'field_data_field_person_area';
+  $handler->display->display_options['fields']['field_person_area']['field'] = 'field_person_area';
+  $handler->display->display_options['fields']['field_person_area']['label'] = '';
+  $handler->display->display_options['fields']['field_person_area']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_person_area']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_person_area']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_person_area']['delta_offset'] = '0';
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
@@ -533,56 +538,57 @@ function uom_ldap_views_default_views() {
     1 => '1',
   );
   $handler->display->display_options['filters']['field_profile_hide_value']['group'] = 1;
-  /* Filter criterion: Field: Area of study (field_award_study_area) */
-  $handler->display->display_options['filters']['field_award_study_area_tid_1']['id'] = 'field_award_study_area_tid_1';
-  $handler->display->display_options['filters']['field_award_study_area_tid_1']['table'] = 'field_data_field_award_study_area';
-  $handler->display->display_options['filters']['field_award_study_area_tid_1']['field'] = 'field_award_study_area_tid';
-  $handler->display->display_options['filters']['field_award_study_area_tid_1']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_award_study_area_tid_1']['group'] = 1;
-  $handler->display->display_options['filters']['field_award_study_area_tid_1']['type'] = 'select';
-  $handler->display->display_options['filters']['field_award_study_area_tid_1']['vocabulary'] = 'study_area';
   /* Filter criterion: User: Display name (field_profile_display_name) */
   $handler->display->display_options['filters']['field_profile_display_name_value']['id'] = 'field_profile_display_name_value';
   $handler->display->display_options['filters']['field_profile_display_name_value']['table'] = 'field_data_field_profile_display_name';
   $handler->display->display_options['filters']['field_profile_display_name_value']['field'] = 'field_profile_display_name_value';
   $handler->display->display_options['filters']['field_profile_display_name_value']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_profile_display_name_value']['group'] = 1;
-  /* Filter criterion: Field: Area of study (field_award_study_area) */
-  $handler->display->display_options['filters']['field_award_study_area_tid']['id'] = 'field_award_study_area_tid';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['table'] = 'field_data_field_award_study_area';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['field'] = 'field_award_study_area_tid';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['operator'] = 'and';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['value'] = array(
-    5 => '5',
-    6 => '6',
-    7 => '7',
-    8 => '8',
-    9 => '9',
-    10 => '10',
-    11 => '11',
-    12 => '12',
-    13 => '13',
-  );
-  $handler->display->display_options['filters']['field_award_study_area_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_award_study_area_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_award_study_area_tid']['expose']['operator_id'] = 'field_award_study_area_tid_op';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['expose']['label'] = 'Filter by study area';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['expose']['operator'] = 'field_award_study_area_tid_op';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['expose']['identifier'] = 'field_award_study_area_tid';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_award_study_area_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: User: Subject area (field_person_area) */
+  $handler->display->display_options['filters']['field_person_area_tid_1']['id'] = 'field_person_area_tid_1';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['table'] = 'field_data_field_person_area';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['field'] = 'field_person_area_tid';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_person_area_tid_1']['expose']['operator_id'] = 'field_person_area_tid_1_op';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['expose']['label'] = 'Filter by study area';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['expose']['operator'] = 'field_person_area_tid_1_op';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['expose']['identifier'] = 'field_person_area_tid_1';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_person_area_tid_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
     4 => 0,
     5 => 0,
   );
-  $handler->display->display_options['filters']['field_award_study_area_tid']['expose']['reduce'] = TRUE;
-  $handler->display->display_options['filters']['field_award_study_area_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_award_study_area_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['vocabulary'] = 'study_area';
-  $handler->display->display_options['filters']['field_award_study_area_tid']['hierarchy'] = 1;
-  $handler->display->display_options['filters']['field_award_study_area_tid']['error_message'] = FALSE;
+  $handler->display->display_options['filters']['field_person_area_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['vocabulary'] = 'subject_area';
+  $handler->display->display_options['filters']['field_person_area_tid_1']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['field_person_area_tid_1']['error_message'] = FALSE;
+  /* Filter criterion: User: Subject area (field_person_area) */
+  $handler->display->display_options['filters']['field_person_area_tid']['id'] = 'field_person_area_tid';
+  $handler->display->display_options['filters']['field_person_area_tid']['table'] = 'field_data_field_person_area';
+  $handler->display->display_options['filters']['field_person_area_tid']['field'] = 'field_person_area_tid';
+  $handler->display->display_options['filters']['field_person_area_tid']['operator'] = 'and';
+  $handler->display->display_options['filters']['field_person_area_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_person_area_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_person_area_tid']['expose']['operator_id'] = 'field_person_area_tid_op';
+  $handler->display->display_options['filters']['field_person_area_tid']['expose']['label'] = 'Filter by study area';
+  $handler->display->display_options['filters']['field_person_area_tid']['expose']['operator'] = 'field_person_area_tid_op';
+  $handler->display->display_options['filters']['field_person_area_tid']['expose']['identifier'] = 'field_person_area_tid';
+  $handler->display->display_options['filters']['field_person_area_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_person_area_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_person_area_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_person_area_tid']['vocabulary'] = 'subject_area';
+  $handler->display->display_options['filters']['field_person_area_tid']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['field_person_area_tid']['error_message'] = FALSE;
   /* Filter criterion: User: Staff type (field_person_type) */
   $handler->display->display_options['filters']['field_person_type_tid']['id'] = 'field_person_type_tid';
   $handler->display->display_options['filters']['field_person_type_tid']['table'] = 'field_data_field_person_type';
@@ -805,7 +811,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['filters']['field_profile_display_name_value']['field'] = 'field_profile_display_name_value';
   $handler->display->display_options['filters']['field_profile_display_name_value']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_profile_display_name_value']['group'] = 1;
-  /* Filter criterion: Field: Area of study (field_award_study_area) */
+  /* Filter criterion: Field: Subject area (field_award_study_area) */
   $handler->display->display_options['filters']['field_award_study_area_tid']['id'] = 'field_award_study_area_tid';
   $handler->display->display_options['filters']['field_award_study_area_tid']['table'] = 'field_data_field_award_study_area';
   $handler->display->display_options['filters']['field_award_study_area_tid']['field'] = 'field_award_study_area_tid';

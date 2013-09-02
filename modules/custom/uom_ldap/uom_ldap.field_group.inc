@@ -121,6 +121,7 @@ function uom_ldap_field_group_info() {
       0 => 'field_fae_resource',
       1 => 'field_award_study_area',
       2 => 'field_person_type',
+      3 => 'field_person_area',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
