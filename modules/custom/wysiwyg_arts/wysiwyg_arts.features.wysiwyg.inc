@@ -55,7 +55,7 @@ function wysiwyg_arts_wysiwyg_default_profiles() {
       'remove_linebreaks' => 0,
       'apply_source_formatting' => 1,
       'paste_auto_cleanup_on_paste' => 1,
-      'block_formats' => 'p,address,pre,h2,h3,h4,h5,h6,div,blockquote,address,pre,code,dt,dd,img',
+      'block_formats' => 'p,address,pre,h3,h4,h5,h6,div,blockquote,address,pre,code,dt,dd,img',
       'css_setting' => 'self',
       'css_path' => 'profiles/foa/themes/custom/unimelb/css/unimelb_wysiwyg.css',
       'css_classes' => 'Image float left=wysiwyg-left
