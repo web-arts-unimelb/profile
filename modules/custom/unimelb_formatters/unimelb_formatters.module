@@ -156,6 +156,6 @@ function unimelb_formatters_field_formatter_unimelb_html5_phone_link($item) {
  * Format multi-line text as list items.
  */
 function unimelb_formatters_field_formatter_unimelb_text_list($item, $list = 'ul') {
-  $list = explode("\n", trim($item['value']));
-  return '<' . $list . '><li>' . implode('</li><li>', $list) .'</li></' . $list . '>';
+  $items = explode("\n", trim($item['value']));
+  return '<' . $list . '><li>' . implode('</li><li>', $items) .'</li></' . $list . '>';
 }
