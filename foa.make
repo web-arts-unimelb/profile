@@ -11,6 +11,9 @@ projects[better_exposed_filters][subdir] = contrib
 projects[block_titlelink][version] = "1.3"
 projects[block_titlelink][subdir] = contrib
 
+projects[imagecache_external][version] = "2.0-beta1"
+projects[imagecache_external][subdir] = "contrib"
+
 projects[jquerymenu][version] = "4.0-alpha3"
 projects[jquerymenu][subdir] = contrib
 projects[jquerymenu][patch][] = "https://raw.github.com/web-arts-unimelb/profile/foa-drush-make/patches/jquerymenu-schema.patch"
