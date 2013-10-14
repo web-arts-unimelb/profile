@@ -1,0 +1,48 @@
+/* Quick Tabs: "FoA" style. */
+
+/* Override h2 size on the profile tabs. */
+#main-content .pane-quicktabs-staff-profile h2 {
+  font-size: 23px;
+}
+
+.quicktabs-style-foa {
+  border: none;
+  margin-top: 1em;
+}
+
+ul.quicktabs-tabs li {
+  display: inline-block;
+}
+
+ul.quicktabs-tabs.quicktabs-style-foa {
+  border-bottom: 1px solid #758caa;
+  li {
+    border: 1px solid #aaa;
+    border-bottom: 1px solid #758caa;
+    margin: 0 8px -1px 0;
+    padding: 5px 10px 2px;
+    @include gradient(#eeeeee, #e0eaf4);
+
+    a {
+      color: #666;
+      margin-bottom: 0.5em;
+      &:hover {
+        color: $uni-blue;
+      }
+    }
+
+    &.active {
+      @include gradient(#758CAA, #003366);
+      color: white;
+
+      a {
+        background: none;
+        color: white;
+
+        &:hover {
+          color: $uni-blue;
+        }
+      }
+    }
+  }
+}

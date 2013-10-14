@@ -1,0 +1,16 @@
+<?php
+/**
+ * Implements hook_quicktabs_tabstyles().
+ */
+function uom_tabz_quicktabs_tabstyles() {
+  $tabstyles_directory = drupal_get_path('module', 'uom_tabz') . '/tabstyles';
+  $files = file_scan_directory($tabstyles_directory, '/\.css$/');
+  $tabstyles = array();
+  foreach ($files as $file) {
+    // Skip RTL files.
+    if (!strpos($file->name, '-rtl')) {
+      $tabstyles[$file->uri] = drupal_ucfirst($file->name);
+    }
+  }
+  return $tabstyles;
+}

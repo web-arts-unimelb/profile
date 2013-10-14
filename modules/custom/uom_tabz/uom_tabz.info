@@ -1,0 +1,6 @@
+name = Faculty of Arts Tabz
+description = Provides the Faculty of Arts QuickTabs style.
+core = 7.x
+dependencies[] = quicktabs
+
+package = University of Melbourne
