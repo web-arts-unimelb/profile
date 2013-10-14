@@ -80,6 +80,9 @@ class arts_views_extras_date_status_field extends views_handler_field {
       if ($start <= $now && $now <= $end) {
         return t('Open');
       }
+			elseif(empty($start) && empty($end)) {
+				return '';
+			}
       else {
         return t('Closed');
       }

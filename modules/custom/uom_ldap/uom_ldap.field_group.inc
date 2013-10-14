@@ -119,9 +119,9 @@ function uom_ldap_field_group_info() {
     'weight' => '7',
     'children' => array(
       0 => 'field_fae_resource',
-      1 => 'field_award_study_area',
-      2 => 'field_person_type',
-      3 => 'field_person_area',
+      1 => 'field_person_type',
+      2 => 'field_person_area',
+      3 => 'field_person_supervision',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(

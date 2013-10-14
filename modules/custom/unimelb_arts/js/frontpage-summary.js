@@ -8,7 +8,19 @@ Drupal.behaviors.frontpageSummary = {
   attach: function (context, settings) {
 
     var init = $('.field-type-text-with-summary div.text-format-wrapper > fieldset.filter-wrapper input').val();
-    $('.text-summary-wrapper select', $(this).closest('.text-format-wrapper')).val(init);
+
+		// Backup plan
+		if(typeof init === 'undefined') {
+			init = 'full_html';
+		}
+    
+    if(version_compare($().jquery, '1.7.0', '>')) {
+			$(".text-summary-wrapper select > option[value=" + init + "]").prop("selected", true);
+			$(this).closest('.text-format-wrapper').val(init);
+		}
+		else {
+			$('.text-summary-wrapper select', $(this).closest('.text-format-wrapper')).val(init);
+		}
 
     $('.field-type-text-with-summary div.text-format-wrapper > fieldset.filter-wrapper select').change(function() {
        var value = $(this).val();
