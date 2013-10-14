@@ -151,6 +151,69 @@ function uom_ldap_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_person_supervision'.
+  $fields['user-user-field_person_supervision'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_person_supervision',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => 'Available for supervision',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '13',
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_person_supervision',
+      'label' => 'Supervision',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 0,
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ),
+        'type' => 'options_onoff',
+        'weight' => '35',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_person_type'.
   $fields['user-user-field_person_type'] = array(
     'field_config' => array(
@@ -195,7 +258,7 @@ function uom_ldap_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '11',
         ),
       ),
       'entity_type' => 'user',
@@ -210,7 +273,7 @@ function uom_ldap_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '35',
+        'weight' => '34',
       ),
     ),
   );
@@ -955,7 +1018,7 @@ function uom_ldap_field_default_fields() {
           'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '12',
         ),
       ),
       'entity_type' => 'user',
@@ -995,6 +1058,7 @@ function uom_ldap_field_default_fields() {
   t('Sort weight');
   t('Staff type');
   t('Subject area');
+  t('Supervision');
   t('Title');
   t('To add images in your profile, first upload them here. Then choose a style and click <em>Insert</a>. Images will be resized automatically. To insert a link to the full-size image, choose one of the <em>Colorbox</em> styles.');
 
