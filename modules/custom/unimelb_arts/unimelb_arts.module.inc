@@ -469,4 +469,3 @@ function unimelb_arts_webform_select_options_info() {
     ),
   );
 }
-}
