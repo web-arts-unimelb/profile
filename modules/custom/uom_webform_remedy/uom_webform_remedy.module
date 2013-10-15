@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function uom_webform_remedy_menu() {
+  $items['node/%webform_menu/webform/remedy'] = array(
+    'title' => 'BSM Remedy',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('uom_webform_remedy_form', 1),
+    'access callback' => 'node_access',
+    'access arguments' => array('update', 1),
+    'file' => 'uom_webform_remedy.remedy.inc',
+    'weight' => 5,
+    'type' => MENU_LOCAL_TASK,
+  );
+}

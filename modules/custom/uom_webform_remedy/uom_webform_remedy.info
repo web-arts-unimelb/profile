@@ -1,0 +1,5 @@
+name = Webform Remedy
+description = Allow webforms to be submitted to BSM Remedy.
+core = 7.x
+
+dependencies[] = webform
