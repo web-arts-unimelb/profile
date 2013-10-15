@@ -456,3 +456,17 @@ function unimelb_arts_user_edit_access($account) {
   }
   return user_edit_access($account);
 }
+
+/**
+ * Implements hook_webform_select_options_info().
+ */
+function unimelb_arts_webform_select_options_info() {
+  return array(
+    'unimelb_arts_unit_school' => array(
+      'title' => t('Faculty of Arts Units and Schools'),
+      'options callback' => '_unimelb_arts_webform_unit_school',
+      'file' =>  'unimelb_arts.webform.inc',
+    ),
+  );
+}
+}
