@@ -68,25 +68,27 @@ class arts_views_extras_date_status_field extends views_handler_field {
     $items = array();
 
     if (!empty($this->options['status_date_field'])) {
-      $dates = $values->{$this->options['status_date_field']}[0]['raw'];
+			if( isset( $values->{$this->options['status_date_field']}[0] ) ) {
+      	$dates = $values->{$this->options['status_date_field']}[0]['raw'];
 
-      // Convert the dates and check if time() is between them.
-      $start = strtotime($dates['value']);
-      $end   = strtotime($dates['value2']);
-      $now   = time();
+      	// Convert the dates and check if time() is between them.
+      	$start = strtotime($dates['value']);
+      	$end   = strtotime($dates['value2']);
+      	$now   = time();
 
-      // If there are dates and now is in the correct range, we're open and
-      // otherwise closed. If no dates, return empty.
-      if ($start <= $now && $now <= $end) {
-        return t('Open');
-      }
-			elseif(empty($start) && empty($end)) {
-				return '';
-			}
-      else {
-        return t('Closed');
-      }
-    }
+      	// If there are dates and now is in the correct range, we're open and
+      	// otherwise closed. If no dates, return empty.
+      	if ($start <= $now && $now <= $end) {
+        	return t('Open');
+      	}
+				elseif(empty($start) && empty($end)) {
+					return '';
+				}
+      	else {
+        	return t('Closed');
+      	}
+    	}
+		}
 
     return t('');
   }
