@@ -18,3 +18,44 @@ function uom_webform_remedy_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 }
+
+/**
+ * Implements hook_node_insert().
+ */
+function uom_webform_remedy_node_insert($node) {
+  if (!variable_get('webform_node_' . $node->type, FALSE)) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_node_load().
+ *
+ * @see webform_node_load().
+ */
+function uom_webform_remedy_node_load($nodes, $types) {
+  // Quick check to see if we need to do anything at all for these nodes.
+  $webform_types = webform_node_types();
+  if (count(array_intersect($types, $webform_types)) == 0) {
+    return;
+  }
+
+  // Select all webforms that match these node IDs.
+  $result = db_select('uom_webform_remedy')
+    ->fields('remedy', 'remedy_url')
+    ->condition('nid', array_keys($nodes), 'IN')
+    ->execute()
+    ->fetchAllAssoc('nid', PDO::FETCH_ASSOC);
+
+  foreach ($result as $nid => $remedy) {
+    dpm($remedy);
+  }
+
+}
+
+/**
+ * Implements hook_webform_node_defaults_alter().
+ */
+function uom_webform_remedy_webform_node_defaults_alter(&$defaults) {
+  $defaults['remedy'] = array();
+}

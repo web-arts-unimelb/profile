@@ -10,6 +10,10 @@ function uom_webform_remedy_form($form, $form_state, $node) {
   $form['#tree'] = TRUE;
   $form['#node'] = $node;
 
+    dpm($form, '$form');
+    dpm($form_state, '$form_state');
+    dpm($node, '$node');
+
   $form['remedy'] = array(
     '#type' => 'checkbox',
     '#title' => t('Post the contents of this form to BSM Remedy'),

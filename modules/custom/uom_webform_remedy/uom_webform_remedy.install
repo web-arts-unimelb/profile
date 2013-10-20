@@ -1,0 +1,46 @@
+<?php
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function uom_webform_remedy_schema() {
+  $schema = array();
+
+  $schema['uom_webform_remedy'] = array(
+    'description' => 'Table for remedy settings for webforms.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The {node}.nid identifier of a webform.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'remedy' => array(
+        'description' => 'Boolean value of the remedy setting for true (1) or false (0).',
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'remedy_url' => array(
+        'description' => 'The Remedy URL a submission is posted to when submitting a form.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('nid'),
+    'foreign keys' => array(
+      'node' => array(
+        'table' => 'node',
+        'columns' => array('nid' => 'nid'),
+      ),
+    ),
+  );
+  return $schema;
+}
