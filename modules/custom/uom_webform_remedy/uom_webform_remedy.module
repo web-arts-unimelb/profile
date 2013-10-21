@@ -3,6 +3,8 @@
  * @file
  */
 
+define('UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY', '---===---m04r-k1tt3n5---' . str_replace('.','', microtime(TRUE)));
+
 /**
  * Implements hook_menu().
  */
@@ -14,9 +16,10 @@ function uom_webform_remedy_menu() {
     'access callback' => 'node_access',
     'access arguments' => array('update', 1),
     'file' => 'uom_webform_remedy.remedy.inc',
-    'weight' => 5,
+    'weight' => 10,
     'type' => MENU_LOCAL_TASK,
   );
+  return $items;
 }
 
 /**
@@ -26,6 +29,28 @@ function uom_webform_remedy_node_insert($node) {
   if (!variable_get('webform_node_' . $node->type, FALSE)) {
     return;
   }
+
+  $node->webform['remedy']['nid'] = $node->nid;
+  drupal_write_record('uom_webform_remedy', $node->webform['remedy']);
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function uom_webform_remedy_node_update($node) {
+  if (!variable_get('webform_node_' . $node->type, FALSE)) {
+    return;
+  }
+
+  // Check if this node has a webform_remedy record yet. If not, the update
+  // would fail, so call insert() instead.
+  if (!uom_webform_remedy_check_record($node)) {
+    uom_webform_remedy_node_insert($node);
+    return;
+  }
+
+  $node->webform['remedy']['nid'] = $node->nid;
+  drupal_write_record('uom_webform_remedy', $node->webform['remedy'], array('nid'));
 }
 
 /**
@@ -35,27 +60,172 @@ function uom_webform_remedy_node_insert($node) {
  */
 function uom_webform_remedy_node_load($nodes, $types) {
   // Quick check to see if we need to do anything at all for these nodes.
-  $webform_types = webform_node_types();
-  if (count(array_intersect($types, $webform_types)) == 0) {
+  // Sadly it seems that webform_node_types() cannot be called here.
+  foreach ($types as $type) {
+    if (variable_get('webform_node_' . $type, FALSE)) {
+      break;
+    }
     return;
   }
 
-  // Select all webforms that match these node IDs.
+  // Select all webform remedy data for these node IDs.
   $result = db_select('uom_webform_remedy')
-    ->fields('remedy', 'remedy_url')
+    ->fields('uom_webform_remedy')
     ->condition('nid', array_keys($nodes), 'IN')
     ->execute()
     ->fetchAllAssoc('nid', PDO::FETCH_ASSOC);
 
   foreach ($result as $nid => $remedy) {
-    dpm($remedy);
+    unset($remedy['nid']);
+    $nodes[$nid]->webform['remedy'] = $remedy;
   }
-
 }
 
 /**
  * Implements hook_webform_node_defaults_alter().
  */
 function uom_webform_remedy_webform_node_defaults_alter(&$defaults) {
-  $defaults['remedy'] = array();
+  $defaults['remedy'] = array('remedy' => 0, 'remedy_url' => '', 'remedy_method' => 'POST');
+}
+
+/**
+ * Check if a webform_remedy record exists...
+ */
+function uom_webform_remedy_check_record($node) {
+  return db_select('uom_webform_remedy')
+    ->fields('uom_webform_remedy', array('nid'))
+    ->condition('nid', $node->nid)
+    ->execute()
+    ->fetchCol();
+}
+
+/**
+ * Implements hook_webform_submission_insert().
+ */
+function uom_webform_remedy_webform_submission_insert($node, $submission) {
+  if (!empty($node->webform['remedy']['remedy'])) {
+    $data = array();
+    // Check if we need to post any file data.
+    foreach ($node->webform['components'] as $cid => $component) {
+      if (!empty($submission->data[$cid])) {
+        if ($component['type'] == 'file' && !empty($submission->data[$cid])) {
+          $data['files'] = array($component['form_key'] => file_load($submission->data[$cid][0]));
+        }
+        else if (count($submission->data[$cid]) == 1) {
+          $data[$component['form_key']] = $submission->data[$cid][0];
+        }
+        else {
+          foreach ($submission->data[$cid] as $delta) {
+            $data[$component['form_key']][] = $submission->data[$cid][$delta];
+          }
+        }
+      }
+    }
+
+    // Create an options array for the HTTP request.
+    $options = array(
+      'method' => $node->webform['remedy']['remedy_method'],
+      'data' => $data,
+    );
+
+    // Mess with the options, in case of file attachment. Taken mostly from
+    // the httprl module.
+    uom_webform_remedy_handle_data($options);
+
+    $response = drupal_http_request($node->webform['remedy']['remedy_url'], $options);
+
+    if ($response->code == 200) {
+      watchdog('uom_webform_remedy', 'Posted @sid to @url<br />@response', array('@sid' => $submission->sid, '@url' => $node->webform['remedy']['remedy_url'], '@response' => print_r($response, TRUE)), WATCHDOG_ERROR, l('node/'. $node->nid, 'node/' . $node->nid));
+      drupal_set_message(t('Your request was successfully submitted to BSM Remedy.'));
+    }
+    else {
+      watchdog('uom_webform_remedy', 'A HTTP @code error occurred posting submission @sid to @url<br />@response', array('@code' => $response->code, '@sid' => $submission->sid, '@url' => $node->webform['remedy']['remedy_url'], '@response' => print_r($response, TRUE)), WATCHDOG_ERROR, l('node/'. $node->nid, 'node/' . $node->nid));
+      drupal_set_message(t('An error occurred when submitting the form: %error.<br />Your form submission was saved and an error has been logged.', array('%error' => $response->code . ': ' . $response->error)), 'error');
+    }
+  }
+}
+
+/**
+ * Process the form data in case there is an attached file.
+ *
+ * @see http://drupalcode.org/project/httprl.git/blob_plain/refs/heads/7.x-1.x:/httprl.module
+ */
+function uom_webform_remedy_handle_data(&$options) {
+  if (!empty($options['data']) && !is_string($options['data'])) {
+    // Record raw data before it gets processed.
+    $options['data-input'] = $options['data'];
+
+    // No files passed in, url-encode the data.
+    if (empty($options['data']['files']) || !is_array($options['data']['files'])) {
+      $options['data'] = drupal_http_build_query($options['data']);
+
+      // Set the Content-Type to application/x-www-form-urlencoded if the data
+      // is not empty, the Content-Type is not set, and the method is POST or
+      // PUT.
+      if (!empty($options['data']) && !isset($options['headers']['Content-Type']) && ($options['method'] == 'POST' || $options['method'] == 'PUT')) {
+        $options['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
+      }
+    }
+    else {
+      $data_stream = '';
+      // Add files to the request.
+      foreach ($options['data']['files'] as $field_name => $file) {
+        $fullpath = file_create_url($file->uri);
+        // Strip '@' from the start of the path (cURL requirement).
+        if (substr($fullpath, 0, 1) == "@") {
+          $fullpath = substr($fullpath, 1);
+        }
+
+        // Build the datastream for this file.
+        $data_stream .= '--' . UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY . "\r\n";
+        $data_stream .= 'Content-Disposition: form-data; name="files[' . $field_name . ']"; filename="' . $file->filename .  "\"\r\n";
+        $data_stream .= 'Content-Transfer-Encoding: binary' . "\r\n";
+        $data_stream .= 'Content-Type: application/octet-stream' . "\r\n\r\n";
+        $data_stream .= file_get_contents($fullpath) . "\r\n";
+      }
+    }
+    // Remove files from the data array as they have already been added.
+    $data_array = $options['data'];
+    unset($data_array['files']);
+
+    // Add fields to the request too: $_POST['foo'] = 'bar'.
+    _uom_webform_remedy_multipart_encoder($data_stream, $data_array);
+
+    // Signal end of request (note the trailing "--").
+    $data_stream .= '--' . UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY . "--\r\n";
+    $options['data'] = $data_stream;
+
+    // Set the Content-Type to multipart/form-data if the data is not empty,
+    // the Content-Type is not set, and the method is POST or PUT.
+    if (!empty($options['data']) && !isset($options['headers']['Content-Type']) && ($options['method'] == 'POST' || $options['method'] == 'PUT')) {
+      $options['headers']['Content-Type'] = 'multipart/form-data; boundary=' . UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY;
+    }
+  }
+
+  // Add a Content-Length header if needed.
+  if (strlen($options['data']) > 0 || $options['method'] == 'POST' || $options['method'] == 'PUT') {
+    $options['headers']['Content-Length'] = drupal_strlen($options['data']);
+  }
+}
+
+/**
+ * Provide a multipart encoder to submit the form with file data.
+ */
+function _uom_webform_remedy_multipart_encoder(&$data_stream, $data_array, $prepend = array()) {
+  foreach ($data_array as $key => $value) {
+    $key_array = $prepend;
+    $key_array[] = $key;
+    if (is_array($value)) {
+      _uom_webform_remedy_multipart_encoder($data_stream, $value, $key_array);
+    }
+    elseif (is_scalar($value)) {
+      $key_string = array_shift($key_array);
+      if (!empty($key_array)) {
+        $key_string .= '[' . implode('][', $key_array) . ']';
+      }
+      $data_stream .= '--' . UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY . "\r\n";
+      $data_stream .= 'Content-Disposition: form-data; name="' . $key_string . "\"\r\n\r\n";
+      $data_stream .= $value . "\r\n";
+    }
+  }
 }

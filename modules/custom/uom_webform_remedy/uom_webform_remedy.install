@@ -33,6 +33,13 @@ function uom_webform_remedy_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'remedy_method' => array(
+        'description' => 'The HTTP request method for this {uom_webform_remedy}.remedy_url.',
+        'type' => 'varchar',
+        'length' => 4,
+        'not null' => TRUE,
+        'default' => 'POST',
+      ),
     ),
     'primary key' => array('nid'),
     'foreign keys' => array(
@@ -43,4 +50,18 @@ function uom_webform_remedy_schema() {
     ),
   );
   return $schema;
+}
+
+/**
+ * Add the request method field.
+ */
+function uom_webform_remedy_update_7001(&$sandbox) {
+  $field = array(
+    'type'=> 'varchar',
+    'length' => 4,
+    'not null' => TRUE,
+    'default' => 'POST',
+    'description' => 'The HTTP request method for this {uom_webform_remedy}.remedy_url.',
+  );
+  db_add_field('uom_webform_remedy', 'remedy_method', $field);
 }
