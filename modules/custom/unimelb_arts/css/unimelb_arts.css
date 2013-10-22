@@ -2,3 +2,23 @@
 .html #admin-menu {
   font-size: 1em;
 }
+
+/* Mess with webform inline label alignments. */
+.webform-container-inline.foa-webform-inline-label label {
+  display: inline-block;
+  width: 150px;
+}
+
+.webform-container-inline.foa-webform-inline-label div.description {
+  margin-left: 168px;
+}
+
+div.foa-webform-inline-label {
+	/* We don't need to dots any more */
+  /* border-bottom: 1px dotted #264e82; */
+}
+
+form.webform-client-form .form-actions {
+  /*margin-left: 168px;*/
+  margin-top: 2em;
+}
