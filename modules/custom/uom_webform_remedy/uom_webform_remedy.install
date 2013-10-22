@@ -26,8 +26,22 @@ function uom_webform_remedy_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'remedy_group' => array(
+        'description' => 'The Remedy group a submission should be assigned to.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
       'remedy_url' => array(
         'description' => 'The Remedy URL a submission is posted to when submitting a form.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'remedy_return_url' => array(
+        'description' => 'The BSM Remedy form that the processor should read its response from.',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
@@ -64,4 +78,27 @@ function uom_webform_remedy_update_7001(&$sandbox) {
     'description' => 'The HTTP request method for this {uom_webform_remedy}.remedy_url.',
   );
   db_add_field('uom_webform_remedy', 'remedy_method', $field);
+}
+
+/**
+ * Add group and return_url fields.
+ */
+function uom_webform_remedy_update_7002(&$sandbox) {
+  $group = array(
+    'description' => 'The Remedy group a submission should be assigned to.',
+    'type' => 'varchar',
+    'length' => 32,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('uom_webform_remedy', 'remedy_group', $group);
+
+  $return_url = array(
+    'description' => 'The BSM Remedy form that the processor should read its response from.',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('uom_webform_remedy', 'remedy_return_url', $return_url);
 }
