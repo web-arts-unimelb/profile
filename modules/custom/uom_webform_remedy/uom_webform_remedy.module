@@ -3,7 +3,7 @@
  * @file
  */
 
-define('UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY', '---===---m04r-k1tt3n5---' . str_replace('.','', microtime(TRUE)));
+define('UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY', '-----m04r-k1tt3n5-' . str_replace('.','', microtime(TRUE)));
 
 /**
  * Implements hook_menu().
