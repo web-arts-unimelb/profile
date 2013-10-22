@@ -178,7 +178,7 @@ function uom_webform_remedy_handle_data(&$options) {
       $data_stream = '';
       // Add files to the request.
       foreach ($options['data']['files'] as $field_name => $file) {
-        $fullpath = file_create_url($file->uri);
+        $fullpath = drupal_realpath($file->uri);
         // Strip '@' from the start of the path (cURL requirement).
         if (substr($fullpath, 0, 1) == "@") {
           $fullpath = substr($fullpath, 1);
