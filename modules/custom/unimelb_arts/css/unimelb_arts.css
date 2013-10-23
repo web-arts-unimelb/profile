@@ -23,7 +23,50 @@ form.webform-client-form .form-actions {
   margin-top: 2em;
 }
 
-/* New project remedy form */
+/* Start new project remedy form */
 form#webform-client-form-1919 div.form-actions {
 	margin-left:0;
 }
+
+table.service_table {
+
+}
+
+table.service_table td {
+	width: 144px;
+}
+
+table.service_table p.yes {
+	color: #008000;
+  text-align: center;
+}
+
+table.service_table p.no {
+  color: #FF0000;
+  text-align: center;
+}
+
+table.service_table p.the_text {
+  text-align: center;
+}
+
+table.service_table td.highlight {
+  background-color: #DADADA;
+}
+
+table.service_table tr.services {
+	background-color: #DADADA;
+}
+
+table.service_table span.highest {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+table.service_table span.lowest {
+    color: #808080;
+    float: right;
+    font-weight: bold;
+    margin-right: 5px;
+}
+/* End new project remedy form */
