@@ -140,8 +140,8 @@ function uom_webform_remedy_webform_submission_insert($node, $submission) {
     // Perform the request to BSM Remedy and parse the response.
     $response = drupal_http_request($node->webform['remedy']['remedy_url'], $options);
 
-    // Munge the '<div id="content">' innerHTML out of the response and show it to the user?
 
+    // Munge the '<div id="content">' innerHTML out of the response and show it to the user?
     if ($response->code == 200) {
       watchdog('uom_webform_remedy', 'Posted @sid to @url<br />@response', array('@sid' => $submission->sid, '@url' => $node->webform['remedy']['remedy_url'], '@response' => print_r($response, TRUE)), WATCHDOG_ERROR, l('node/'. $node->nid, 'node/' . $node->nid));
       drupal_set_message(t('Your request was successfully submitted to BSM Remedy.'));
@@ -177,6 +177,7 @@ function uom_webform_remedy_handle_data(&$options) {
     else {
       $data_stream = '';
       // Add files to the request.
+			// NOTE: remedy form can only accept 1 file upload since.....
       foreach ($options['data']['files'] as $field_name => $file) {
         $fullpath = drupal_realpath($file->uri);
         // Strip '@' from the start of the path (cURL requirement).
@@ -186,13 +187,16 @@ function uom_webform_remedy_handle_data(&$options) {
 
         // Build the datastream for this file.
         $data_stream .= '--' . UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY . "\r\n";
-        $data_stream .= 'Content-Disposition: form-data; name="files[' . $field_name . ']"; filename="' . $file->filename .  "\"\r\n";
+        $data_stream .= 'Content-Disposition: form-data; name="'. $field_name. '"; filename="'. $file->filename.  "\"\r\n";
         $data_stream .= 'Content-Transfer-Encoding: binary' . "\r\n";
         $data_stream .= 'Content-Type: application/octet-stream' . "\r\n\r\n";
         $data_stream .= file_get_contents($fullpath) . "\r\n";
-      }
-      // Remove files from the data array as they have already been added.
 
+				// 1 file only 
+				break;
+      }
+
+      // Remove files from the data array as they have already been added.
       $data_array = $options['data'];
       if (is_array($data_array) && !empty($data_array['files'])) {
         unset($data_array['files']);
@@ -209,7 +213,7 @@ function uom_webform_remedy_handle_data(&$options) {
     // Set the Content-Type to multipart/form-data if the data is not empty,
     // the Content-Type is not set, and the method is POST or PUT.
     if (!empty($options['data']) && !isset($options['headers']['Content-Type']) && ($options['method'] == 'POST' || $options['method'] == 'PUT')) {
-      $options['headers']['Content-Type'] = 'multipart/form-data; boundary=' . UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY;
+		$options['headers']['Content-Type'] = 'multipart/form-data; boundary=' . UOM_WEBFORM_REMEDY_MULTIPART_BOUNDARY;
     }
   }
 
