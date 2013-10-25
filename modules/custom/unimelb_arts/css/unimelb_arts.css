@@ -19,13 +19,13 @@ div.foa-webform-inline-label {
 }
 
 form.webform-client-form .form-actions {
-  margin-left: 168px;
+  /*margin-left: 168px;*/
   margin-top: 2em;
 }
 
 /* Start new project remedy form */
-form#webform-client-form-1919 div.form-actions {
-	margin-left:0;
+form#webform-client-form-1918 div.form-actions {
+	margin-left: 168px;
 }
 
 table.service_table {
