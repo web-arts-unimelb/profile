@@ -117,9 +117,8 @@ function unimelb_arts_form_alter(&$form, $form_state, $form_id) {
 function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
   $form['body'][$form['language']['#value']][0]['summary']['#title'] = t('Front page summary');
   $form['body'][$form['language']['#value']][0]['summary']['#description'] = t('The front page summary is displayed only on the front page. You can leave it blank for any @node that does not display on the front page.', array('@node' => $form['type']['#value']));
-  $form['body'][$form['language']['#value']][0]['summary']['#attached']['js'][0] = drupal_get_path('module', 'unimelb_arts') . '/js/version_compare.js';
-  $form['body'][$form['language']['#value']][1]['summary']['#attached']['js'][0] = drupal_get_path('module', 'unimelb_arts') . '/js/frontpage-summary.js';
-	
+	$form['body'][$form['language']['#value']][0]['summary']['#attached']['js'][0] = drupal_get_path('module', 'unimelb_arts') . '/js/version_compare.js';
+  $form['body'][$form['language']['#value']][0]['summary']['#attached']['js'][0] = drupal_get_path('module', 'unimelb_arts') . '/js/frontpage-summary.js';
 
   // Hide these WYSIWYG buttons on the summary field.
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_images { display: none; }', 'inline');
@@ -373,7 +372,7 @@ function _unimelb_arts_date_token($node, $format, $langcode) {
 function _unimelb_arts_tag_path($node, $langcode) {
   // Haz tags?
   if (isset($node->field_shared_tags) && !empty($node->field_shared_tags[$langcode])) {
-    $trees = array();
+   $trees = array();
     foreach ($node->field_shared_tags[$langcode] as $item) {
       $trees[$item['tid']]['depth'] = _unimelb_arts_tag_depth($item['tid']);
 
@@ -395,18 +394,7 @@ function _unimelb_arts_tag_path($node, $langcode) {
       $tree['path'][] = $term->field_tag_path_token[$langcode][0]['safe_value'];
     }
 
-    $path = array_reverse($tree['path']);
-
-    // A tag path token can contain the same snippet as its parent item, we
-    // check for that here and remove them, so that path components do not
-    // double up.
-    if (count($path) > 1) {
-      for ($i = 0; $i < count($path) - 1; $i++) {
-        $path[$i + 1] = preg_replace('/^' . preg_quote($path[$i]) . '\//', '', $path[$i + 1]);
-      }
-    }
-
-    return implode('/', $path);
+    return implode('/', array_reverse($tree['path']));
   }
 }
 
@@ -450,8 +438,8 @@ function _unimelb_arts_depth_sort($a, $b) {
  */
 function unimelb_arts_user_edit_access($account) {
   if (in_array('site admin',$account->roles) && !in_array('site admin', $GLOBALS['user']->roles)) {
-    // drupal_set_message(t('You do not have permission to edit site admins'), 'error');
-    // watchdog('unimelb_arts', '%user tried to edit site admin %account', array('%user' => $GLOBALS['user']->name, '%account' => $account->name), WATCHDOG_INFO);
+    drupal_set_message(t('You do not have permission to edit site admins'), 'error');
+    watchdog('unimelb_arts', '%user tried to edit site admin %account', array('%user' => $GLOBALS['user']->name, '%account' => $account->name), WATCHDOG_INFO);
     return FALSE;
   }
   return user_edit_access($account);
