@@ -117,8 +117,8 @@ function unimelb_arts_form_alter(&$form, $form_state, $form_id) {
 function unimelb_arts_form_node_form_alter(&$form, &$form_state, $form_id) {
   $form['body'][$form['language']['#value']][0]['summary']['#title'] = t('Front page summary');
   $form['body'][$form['language']['#value']][0]['summary']['#description'] = t('The front page summary is displayed only on the front page. You can leave it blank for any @node that does not display on the front page.', array('@node' => $form['type']['#value']));
-	$form['body'][$form['language']['#value']][0]['summary']['#attached']['js'][0] = drupal_get_path('module', 'unimelb_arts') . '/js/version_compare.js';
-  $form['body'][$form['language']['#value']][0]['summary']['#attached']['js'][0] = drupal_get_path('module', 'unimelb_arts') . '/js/frontpage-summary.js';
+	$form['body'][$form['language']['#value']][0]['summary']['#attached']['js'][] = drupal_get_path('module', 'unimelb_arts') . '/js/version_compare.js';
+  $form['body'][$form['language']['#value']][0]['summary']['#attached']['js'][] = drupal_get_path('module', 'unimelb_arts') . '/js/frontpage-summary.js';
 
   // Hide these WYSIWYG buttons on the summary field.
   drupal_add_css('#edit-body-' . $form['language']['#value'] .'-0-summary-value_wysiwyg_fields_field_shared_images { display: none; }', 'inline');
