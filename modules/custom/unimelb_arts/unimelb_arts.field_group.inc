@@ -31,7 +31,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Insert Media',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => '',
+        'classes' => ' group-shared-media field-group-fieldset',
         'description' => 'Use these fields to upload images and files that you want to be displayed on this event. To insert an image or attachment, click in the text editor above, then click the <em>Insert</em> button for the image or attachment you want to insert.',
       ),
       'formatter' => 'collapsed',
@@ -60,7 +60,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Insert Media',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => '',
+        'classes' => ' group-shared-media field-group-fieldset',
         'description' => 'Use these fields to upload images and files that you want to be displayed on this news. To insert an image or attachment, click in the text editor above, then click the <em>Insert</em> button for the image or attachment you want to insert.',
       ),
       'formatter' => 'collapsed',
@@ -89,7 +89,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Insert Media',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => '',
+        'classes' => ' group-shared-media field-group-fieldset',
         'description' => 'Use these fields to upload images and files that you want to be displayed on this page. To insert an image or attachment, click in the text editor above, then click the <em>Insert</em> button for the image or attachment you want to insert.',
       ),
       'formatter' => 'collapsed',
@@ -117,7 +117,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Meta Tags',
       'instance_settings' => array(
         'required_fields' => 0,
-        'classes' => '',
+        'classes' => ' group-shared-metadata field-group-tab',
         'description' => '',
       ),
       'formatter' => 'open',
@@ -145,7 +145,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Meta Tags',
       'instance_settings' => array(
         'required_fields' => 0,
-        'classes' => '',
+        'classes' => ' group-shared-metadata field-group-tab',
         'description' => '',
       ),
       'formatter' => 'open',
@@ -173,7 +173,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Meta Tags',
       'instance_settings' => array(
         'required_fields' => 0,
-        'classes' => '',
+        'classes' => ' group-shared-metadata field-group-tab',
         'description' => '',
       ),
       'formatter' => 'open',
@@ -201,7 +201,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Structure',
       'instance_settings' => array(
         'required_fields' => 0,
-        'classes' => '',
+        'classes' => ' group-shared-structure field-group-tab',
         'description' => '',
       ),
       'formatter' => 'closed',
@@ -229,7 +229,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Structure',
       'instance_settings' => array(
         'required_fields' => 0,
-        'classes' => '',
+        'classes' => ' group-shared-structure field-group-tab',
         'description' => '',
       ),
       'formatter' => 'closed',
@@ -257,7 +257,7 @@ function unimelb_arts_field_group_info() {
       'label' => 'Structure',
       'instance_settings' => array(
         'required_fields' => 0,
-        'classes' => '',
+        'classes' => ' group-shared-structure field-group-tab',
         'description' => '',
       ),
       'formatter' => 'closed',

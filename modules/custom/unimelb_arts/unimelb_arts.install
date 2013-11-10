@@ -39,6 +39,10 @@ function unimelb_arts_install() {
 
   // @todo
   // Give editor, admin and site admin correct access to the tags vocabulary.
+
+  // How lazy is this‽
+  $foo = NULL;
+  unimelb_arts_update_7002($foo);
 }
 
 /**
@@ -109,11 +113,40 @@ function unimelb_arts_update_7001(&$sandbox) {
 /**
  * Implements hook_update_N().
  *
- * Empty update to placate sites that had a temporary update and whose schema
- * version is now 7002.
+ * Add date formats needed by the events views.
  */
 function unimelb_arts_update_7002(&$sandbox) {
-  return t('Returning a text string only.');
+  $formats = array(
+    'day' => array('title' => 'Day', 'format' => 'j'),
+    'mon' => array('title' => 'Mon', 'format' => 'M'),
+    'yr' => array('title' => 'Yr', 'format' => 'Y'),
+  );
+
+  // If the formats are already present, exit.
+  foreach ($formats as $type => $info) {
+    $exists = variable_get('date_format_' . $type, NULL);
+    if (!empty($exists)) {
+      continue;
+    }
+
+    db_insert('date_format_type')
+      ->fields(array(
+        'type' => $type,
+        'title' => $info['title'],
+        'locked' => 0
+      ))
+      ->execute();
+
+    db_insert('date_formats')
+      ->fields(array(
+        'format' => $info['format'],
+        'type' => 'custom',
+        'locked' => 0
+      ))
+      ->execute();
+
+    variable_set('date_format_' . $type, $info['format']);
+  }
 }
 
 /**

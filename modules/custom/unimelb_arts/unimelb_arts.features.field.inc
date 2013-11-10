@@ -20,6 +20,9 @@ function unimelb_arts_field_default_fields() {
         0 => 'node',
       ),
       'field_name' => 'body',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -28,6 +31,7 @@ function unimelb_arts_field_default_fields() {
           'table' => 'filter_format',
         ),
       ),
+      'global_block_settings' => '1',
       'indexes' => array(
         'format' => array(
           0 => 'format',
@@ -53,6 +57,15 @@ function unimelb_arts_field_default_fields() {
           'settings' => array(),
           'type' => 'text_default',
           'weight' => '1',
+        ),
+        'event_list' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(
+            'trim_length' => '300',
+          ),
+          'type' => 'text_summary_or_trimmed',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -152,7 +165,14 @@ function unimelb_arts_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'inline',
+          'label' => 'hidden',
+          'module' => 'custom_formatters',
+          'settings' => array(),
+          'type' => 'custom_formatters_styled_conditional_date_time',
+          'weight' => '0',
+        ),
+        'event_list' => array(
+          'label' => 'hidden',
           'module' => 'date',
           'settings' => array(
             'format_type' => 'long',
@@ -162,10 +182,10 @@ function unimelb_arts_field_default_fields() {
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => '0',
+          'weight' => '2',
         ),
         'teaser' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'date',
           'settings' => array(
             'format_type' => 'long',
@@ -247,6 +267,12 @@ function unimelb_arts_field_default_fields() {
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '4',
+        ),
+        'event_list' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '10',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -385,13 +411,19 @@ function unimelb_arts_field_default_fields() {
           'type' => 'hidden',
           'weight' => '3',
         ),
-        'teaser' => array(
+        'event_list' => array(
           'label' => 'hidden',
           'module' => 'image',
           'settings' => array(
             'image_link' => 'content',
             'image_style' => 'thumbnail',
           ),
+          'type' => 'image',
+          'weight' => '0',
+        ),
+        'teaser' => array(
+          'label' => 'hidden',
+          'settings' => array(),
           'type' => 'hidden',
           'weight' => '1',
         ),
@@ -532,13 +564,19 @@ function unimelb_arts_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '6',
+        ),
+        'event_list' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '12',
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '0',
         ),
       ),
       'entity_type' => 'node',
@@ -619,11 +657,17 @@ function unimelb_arts_field_default_fields() {
           'type' => 'hidden',
           'weight' => '2',
         ),
+        'event_list' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '9',
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '0',
         ),
       ),
       'entity_type' => 'node',
@@ -655,6 +699,130 @@ function unimelb_arts_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-event-field_shared_video'.
+  $fields['node-event-field_shared_video'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_video',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'event',
+      'deleted' => '0',
+      'description' => 'Add a new video by clicking <em>Select media</em> and choosing the <em>Web</em> tab. Paste in the YouTube embed code.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '5',
+        ),
+        'event_list' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '11',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '0',
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_video',
+      'label' => 'Video',
+      'required' => 0,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'mpg mov avi mp4 mp3 ogg ogv flv',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'media',
+        'settings' => array(
+          'allowed_schemes' => array(
+            'private' => 0,
+            'public' => 0,
+            'youtube' => 'youtube',
+          ),
+          'allowed_types' => array(
+            'audio' => 0,
+            'default' => 0,
+            'image' => 0,
+            'video' => 'video',
+          ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'media_youtube_video',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__slider' => 0,
+            'colorbox__square_thumbnail' => 0,
+            'colorbox__thumbnail' => 0,
+            'custom_formatters_unimel_download_large' => 0,
+            'custom_formatters_unimel_download_small' => 0,
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_square_thumbnail' => 0,
+            'image_thumbnail' => 0,
+            'link' => 0,
+            'media_youtube_image' => 'media_youtube_image',
+            'media_youtube_video' => 'media_youtube_video',
+          ),
+          'insert_width' => '',
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'media_generic',
+        'weight' => '7',
+      ),
+    ),
+  );
+
   // Exported field: 'node-news-body'.
   $fields['node-news-body'] = array(
     'field_config' => array(
@@ -665,6 +833,9 @@ function unimelb_arts_field_default_fields() {
         0 => 'node',
       ),
       'field_name' => 'body',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -673,6 +844,7 @@ function unimelb_arts_field_default_fields() {
           'table' => 'filter_format',
         ),
       ),
+      'global_block_settings' => '1',
       'indexes' => array(
         'format' => array(
           0 => 'format',
@@ -1220,6 +1392,9 @@ function unimelb_arts_field_default_fields() {
         0 => 'node',
       ),
       'field_name' => 'body',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -1228,6 +1403,7 @@ function unimelb_arts_field_default_fields() {
           'table' => 'filter_format',
         ),
       ),
+      'global_block_settings' => '1',
       'indexes' => array(
         'format' => array(
           0 => 'format',
@@ -1449,7 +1625,7 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '4',
+        'weight' => '8',
       ),
     ),
   );
@@ -1593,7 +1769,7 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '3',
+        'weight' => '7',
       ),
     ),
   );
@@ -1642,7 +1818,7 @@ function unimelb_arts_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '5',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1765,6 +1941,124 @@ function unimelb_arts_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-page-field_shared_video'.
+  $fields['node-page-field_shared_video'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_shared_video',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'page',
+      'deleted' => '0',
+      'description' => 'Add a new video by clicking <em>Select media</em> and choosing the <em>Web</em> tab. Paste in the YouTube embed code.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '4',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_shared_video',
+      'label' => 'Video',
+      'required' => 0,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'mpg mov avi mp4 mp3 ogg ogv flv',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'media',
+        'settings' => array(
+          'allowed_schemes' => array(
+            'private' => 0,
+            'public' => 0,
+            'youtube' => 'youtube',
+          ),
+          'allowed_types' => array(
+            'audio' => 0,
+            'default' => 0,
+            'image' => 0,
+            'video' => 'video',
+          ),
+          'insert' => 1,
+          'insert_absolute' => 0,
+          'insert_class' => '',
+          'insert_default' => 'media_youtube_video',
+          'insert_styles' => array(
+            'auto' => 0,
+            'colorbox__frontpage_2up' => 0,
+            'colorbox__frontpage_3up' => 0,
+            'colorbox__frontpage_4up' => 0,
+            'colorbox__frontpage_6up' => 0,
+            'colorbox__frontpage_8up' => 0,
+            'colorbox__large' => 0,
+            'colorbox__medium' => 0,
+            'colorbox__slider' => 0,
+            'colorbox__square_thumbnail' => 0,
+            'colorbox__thumbnail' => 0,
+            'custom_formatters_unimel_download_large' => 0,
+            'custom_formatters_unimel_download_small' => 0,
+            'icon_link' => 0,
+            'image' => 0,
+            'image_frontpage_2up' => 0,
+            'image_frontpage_3up' => 0,
+            'image_frontpage_4up' => 0,
+            'image_frontpage_6up' => 0,
+            'image_frontpage_8up' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_slider' => 0,
+            'image_square_thumbnail' => 0,
+            'image_thumbnail' => 0,
+            'link' => 0,
+            'media_youtube_image' => 'media_youtube_image',
+            'media_youtube_video' => 'media_youtube_video',
+          ),
+          'insert_width' => '',
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'media_generic',
+        'weight' => '9',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-tags-field_tag_path_token'.
   $fields['taxonomy_term-tags-field_tag_path_token'] = array(
     'field_config' => array(
@@ -1864,6 +2158,7 @@ function unimelb_arts_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add a new video by clicking <em>Select media</em> and choosing the <em>Web</em> tab. Paste in the YouTube embed code.');
   t('Attachments');
   t('Body');
   t('Date');
@@ -1880,6 +2175,7 @@ function unimelb_arts_field_default_fields() {
   t('The first image listed here will be used as front page image if this news is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.');
   t('The first image listed here will be used as front page image if this page is added to the front page. You can rearrange attached images by dragging them up and down in the list using the crossed arrows icon to the left of each thumbnail.');
   t('Upload and attach all files that should be displayed on this page.');
+  t('Video');
 
   return $fields;
 }
