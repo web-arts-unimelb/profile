@@ -358,7 +358,7 @@ system/ajax/*';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'date_format_yr';
-  $strongarm->value = 'Y';
+  $strongarm->value = 'y';
   $export['date_format_yr'] = $strongarm;
 
   $strongarm = new stdClass();

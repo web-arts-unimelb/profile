@@ -58,15 +58,6 @@ function unimelb_arts_field_default_fields() {
           'type' => 'text_default',
           'weight' => '1',
         ),
-        'event_list' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(
-            'trim_length' => '300',
-          ),
-          'type' => 'text_summary_or_trimmed',
-          'weight' => '3',
-        ),
         'teaser' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -165,14 +156,7 @@ function unimelb_arts_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
-          'module' => 'custom_formatters',
-          'settings' => array(),
-          'type' => 'custom_formatters_styled_conditional_date_time',
-          'weight' => '0',
-        ),
-        'event_list' => array(
-          'label' => 'hidden',
+          'label' => 'inline',
           'module' => 'date',
           'settings' => array(
             'format_type' => 'long',
@@ -182,10 +166,10 @@ function unimelb_arts_field_default_fields() {
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => '2',
+          'weight' => '0',
         ),
         'teaser' => array(
-          'label' => 'hidden',
+          'label' => 'above',
           'module' => 'date',
           'settings' => array(
             'format_type' => 'long',
@@ -267,12 +251,6 @@ function unimelb_arts_field_default_fields() {
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '4',
-        ),
-        'event_list' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '10',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -411,19 +389,13 @@ function unimelb_arts_field_default_fields() {
           'type' => 'hidden',
           'weight' => '3',
         ),
-        'event_list' => array(
+        'teaser' => array(
           'label' => 'hidden',
           'module' => 'image',
           'settings' => array(
             'image_link' => 'content',
             'image_style' => 'thumbnail',
           ),
-          'type' => 'image',
-          'weight' => '0',
-        ),
-        'teaser' => array(
-          'label' => 'hidden',
-          'settings' => array(),
           'type' => 'hidden',
           'weight' => '1',
         ),
@@ -564,19 +536,13 @@ function unimelb_arts_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
-        ),
-        'event_list' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '5',
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -657,17 +623,11 @@ function unimelb_arts_field_default_fields() {
           'type' => 'hidden',
           'weight' => '2',
         ),
-        'event_list' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
-        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -1625,7 +1585,7 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '8',
+        'weight' => '4',
       ),
     ),
   );
@@ -1769,7 +1729,7 @@ function unimelb_arts_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '7',
+        'weight' => '3',
       ),
     ),
   );
@@ -1818,7 +1778,7 @@ function unimelb_arts_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '4',
         ),
         'teaser' => array(
           'label' => 'above',
