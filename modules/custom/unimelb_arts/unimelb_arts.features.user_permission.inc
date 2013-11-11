@@ -24,8 +24,9 @@ function unimelb_arts_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      0 => 'anonymous user',
-      1 => 'authenticated user',
+      0 => 'admin',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -54,7 +55,8 @@ function unimelb_arts_user_default_permissions() {
   $permissions['administer nodequeue'] = array(
     'name' => 'administer nodequeue',
     'roles' => array(
-      0 => 'site admin',
+      0 => 'admin',
+      1 => 'site admin',
     ),
     'module' => 'nodequeue',
   );
@@ -255,7 +257,8 @@ function unimelb_arts_user_default_permissions() {
   $permissions['manipulate all queues'] = array(
     'name' => 'manipulate all queues',
     'roles' => array(
-      0 => 'site admin',
+      0 => 'admin',
+      1 => 'site admin',
     ),
     'module' => 'nodequeue',
   );

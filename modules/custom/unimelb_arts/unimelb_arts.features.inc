@@ -55,6 +55,7 @@ function unimelb_arts_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'frontpage_2up',
   );
 
   // Exported image style: frontpage_3up.
@@ -77,6 +78,7 @@ function unimelb_arts_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'frontpage_3up',
   );
 
   // Exported image style: frontpage_4up.
@@ -99,6 +101,7 @@ function unimelb_arts_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'frontpage_4up',
   );
 
   // Exported image style: frontpage_6up.
@@ -121,6 +124,7 @@ function unimelb_arts_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'frontpage_6up',
   );
 
   // Exported image style: frontpage_8up.
@@ -143,6 +147,7 @@ function unimelb_arts_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'frontpage_8up',
   );
 
   return $styles;
