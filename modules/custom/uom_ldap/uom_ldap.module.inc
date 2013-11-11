@@ -4,6 +4,18 @@
  */
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function uom_ldap_form_user_profile_form_alter(&$form, &$form_state) {
+  // Require 'administer users' access to see the Find an Expert and Preferences
+  // tab groups.
+  // @see https://drupal.org/node/1324860
+  if (!user_access('administer users') && module_exists('field_group')) {
+    field_group_hide_field_groups($form, array('group_profile_fae', 'group_misc'));
+  }
+}
+
+/**
  * Implements hook_views_query_alter().
  */
 function uom_ldap_views_query_alter(&$view, &$query) {
