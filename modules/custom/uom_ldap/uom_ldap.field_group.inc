@@ -31,7 +31,7 @@ function uom_ldap_field_group_info() {
     'format_settings' => array(
       'label' => 'Details',
       'instance_settings' => array(
-        'classes' => '',
+        'classes' => ' group-details field-group-accordion',
         'effect' => 'bounceslide',
       ),
     ),
@@ -63,7 +63,7 @@ function uom_ldap_field_group_info() {
       'label' => 'Preferences',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => '',
+        'classes' => ' group-misc field-group-accordion-item',
         'description' => '',
       ),
       'formatter' => 'closed',
@@ -97,7 +97,7 @@ function uom_ldap_field_group_info() {
       'label' => 'Contact details',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => '',
+        'classes' => ' group-profile-contact field-group-accordion-item',
         'description' => '',
       ),
       'formatter' => 'open',
@@ -128,7 +128,7 @@ function uom_ldap_field_group_info() {
       'label' => 'Find an Expert',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => '',
+        'classes' => ' group-profile-fae field-group-accordion-item',
         'description' => 'Only fill out information for academic staff that need Find an Expert data displayed on their user profile.',
       ),
       'formatter' => 'closed',

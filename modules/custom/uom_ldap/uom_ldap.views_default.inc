@@ -497,6 +497,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['fields']['field_person_area']['label'] = '';
   $handler->display->display_options['fields']['field_person_area']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_person_area']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_person_area']['empty'] = 'Professional';
   $handler->display->display_options['fields']['field_person_area']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_person_area']['group_rows'] = FALSE;
   $handler->display->display_options['fields']['field_person_area']['delta_offset'] = '0';
@@ -660,6 +661,7 @@ function uom_ldap_views_default_views() {
   );
   $handler->display->display_options['filters']['field_person_supervision_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_person_supervision_value']['expose']['operator_id'] = 'field_person_supervision_value_op';
+  $handler->display->display_options['filters']['field_person_supervision_value']['expose']['label'] = 'Filter by supervision';
   $handler->display->display_options['filters']['field_person_supervision_value']['expose']['operator'] = 'field_person_supervision_value_op';
   $handler->display->display_options['filters']['field_person_supervision_value']['expose']['identifier'] = 'field_person_supervision_value';
   $handler->display->display_options['filters']['field_person_supervision_value']['expose']['multiple'] = TRUE;
