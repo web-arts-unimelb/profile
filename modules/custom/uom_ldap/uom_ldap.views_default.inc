@@ -243,7 +243,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Contact info';
   $handler->display->display_options['fields']['nothing']['label'] = 'Contact';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<strong>Email:</strong> [mail]<br />
-  [field_profile_phone]';
+    [field_profile_phone]';
   $handler->display->display_options['fields']['nothing']['element_class'] = 'staff-contact';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
@@ -355,7 +355,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['filters']['field_person_type_tid']['vocabulary'] = 'person_type';
   $handler->display->display_options['filters']['field_person_type_tid']['hierarchy'] = 1;
   $handler->display->display_options['filters']['field_person_type_tid']['error_message'] = FALSE;
-  
+
   /* Display: Academic staff */
   $handler = $view->new_display('page', 'Academic staff', 'academic');
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
@@ -498,14 +498,24 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Staff type */
+  $handler->display->display_options['fields']['field_person_type']['id'] = 'field_person_type';
+  $handler->display->display_options['fields']['field_person_type']['table'] = 'field_data_field_person_type';
+  $handler->display->display_options['fields']['field_person_type']['field'] = 'field_person_type';
+  $handler->display->display_options['fields']['field_person_type']['label'] = '';
+  $handler->display->display_options['fields']['field_person_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_person_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_person_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_person_type']['delta_offset'] = '0';
   /* Field: User: Subject area */
   $handler->display->display_options['fields']['field_person_area']['id'] = 'field_person_area';
   $handler->display->display_options['fields']['field_person_area']['table'] = 'field_data_field_person_area';
   $handler->display->display_options['fields']['field_person_area']['field'] = 'field_person_area';
   $handler->display->display_options['fields']['field_person_area']['label'] = '';
   $handler->display->display_options['fields']['field_person_area']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_person_area']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_person_area']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_person_area']['empty'] = 'Professional';
+  $handler->display->display_options['fields']['field_person_area']['empty'] = '[field_person_type] ';
   $handler->display->display_options['fields']['field_person_area']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_person_area']['group_rows'] = FALSE;
   $handler->display->display_options['fields']['field_person_area']['delta_offset'] = '0';
@@ -568,7 +578,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Contact info';
   $handler->display->display_options['fields']['nothing']['label'] = 'Contact';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<strong>Email:</strong> [mail]<br />
-  [field_profile_phone]';
+    [field_profile_phone]';
   $handler->display->display_options['fields']['nothing']['element_class'] = 'staff-contact';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
@@ -613,15 +623,10 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['filters']['field_person_area_tid']['table'] = 'field_data_field_person_area';
   $handler->display->display_options['filters']['field_person_area_tid']['field'] = 'field_person_area_tid';
   $handler->display->display_options['filters']['field_person_area_tid']['value'] = array(
-    28 => '28',
-    19 => '19',
-    20 => '20',
-    21 => '21',
-    22 => '22',
-    23 => '23',
-    24 => '24',
-    25 => '25',
-    26 => '26',
+    18 => '18',
+    16 => '16',
+    15 => '15',
+    17 => '17',
   );
   $handler->display->display_options['filters']['field_person_area_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_person_area_tid']['exposed'] = TRUE;
@@ -646,10 +651,10 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['filters']['field_person_type_tid']['table'] = 'field_data_field_person_type';
   $handler->display->display_options['filters']['field_person_type_tid']['field'] = 'field_person_type_tid';
   $handler->display->display_options['filters']['field_person_type_tid']['value'] = array(
-    27 => '27',
-    15 => '15',
-    14 => '14',
-    16 => '16',
+    19 => '19',
+    13 => '13',
+    11 => '11',
+    12 => '12',
   );
   $handler->display->display_options['filters']['field_person_type_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_person_type_tid']['exposed'] = TRUE;
@@ -698,7 +703,7 @@ function uom_ldap_views_default_views() {
     3 => array(),
   );
   $handler->display->display_options['path'] = 'about/staff';
-  
+
   /* Display: Professional staff */
   $handler = $view->new_display('attachment', 'Professional staff', 'professional');
   $handler->display->display_options['defaults']['title'] = FALSE;
@@ -850,7 +855,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Contact info';
   $handler->display->display_options['fields']['nothing']['label'] = 'Contact';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<strong>Email:</strong> [mail]<br />
-  [field_profile_phone]';
+    [field_profile_phone]';
   $handler->display->display_options['fields']['nothing']['element_class'] = 'staff-contact';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
@@ -888,9 +893,12 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['filters']['field_person_type_tid_1']['id'] = 'field_person_type_tid_1';
   $handler->display->display_options['filters']['field_person_type_tid_1']['table'] = 'field_data_field_person_type';
   $handler->display->display_options['filters']['field_person_type_tid_1']['field'] = 'field_person_type_tid';
-  $handler->display->display_options['filters']['field_person_type_tid_1']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_person_type_tid_1']['value'] = '';
+  $handler->display->display_options['filters']['field_person_type_tid_1']['operator'] = 'and';
+  $handler->display->display_options['filters']['field_person_type_tid_1']['value'] = array(
+    12 => '12',
+  );
   $handler->display->display_options['filters']['field_person_type_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_person_type_tid_1']['type'] = 'select';
   $handler->display->display_options['filters']['field_person_type_tid_1']['vocabulary'] = 'person_type';
   /* Filter criterion: User: Display name (field_profile_display_name) */
   $handler->display->display_options['filters']['field_profile_display_name_value']['id'] = 'field_profile_display_name_value';
@@ -926,8 +934,8 @@ function uom_ldap_views_default_views() {
     'block_1' => 0,
   );
   $handler->display->display_options['attachment_position'] = 'after';
-  $handler->display->display_options['inherit_exposed_filters'] = TRUE;
-  
+  $handler->display->display_options['inherit_arguments'] = FALSE;
+
   /* Display: Profile Gallery */
   $handler = $view->new_display('block', 'Profile Gallery', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
@@ -941,7 +949,7 @@ function uom_ldap_views_default_views() {
   $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: User: Gallery */
+  /* Field: User: Images */
   $handler->display->display_options['fields']['field_profile_images']['id'] = 'field_profile_images';
   $handler->display->display_options['fields']['field_profile_images']['table'] = 'field_data_field_profile_images';
   $handler->display->display_options['fields']['field_profile_images']['field'] = 'field_profile_images';
