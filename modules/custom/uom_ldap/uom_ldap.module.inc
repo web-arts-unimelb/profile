@@ -45,14 +45,18 @@ function uom_ldap_views_post_execute(&$view) {
     }
 
     // Main page display, only ever list academic staff.
+		// NOTE: $view->current_display as 'academic' or 'profesional' or both
     if ($view->current_display == 'academic') {
+			//test 
+      //watchdog("current_display_academic", '<pre>'. print_r($view->exposed_raw_input, true). "</pre>");
 
       // Did we want to only see professionals? Hide the academic view.
-      if (!empty($view->exposed_raw_input['field_person_type_tid'][$tid])) {
-        $view->result = array();
+      if ($view->exposed_raw_input['field_person_type_tid'] == $tid) {
+				// We need to return early and let the default view to handle filtering.
         return;
       }
 
+			// It is save to remove all professional staff
       foreach ($view->result as $i => $result) {
         $wrapper = entity_metadata_wrapper('user', $result->_field_data['uid']['entity']);
         // Remove all professionals.
@@ -65,16 +69,18 @@ function uom_ldap_views_post_execute(&$view) {
           $area = $wrapper->field_person_area->value();
         }
         // Remove everyone who has neither a subject area nor a staff type.
-        if (empty($result->_field_data['uid']['entity']->field_person_type) && empty($result->_field_data['uid']['entity']->field_person_area)) {
+        if (empty($result->_field_data['uid']['entity']->field_person_type) && empty($result->_field_data['uid']['entity']->field_person_area)) 			 {
           unset($view->result[$i]);
           continue;
         }
 
         // Always remove professionals from the academic view.
-        if ($result->field_data_field_person_type_field_person_type_tid == $tid) {
-          unset($view->result[$i]);
-          continue;
-        }
+				if(isset($result->field_data_field_person_type_field_person_type_tid)) {
+        	if ($result->field_data_field_person_type_field_person_type_tid == $tid) {
+          	unset($view->result[$i]);
+          	continue;
+       		}
+				}
       }
 
       if (!empty($view->exposed_raw_input['field_person_area_tid'])) {
@@ -85,7 +91,7 @@ function uom_ldap_views_post_execute(&$view) {
             continue;
           }
           // And remove professional from this display as well. They have an attachment.
-          if (in_array($result->field_data_field_person_area_field_person_area_tid, $tid)) {
+          if ($result->field_data_field_person_area_field_person_area_tid == $tid) {
             unset($view->result[$i]);
             continue;
           }
@@ -105,6 +111,10 @@ function uom_ldap_views_post_execute(&$view) {
 
     // Nothing at all if anything is selected that isn't "Professional".
     if ($view->current_display == 'professional') {
+
+			//test
+			//watchdog("current_display_prof", '<pre>'. print_r($view->exposed_raw_input, true). "</pre>");
+
       if ((!empty($view->exposed_raw_input['field_person_area_tid']) || !empty($view->exposed_raw_input['field_person_supervision_value']) || 
       (!empty($view->exposed_raw_input['field_person_type_tid']) && $view->exposed_raw_input['field_person_type_tid'] != 'All' && $view->exposed_raw_input['field_person_type_tid'] != $tid))) {
         $view->result = array();
