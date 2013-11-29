@@ -32,6 +32,7 @@ function uom_ldap_views_query_alter(&$view, &$query) {
   }
 }
 
+
 /**
  * Implements hook_views_post_execute().
  */
@@ -52,6 +53,14 @@ function uom_ldap_views_post_execute(&$view) {
 
       // Did we want to only see professionals? Hide the academic view.
       if ($view->exposed_raw_input['field_person_type_tid'] == $tid) {
+				if( empty($view->exposed_raw_input['field_person_area_tid']) && 
+						empty($view->exposed_raw_input['field_person_supervision_value'])
+				) {
+					// Professional filter is selected, hide the filter result from academic view, but show
+        	// the result from attachment.
+					unset($view->result);
+				}
+
 				// We need to return early and let the default view to handle filtering.
         return;
       }
