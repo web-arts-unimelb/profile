@@ -65,6 +65,10 @@ function uom_ldap_views_post_execute(&$view) {
 					unset($view->field['draggableviews']); // Remove save button
 				}
 
+				if(!empty($view->exposed_raw_input['field_person_area_tid']) || !empty($view->exposed_raw_input['field_person_supervision_value'])) {
+					unset($view->field['draggableviews']); // Remove save button
+				}
+
 				// We need to return early and let the default view to handle filtering.
         return;
       }
@@ -133,6 +137,12 @@ function uom_ldap_views_post_execute(&$view) {
         $view->result = array();
       }
     }
+
+		// If no view result for academic view and professional view, hide save button
+		//watchdog("current_display_prof", '<pre>'. print_r($view->result, true). "</pre>");
+		if(is_array($view->result) && count($view->result) == 0) {
+			unset($view->field['draggableviews']); // Remove save button
+		}
   }
 }
 
