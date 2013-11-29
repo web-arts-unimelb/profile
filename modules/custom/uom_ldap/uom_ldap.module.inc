@@ -39,6 +39,9 @@ function uom_ldap_views_query_alter(&$view, &$query) {
 function uom_ldap_views_post_execute(&$view) {
   if ($view->name == 'staff') {
 
+		//test
+		//dsm($view);
+
     // Load the professional staff tid, we'll need it.
     $tid = &drupal_static(__FUNCTION__);
     if (empty($tid)) {
@@ -59,6 +62,7 @@ function uom_ldap_views_post_execute(&$view) {
 					// Professional filter is selected, hide the filter result from academic view, but show
         	// the result from attachment.
 					unset($view->result);
+					unset($view->field['draggableviews']); // Remove save button
 				}
 
 				// We need to return early and let the default view to handle filtering.
