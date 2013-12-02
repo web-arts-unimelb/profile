@@ -165,3 +165,16 @@ function uom_ldap_preprocess_views_view_table(&$vars) {
   // unset ($vars['title'], $vars['header'], $vars['rows']);
   // $vars['options']['empty_table'] = 1;
 }
+
+
+/**
+ * Implements hook_user_presave().
+ */
+function uom_ldap_user_presave(&$edit, $account, $category) {
+	if(
+			isset($account->field_profile_title) && 
+			isset($edit['field_profile_title']['und'][0]['value'])
+	) {
+		$edit['field_profile_title']['und'][0]['value'] = ucfirst(strtolower($edit['field_profile_title']['und'][0]['value']));
+  }
+}
