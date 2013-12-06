@@ -15,6 +15,29 @@ function unimelb_arts_taxonomy_default_vocabularies() {
       'description' => 'Allow users to tag content with keywords to be added in the HTML header.',
       'hierarchy' => '0',
       'module' => 'taxonomy',
+      'weight' => '-9',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'object_status' => array(
+      'name' => 'Status',
+      'machine_name' => 'object_status',
+      'description' => '',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
       'weight' => '0',
       'rdf_mapping' => array(
         'rdftype' => array(
@@ -38,7 +61,7 @@ function unimelb_arts_taxonomy_default_vocabularies() {
       'description' => 'Tag the content to build relationships between items.',
       'hierarchy' => '2',
       'module' => 'taxonomy',
-      'weight' => '0',
+      'weight' => '-8',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',

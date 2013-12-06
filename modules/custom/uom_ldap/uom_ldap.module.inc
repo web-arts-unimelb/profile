@@ -175,6 +175,6 @@ function uom_ldap_user_presave(&$edit, $account, $category) {
 			isset($account->field_profile_title) && 
 			isset($edit['field_profile_title']['und'][0]['value'])
 	) {
-		$edit['field_profile_title']['und'][0]['value'] = ucfirst(strtolower($edit['field_profile_title']['und'][0]['value']));
+		$edit['field_profile_title']['und'][0]['value'] = ucwords(strtolower($edit['field_profile_title']['und'][0]['value']));
   }
 }

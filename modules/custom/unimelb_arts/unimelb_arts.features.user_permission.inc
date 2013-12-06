@@ -15,7 +15,9 @@ function unimelb_arts_user_default_permissions() {
     'name' => 'access administration menu',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'authenticated user',
+      2 => 'editor',
+      3 => 'site admin',
     ),
     'module' => 'admin_menu',
   );
@@ -24,9 +26,8 @@ function unimelb_arts_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      0 => 'admin',
-      1 => 'anonymous user',
-      2 => 'authenticated user',
+      0 => 'anonymous user',
+      1 => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -55,8 +56,7 @@ function unimelb_arts_user_default_permissions() {
   $permissions['administer nodequeue'] = array(
     'name' => 'administer nodequeue',
     'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
+      0 => 'site admin',
     ),
     'module' => 'nodequeue',
   );
@@ -84,8 +84,7 @@ function unimelb_arts_user_default_permissions() {
   $permissions['bypass node access'] = array(
     'name' => 'bypass node access',
     'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
+      0 => 'site admin',
     ),
     'module' => 'node',
   );
@@ -94,8 +93,7 @@ function unimelb_arts_user_default_permissions() {
   $permissions['create event content'] = array(
     'name' => 'create event content',
     'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
+      0 => 'site admin',
     ),
     'module' => 'node',
   );
@@ -124,8 +122,7 @@ function unimelb_arts_user_default_permissions() {
   $permissions['delete any event content'] = array(
     'name' => 'delete any event content',
     'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
+      0 => 'site admin',
     ),
     'module' => 'node',
   );
@@ -154,8 +151,7 @@ function unimelb_arts_user_default_permissions() {
   $permissions['delete own event content'] = array(
     'name' => 'delete own event content',
     'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
+      0 => 'site admin',
     ),
     'module' => 'node',
   );
@@ -224,9 +220,7 @@ function unimelb_arts_user_default_permissions() {
   $permissions['edit own event content'] = array(
     'name' => 'edit own event content',
     'roles' => array(
-      0 => 'admin',
-      1 => 'editor',
-      2 => 'site admin',
+      0 => 'site admin',
     ),
     'module' => 'node',
   );
