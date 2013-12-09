@@ -87,6 +87,13 @@ projects[unimelb][download][url] = "https://github.com/web-arts-unimelb/unimelb.
 projects[unimelb][download][branch] = "master"
 projects[unimelb][download][working-copy] = TRUE
 
+projects[masterclass][type] = "theme"
+projects[masterclass][subdir] = custom
+projects[masterclass][download][type] = "git"
+projects[masterclass][download][url] = "https://github.com/web-arts-unimelb/masterclass.git"
+projects[masterclass][download][branch] = "master"
+projects[masterclass][download][working-copy] = TRUE
+
 ;
 ; Libraries used by the FoA install profile.
 ;
