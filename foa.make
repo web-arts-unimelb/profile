@@ -11,6 +11,9 @@ projects[better_exposed_filters][subdir] = contrib
 projects[block_titlelink][version] = "1.3"
 projects[block_titlelink][subdir] = contrib
 
+projects[css3pie][version] = "2.1"
+projects[css3pie][subdir] = contrib
+
 projects[imagecache_external][version] = "2.0-beta1"
 projects[imagecache_external][subdir] = "contrib"
 
@@ -101,6 +104,11 @@ libraries[ARC2][download][type] = "get"
 libraries[ARC2][download][url] = "http://github.com/semsol/arc2/tarball/master"
 libraries[ARC2][directory_name] = "ARC2/arc"
 libraries[ARC2][destination] = "libraries"
+
+libraries[PIE][download][type] = "get"
+libraries[PIE][download][url] = "http://cloud.github.com/downloads/lojjic/PIE/PIE-1.0beta5.zip"
+libraries[PIE][directory_name] = "PIE"
+libraries[PIE][destination] = "libraries"
 
 libraries[jquery.cycle][download][type] = "git"
 libraries[jquery.cycle][download][url] = "https://github.com/malsup/cycle.git"
