@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Masterclasses feature.
+ */
+
+include_once 'uom_masterclasses.features.inc';
