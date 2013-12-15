@@ -223,6 +223,8 @@ function unimelb_arts_field_group_info() {
     'weight' => '3',
     'children' => array(
       0 => 'field_shared_tags',
+      1 => 'field_shared_subject_area',
+      2 => 'field_shared_status',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
