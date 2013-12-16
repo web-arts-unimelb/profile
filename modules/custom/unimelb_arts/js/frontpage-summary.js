@@ -19,7 +19,8 @@ Drupal.behaviors.frontpageSummary = {
       $(this).closest('.text-format-wrapper').val(init);
     }
     else {
-      $('.text-summary-wrapper select', $(this).closest('.text-format-wrapper')).val(init);
+      var widget = $('.text-summary-wrapper select', $(this).closest('.text-format-wrapper').val());
+      widget.val(init);
     }
 
     $('.field-type-text-with-summary div.text-format-wrapper > fieldset.filter-wrapper select').change(function() {
