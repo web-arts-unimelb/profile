@@ -26,7 +26,7 @@ class arts_views_extras_query_string_field extends views_handler_field {
     $form['query_string'] = array(
       '#type' => 'textfield',
       '#title' => t('Query string'),
-      '#description' => t('Enter the query string variable to provide in this field.'),
+      '#description' => t('Enter the query string variable to provide in this field. You can separate multiple query strings with commas.'),
       '#options' => $fields,
       '#required' => TRUE,
       '#default_value' => $this->options['query_string']
@@ -52,9 +52,34 @@ class arts_views_extras_query_string_field extends views_handler_field {
     // Do not check if the actual $_GET variable is empty, the filter should be
     // able to provide the variable name at any time.
     if (!empty($this->options['query_string'])) {
-      $value = filter_xss($this->options['query_string']) . '=' . filter_xss($_GET[$this->options['query_string']]);
+
+      // Create an array of variables we can use to build a new query string.
+      if (strpos(',', $this->options['query_string']) === FALSE) {
+        $variables = array($this->options['query_string'] => '');
+      }
+      else {
+        $variables = array_fill_keys(explode(',', $this->options['query_string']), '');
+      }
+
+      array_walk($variables, '$this->get_variable');
+      $value = drupal_http_build_query($variables);
     }
 
     return $value;
+  }
+
+  /**
+   * Helper that fetches a $_GET var from the request.
+   */
+  private function get_variable(&$item, $key) {
+    if (!empty($_GET[$key])) {
+      if (!is_array($_GET[$key])) {
+        $item = filter_xss($_GET[$key]);
+      }
+      else {
+        $item = $_GET[$key];
+        array_walk($item, 'filter_xss');
+      }
+    }
   }
 }
