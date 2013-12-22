@@ -37,5 +37,15 @@ function arts_views_extras_views_data() {
     ),
   );
 
+  $data['views']['arts_views_extras_query_string_field'] = array(
+    'title' => t('Query String'),
+    'group' => t('Faculty of Arts'),
+    'help' => t('Provide a query string value as a field.'),
+    'field' => array(
+      'help' => t('Provide a query string value as a field.'),
+      'handler' => 'arts_views_extras_query_string_field',
+    ),
+  );
+
   return $data;
 }
