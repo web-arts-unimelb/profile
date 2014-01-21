@@ -1,5 +1,15 @@
 /* Overrides. */
 
+/* Mobile */
+@media screen and (max-width: 361px) {
+	/* Wrap text */
+	span.image-text {
+		display: block;
+		clear: both;
+	}
+}
+
+
 /* UniMelb blue background. */
 .navbar-inner {
   // font-family: 'HelveticaNeueBoldCondensed', 'HelveticaNeue-Bold-Condensed', 'Helvetica Neue Bold Condensed', 'Haettenschweiler', 'impact', sans-serif;
@@ -97,3 +107,17 @@ body.logo #g-global-menu-logo {
   height: 100%;
 }
 /* End video responsive */
+
+
+/* Dropdown menu arrow */
+.caret {
+	border-left: 7px solid rgba(0, 0, 0, 0);
+  border-right: 7px solid rgba(0, 0, 0, 0);
+  border-top: 7px solid;  
+}
+
+/* Overwrite */
+.navbar .nav li.dropdown > .dropdown-toggle .caret {
+	border-top-color: #A8C5E0;
+}
+/* Dropdown menu arrow */
