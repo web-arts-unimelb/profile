@@ -7,7 +7,8 @@
  * Implements hook_install().
  */
 function uom_ldap_install() {
-  _uom_ldap_enable_block();
+	// It seems the block is not there yet
+  //_uom_ldap_enable_block();
 }
 
 /**
