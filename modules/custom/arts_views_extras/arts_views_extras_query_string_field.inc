@@ -61,25 +61,25 @@ class arts_views_extras_query_string_field extends views_handler_field {
         $variables = array_fill_keys(explode(',', $this->options['query_string']), '');
       }
 
-      array_walk($variables, '$this->get_variable');
+      array_walk($variables, '_arts_views_extras_query_string_field_get_variable');
       $value = drupal_http_build_query($variables);
     }
 
     return $value;
   }
+}
 
-  /**
-   * Helper that fetches a $_GET var from the request.
-   */
-  private function get_variable(&$item, $key) {
-    if (!empty($_GET[$key])) {
-      if (!is_array($_GET[$key])) {
-        $item = filter_xss($_GET[$key]);
-      }
-      else {
-        $item = $_GET[$key];
-        array_walk($item, 'filter_xss');
-      }
+/**
+ * Helper that fetches a $_GET var from the request.
+ */
+function _arts_views_extras_query_string_field_get_variable(&$item, $key) {
+  if (!empty($_GET[$key])) {
+    if (!is_array($_GET[$key])) {
+      $item = filter_xss($_GET[$key]);
+    }
+    else {
+      $item = $_GET[$key];
+      array_walk($item, 'filter_xss');
     }
   }
 }
