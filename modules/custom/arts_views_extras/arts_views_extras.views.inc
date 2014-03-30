@@ -50,6 +50,7 @@ function arts_views_extras_views_data() {
   return $data;
 }
 
+/*
 // hook_form_alter
 function arts_views_extras_form_alter(&$form, &$form_state, $form_id) {
 	if($form_id == 'views_exposed_form') {	
@@ -161,5 +162,6 @@ function arts_views_extras_views_query_alter(&$view, &$query) {
 		}
 	}
 }
+*/
 
 
