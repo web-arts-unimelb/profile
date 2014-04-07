@@ -71,9 +71,11 @@ class arts_views_extras_date_status_field extends views_handler_field {
 			if( isset( $values->{$this->options['status_date_field']}[0] ) ) {
       	$dates = $values->{$this->options['status_date_field']}[0]['raw'];
 
+				$end_string = strtotime('+23 hours 59 minutes', strtotime($dates['value2']));
+
       	// Convert the dates and check if time() is between them.
       	$start = strtotime($dates['value']);
-      	$end   = strtotime($dates['value2']);
+      	$end   = $end_string;
       	$now   = time();
 
       	// If there are dates and now is in the correct range, we're open and
